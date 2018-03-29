@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context="com.example.hospital_one.PartOfHospitalActivity">
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            >
+
+        <TextView
+                android:background="#3f51b5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"/>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:background="#3f51b5"
+                android:layout_width="match_parent"
+                android:id="@+id/head"
+                android:layout_height="0dp"
+                android:layout_weight="1">
+
+            <TextView
+                    android:text="科室"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="2"
+                    android:textSize="30sp"
+                    android:textColor="@android:color/background_light"
+                    android:textAlignment="center"
+                    android:id="@+id/searchResult"/>
+
+        </LinearLayout>
+
+        <TextView
+                android:background="#3f51b5"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.2"/>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="15">
+
+            <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/keshiListView"
+                    android:scrollbars="vertical"
+                    tools:listitem="@layout/keshi_name"
+                    android:layout_weight="2"/>
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>
