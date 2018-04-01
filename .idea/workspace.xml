@@ -113,8 +113,8 @@
       <file leaf-file-name="DoctorActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/DoctorActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+            <state relative-caret-position="87">
+              <caret line="70" column="39" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
             </state>
           </provider>
         </entry>
@@ -2275,7 +2275,7 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="187" />
     <option name="y" value="19" />
     <option name="width" value="1099" />
@@ -2429,7 +2429,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522589816851" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522589943743" />
       </method>
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
@@ -2475,7 +2475,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522589816851" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1522589943744" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2608,7 +2608,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="187" y="19" width="1099" height="620" extended-state="0" />
+    <frame x="187" y="19" width="1099" height="620" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="6" />
@@ -2622,7 +2622,7 @@
       <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="10" weight="0.25" />
       <window_info id="UI Designer" order="0" />
-      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" visible="true" weight="0.29643887" />
+      <window_info anchor="right" id="Device File Explorer" order="0" side_tool="true" visible="true" weight="0.24446583" />
       <window_info anchor="bottom" id="Debug" order="10" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="12" />
       <window_info anchor="right" id="Palette&#9;" order="1" />
@@ -2876,8 +2876,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/DoctorActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="82" column="42" selection-start-line="82" selection-start-column="42" selection-end-line="82" selection-end-column="42" />
+        <state relative-caret-position="87">
+          <caret line="70" column="39" selection-start-line="70" selection-start-column="39" selection-end-line="70" selection-end-column="39" />
         </state>
       </provider>
     </entry>
