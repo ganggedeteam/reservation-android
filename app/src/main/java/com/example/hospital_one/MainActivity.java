@@ -1,5 +1,6 @@
 package com.example.hospital_one;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -81,6 +82,7 @@ public class MainActivity extends AcitivityBase {
 
                 Intent intent = new Intent(MainActivity.this, LoginHospitalActivity.class);
                 startActivity(intent);
+
             }
         });
 
@@ -90,6 +92,9 @@ public class MainActivity extends AcitivityBase {
         yuYue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+//                DatePickerDialog
+
 //                Intent intent = new Intent(MainActivity.this,);
 //                startActivity(intent);
             }

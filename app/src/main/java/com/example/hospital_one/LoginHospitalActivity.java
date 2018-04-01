@@ -1,5 +1,6 @@
 package com.example.hospital_one;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -28,7 +29,19 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
+import com.example.hospital_one.intenet_connection.LoginConnection;
+import com.example.hospital_one.jsonclass.JsonHead;
 import com.google.gson.Gson;
+import okhttp3.*;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.impl.client.HttpClients;
+import org.json.JSONObject;
+
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -64,12 +77,16 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
     private View mLoginFormView;        //登陆界面
     private CheckBox mPasswordCheckBox;     //记住密码复选框
     private ImageButton backButton; //返回按钮
+    private Button forgetPassword;
+    private Button registerButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_hospital);
         // Set up the login form.
+        forgetPassword = (Button)findViewById(R.id.FogetPassword);
+        registerButton = (Button)findViewById(R.id.RegisterButton) ;
         backButton = (ImageButton)findViewById(R.id.backLoginButton);
         backButton.setOnClickListener(new OnClickListener() {
             @Override
@@ -120,6 +137,24 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
         //屏蔽标题栏
         ActionBar actionBar = this.getSupportActionBar();
         if(actionBar != null)actionBar.hide();
+
+        forgetPassword.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        LoginHospitalActivity.this,ForgetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        registerButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        LoginHospitalActivity.this,RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         mEmailView.addTextChangedListener(new TextWatcher() {
@@ -348,22 +383,6 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
         int ADDRESS = 0;
         int IS_PRIMARY = 1;
     }
-
-    private class ID{
-        String account;
-        String password;
-        public ID(String account,String password){
-            this.account = account;
-            this.password = password;
-        }
-    }
-
-    public String makeJson(String account,String password){
-        ID id = new ID(account,password);
-        String json = new Gson().toJson(id);
-        return json;
-    }
-
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -372,6 +391,7 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
 
         private final String mEmail;
         private final String mPassword;
+        private int message = 0;
 
         UserLoginTask(String email, String password) {
             mEmail = email;
@@ -383,38 +403,85 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             // TODO: attempt authentication against a network service.
             //String result = null;
 
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            /*try {
+//            String string = null;
+//            SharedPreferences.Editor sharedPreferences12 =
+//                    getSharedPreferences("testIntenet",MODE_PRIVATE).edit();
+//            try{
+//                String url = "http://192.168.137.1:8080/hospital/hospital/pagelist";
+//                String result = "";
+//                MediaType JSON = MediaType.parse("application/json;charset=utf-8");
+//                OkHttpClient client = new OkHttpClient();
+//                RequestBody body = RequestBody.create(JSON,new JSONObject().toString());
+//                Request request = new Request.Builder()
+//                        .url(url)
+//                        .post(body)
+//                        .build();
+//                Response response= client.newCall(request).execute();
+//                result = response.body().string();
+//                sharedPreferences12.putString("result",result);
+//                Thread.sleep(2000);
+//
+//            } catch (InterruptedException e) {
+//                sharedPreferences12.putString("resultsd","faild" + e);
+//                e.printStackTrace();
+//            } catch (MalformedURLException e) {
+//                sharedPreferences12.putString("resultsd","faild" + e);
+//                e.printStackTrace();
+//            } catch (IOException e) {
+//                sharedPreferences12.putString("resultsd","faild" + e);
+//                e.printStackTrace();
+//            }finally {
+//
+//                sharedPreferences12.apply();
+//            }
+//            try {
                 // Simulate network access.
 //                Thread.sleep(2000);
-                String url = "";
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+
+            LoginConnection.JsonHead result = null;
+            try {
+
+                String url = "http://192.168.137.1:8080/user/pagelist";
                 MediaType JSON = MediaType.parse("application/json;charset=utf-8");
                 OkHttpClient client = new OkHttpClient();
-                RequestBody body = RequestBody.create(JSON,makeJson(mEmail,mPassword));
+                RequestBody body = RequestBody.create
+                        (JSON,new LoginConnection(mEmail).getJsonResult());
                 Request request = new Request.Builder()
                         .url(url)
                         .post(body)
                         .build();
                 Response response= client.newCall(request).execute();
-                result = response.body().string();
+                result = LoginConnection.parseJsonData(response.body().string());
+                // Simulate network access.
+                Thread.sleep(2000);
 
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
             if(result == null){
                 Toast.makeText(LoginHospitalActivity.this,"网络连接失败",Toast.LENGTH_SHORT);
-                return false;
+                this.message = 1;
+                return true;
             }
-            if(result.equals("true")){
-                //密码正确的操作
-            }else if(result.equals("false")){
-                //密码错误的操作
-            }*/
+            if(result.message.equals("success")){
+                if(result.data.size() == 0){
+                    message = 2;
+                }else{
+                    LoginConnection.BuserInfoData
+                            buserInfoData = result.data.get(0);
+                    //密码正确的操作
+                    if(buserInfoData.loginPwd.equals(mPassword))return true;
+                    //密码错误的操作
+                    return false;
+                }
+            }else{
+                message = 3;
+            }
 
             //在此处判断登录条件
 
@@ -472,7 +539,19 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             showProgress(false);
 
             if (success) {
-                finish();
+                if(message == 1){
+                    Toast.makeText(LoginHospitalActivity
+                            .this,"网络连接错误",Toast.LENGTH_LONG);
+                }else if(message == 2){
+                    Toast.makeText(LoginHospitalActivity
+                            .this,"暂不存在此用户",Toast.LENGTH_LONG);
+                }else if(message == 0) {
+                    finish();
+                }
+                else{
+                    Toast.makeText(LoginHospitalActivity
+                            .this,"未知错误",Toast.LENGTH_LONG);
+                }
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();

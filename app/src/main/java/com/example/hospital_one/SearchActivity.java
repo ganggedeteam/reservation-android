@@ -92,13 +92,25 @@ public class SearchActivity extends AcitivityBase {
         });
     }
 
+    public List<Doctor> getJson(String jsonData){
+        List<Doctor> list = new ArrayList<>();
+        return list;
+    }
+
     public void SearchThing(){
         List<Doctor> doctors = new ArrayList<>();
         for(int i = 0;i < 10;i++){
             Doctor doctor = new Doctor("我是谁","儿科","专家","心脏手术专家",R.drawable.account);
             doctors.add(doctor);
         }
+
+//        List<Doctor> doctorList
+
+
+
         //向医生RecyclerView添加搜索结果
+
+
         doctorListView = (RecyclerView) findViewById(R.id.search_result_doctor_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(SearchActivity.this);
         doctorListView.setLayoutManager(layoutManager);

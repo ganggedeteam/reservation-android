@@ -18,4 +18,11 @@
     <string name="password_remember">记住账号</string>
     <string name="todo">TODO</string>
     <string name="SEARCH">搜索</string>
+    <string name="register_button">提交</string>
+    <string name="register_resure_password">确认密码</string>
+    <string name="register_password">密码</string>
+    <string name="register_email">邮箱</string>
+    <string name="register_username">用户名</string>
+    <string name="title_activity_forget_password">忘记密码</string>
+    <string name="title_activity_register">Sign in</string>
 </resources>
