@@ -410,26 +410,12 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             if(result.message.equals("success")){
                 if(result.data.size() == 0){
                     message = 2;
+                    return true;
                 }else{
                     LoginConnection.BuserInfoData
                             buserInfoData = result.data.get(0);
                     //密码正确的操作
-                    if(buserInfoData.loginPwd.equals(mPassword))return true;
-                    //密码错误的操作
-                    return false;
-                }
-            }else{
-                message = 3;
-            }
-
-            //在此处判断登录条件
-
-            for (String credential : DUMMY_CREDENTIALS) {
-                String[] pieces = credential.split(":");
-                if (pieces[0].equals(mEmail)) {
-                    // Account exists, return true if the password matches.
-
-                    if(pieces[1].equals(mPassword)){
+                    if(buserInfoData.loginPwd.equals(mPassword)){
                         if(mPasswordCheckBox.isChecked()) {
                             //保存密码
                             SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
@@ -456,20 +442,26 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
 
                         }
 
-                        SharedPreferences.Editor editorStartFile = getSharedPreferences("start_file",MODE_PRIVATE).edit();
+                        SharedPreferences.Editor editorStartFile =
+                                getSharedPreferences("start_file",MODE_PRIVATE).edit();
                         editorStartFile.putBoolean("status",true);
                         editorStartFile.apply();
-
                         return true;
                     }
+                    //密码错误的操作
+                    SharedPreferences.Editor editorStartFileFail =
+                            getSharedPreferences("start_file",MODE_PRIVATE).edit();
+                    editorStartFileFail.putBoolean("status",false);
+                    editorStartFileFail.apply();
+                    return false;
                 }
+            }else {
+                message = 3;
+                return true;
             }
 
-            SharedPreferences.Editor editorStartFileFail = getSharedPreferences("start_file",MODE_PRIVATE).edit();
-            editorStartFileFail.putBoolean("status",false);
-            editorStartFileFail.apply();
             // TODO: register the new account here.
-            return false;
+//            return false;
         }
 
         @Override

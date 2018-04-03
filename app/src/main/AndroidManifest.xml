@@ -29,7 +29,6 @@
         <activity
                 android:name=".LoginHospitalActivity"
                 android:label="@string/title_activity_login_hospital"/>
-        <activity android:name=".PersonCenterActivity"/>
         <activity
                 android:name=".ForgetPasswordActivity"
                 android:label="@string/title_activity_forget_password"/>

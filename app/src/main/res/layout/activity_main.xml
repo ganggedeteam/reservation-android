@@ -54,10 +54,15 @@
                     <LinearLayout
                             android:orientation="vertical"
                             android:id="@+id/tab3"
-                            android:background="#ffc916"
+                            android:background="#eff2f4"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:visibility="gone">
 
+                        <include
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                layout="@layout/person_center"/>
                     </LinearLayout>
 
                 </FrameLayout>

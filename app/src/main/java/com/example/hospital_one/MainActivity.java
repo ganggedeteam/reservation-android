@@ -1,17 +1,19 @@
 package com.example.hospital_one;
 
-import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TextView;
 
 public class MainActivity extends AcitivityBase {
 
+
+    LinearLayout personCenter,personCenterElse;
     public static final String[] keshi_title = { "儿科","妇产科","泌尿外科、男科",
             "中医科","皮肤性病科","全科","心理科","普外科","骨科","心内科","普内科",
             "呼吸内科","神经内科","肿瘤内科","消化内科","内分泌科","肾内科","眼科","耳鼻喉科",
@@ -21,7 +23,28 @@ public class MainActivity extends AcitivityBase {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        personCenter = (LinearLayout)findViewById(R.id.PersonCenter);
+        personCenterElse = (LinearLayout)findViewById(R.id.PersonCenterElse);
+        intitPersonCenter();
         initMain();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        SharedPreferences reader =
+                getSharedPreferences("start_file", MODE_PRIVATE);
+        boolean status = reader.getBoolean("status", false);
+        if (status) {
+            showPerson();
+        } else {
+            closePerson();
+        }
     }
 
     public void setHostFile(){
@@ -38,6 +61,89 @@ public class MainActivity extends AcitivityBase {
         editor.putString("userPage","/user/pagelist");
         editor.apply();
 
+    }
+
+
+    private void intitPersonCenter(){
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)actionBar.hide();
+        LinearLayout personInformation = (LinearLayout)findViewById(R.id.personInformation);
+        personInformation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(this,);
+
+//                startActivity(intent);
+            }
+        });
+
+        Button paientManger = (Button)findViewById(R.id.paientManger);
+        paientManger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(this,);
+//                startActivity(intent);
+            }
+        });
+
+        Button MyDoctor = (Button)findViewById(R.id.MyDoctor);
+        MyDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(this,);
+//                startActivity(intent);
+            }
+        });
+
+        LinearLayout RegisterNote = (LinearLayout)findViewById(R.id.RegisterNote);
+        RegisterNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(this,);
+//                startActivity(intent);
+            }
+        });
+        LinearLayout ChangePassWord = (LinearLayout)findViewById(R.id.ChangePassWord);
+        ChangePassWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(this,);
+//                startActivity(intent);
+            }
+        });
+
+        Button DownAccount = (Button)findViewById(R.id.DownAccount);
+        DownAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editorStartFileFail =
+                        getSharedPreferences("start_file",MODE_PRIVATE).edit();
+                editorStartFileFail.putBoolean("status",false);
+                editorStartFileFail.apply();
+                closePerson();
+            }
+        });
+
+        Button PlaeaseLogin = (Button)findViewById(R.id.PlaeaseLogin);
+        PlaeaseLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        MainActivity.this,LoginHospitalActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+
+    void showPerson(){
+
+        personCenter.setVisibility(View.VISIBLE);
+        personCenterElse.setVisibility(View.GONE);
+    }
+    void closePerson(){
+        personCenter.setVisibility(View.GONE);
+        personCenterElse.setVisibility(View.VISIBLE);
     }
 
     private void initMain(){
@@ -66,6 +172,24 @@ public class MainActivity extends AcitivityBase {
         tabSpec3.setIndicator("Person",getDrawable(R.drawable.account));
         tabSpec3.setContent(R.id.tab3);
         tabHost.addTab(tabSpec3);
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                if(tabId.equals("Person")) {
+                    SharedPreferences reader =
+                            getSharedPreferences("start_file", MODE_PRIVATE);
+                    boolean status = reader.getBoolean("status", false);
+                    if (status) {
+                        showPerson();
+                    } else {
+                        closePerson();
+                    }
+                }
+            }
+        });
+
+
+
 
         //搜索框事件
 
