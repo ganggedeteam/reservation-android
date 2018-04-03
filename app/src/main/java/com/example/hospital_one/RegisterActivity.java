@@ -31,7 +31,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.hospital_one.jsonclass.JsonHead;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -356,48 +355,6 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         int IS_PRIMARY = 1;
     }
 
-    private class RegisterID extends JsonHead {
-        String username;
-        String email;
-        String password;
-        public RegisterID(String username,String email,String password){
-            super("register");
-            this.username = username;
-            this.email = email;
-            this.password = password;
-        }
-    }
-
-    class RegisterResult extends JsonHead {
-        public int message = 0;
-        public RegisterResult(int message){
-            super("RegisterResult");
-            this.message = message;
-        }
-    }
-
-    public String makeJson(String username,String email,String password){
-        RegisterID id = new RegisterID(username,email,password);
-        String json = new Gson().toJson(id);
-        return json;
-    }
-
-    public RegisterResult getJson(String jsondata){
-        try {
-            JSONArray jsonArray = new JSONArray(jsondata);
-            for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                String headMessage = jsonObject.getString("headMessage");
-                if(!headMessage.equals("RegisterResult")){
-                    return null;
-                }
-                return new RegisterResult(jsonObject.getInt("message"));
-            }
-        } catch (JSONException e) {
-            return null;
-        }
-        return null;
-    }
 
     /**
      * Represents an asynchronous login/registration task used to authenticate

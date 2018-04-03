@@ -21,8 +21,26 @@ public class PartOfHospitalAdapter extends RecyclerView.Adapter<PartOfHospitalAd
         }
     }
 
-    private List<String> keshiList;
-    public PartOfHospitalAdapter( List<String> keshiList){
+    public static class PartOfHospitalMes{
+        public String departmentTypeId;
+        public String departmentName;
+        public String remark;
+
+        public PartOfHospitalMes(String departmentName){
+            this.departmentName = departmentName;
+        }
+
+        public PartOfHospitalMes(String departmentTypeId,
+                String departmentName,
+                String remark){
+            this.departmentTypeId = departmentTypeId;
+            this.departmentName = departmentName;
+            this.remark = remark;
+        }
+    }
+
+    private List<PartOfHospitalMes> keshiList;
+    public PartOfHospitalAdapter( List<PartOfHospitalMes> keshiList){
         this.keshiList = keshiList;
     }
 
@@ -30,14 +48,13 @@ public class PartOfHospitalAdapter extends RecyclerView.Adapter<PartOfHospitalAd
     public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.keshi_name,parent,false);
         ViewHolder holder = new ViewHolder(view);
-
         return holder;
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder,int position){
-        String name = this.keshiList.get(position);
-        holder.textView.setText(name);
+        PartOfHospitalMes name = this.keshiList.get(position);
+        holder.textView.setText(name.departmentName);
         holder.partView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +66,7 @@ public class PartOfHospitalAdapter extends RecyclerView.Adapter<PartOfHospitalAd
 
     @Override
     public int getItemCount(){
+        if(this.keshiList == null)return 0;
         return this.keshiList.size();
     }
 

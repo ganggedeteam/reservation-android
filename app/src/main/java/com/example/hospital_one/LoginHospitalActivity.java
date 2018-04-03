@@ -29,19 +29,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
+import com.example.hospital_one.intenet_connection.InternetConnection;
 import com.example.hospital_one.intenet_connection.LoginConnection;
-import com.example.hospital_one.jsonclass.JsonHead;
-import com.google.gson.Gson;
 import okhttp3.*;
-import org.apache.http.client.methods.CloseableHttpResponse;
-import org.apache.http.impl.client.HttpClients;
-import org.json.JSONObject;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -403,66 +395,13 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             // TODO: attempt authentication against a network service.
             //String result = null;
 
-//            String string = null;
-//            SharedPreferences.Editor sharedPreferences12 =
-//                    getSharedPreferences("testIntenet",MODE_PRIVATE).edit();
-//            try{
-//                String url = "http://192.168.137.1:8080/hospital/hospital/pagelist";
-//                String result = "";
-//                MediaType JSON = MediaType.parse("application/json;charset=utf-8");
-//                OkHttpClient client = new OkHttpClient();
-//                RequestBody body = RequestBody.create(JSON,new JSONObject().toString());
-//                Request request = new Request.Builder()
-//                        .url(url)
-//                        .post(body)
-//                        .build();
-//                Response response= client.newCall(request).execute();
-//                result = response.body().string();
-//                sharedPreferences12.putString("result",result);
-//                Thread.sleep(2000);
-//
-//            } catch (InterruptedException e) {
-//                sharedPreferences12.putString("resultsd","faild" + e);
-//                e.printStackTrace();
-//            } catch (MalformedURLException e) {
-//                sharedPreferences12.putString("resultsd","faild" + e);
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                sharedPreferences12.putString("resultsd","faild" + e);
-//                e.printStackTrace();
-//            }finally {
-//
-//                sharedPreferences12.apply();
-//            }
-//            try {
-                // Simulate network access.
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-
             LoginConnection.JsonHead result = null;
-            try {
-
-                String url = "http://192.168.137.1:8080/user/pagelist";
-                MediaType JSON = MediaType.parse("application/json;charset=utf-8");
-                OkHttpClient client = new OkHttpClient();
-                RequestBody body = RequestBody.create
-                        (JSON,new LoginConnection(mEmail).getJsonResult());
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-                Response response= client.newCall(request).execute();
-                result = LoginConnection.parseJsonData(response.body().string());
-                // Simulate network access.
-                Thread.sleep(2000);
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
+            String ip = reader.getString("ip","");
+            String last = reader.getString("loginBuser","");
+            String jsonResult = InternetConnection.ForInternetConnection
+                    (ip + last,"{ \"account\":\"" + this.mEmail +"\"}");
+            //待定
             if(result == null){
                 Toast.makeText(LoginHospitalActivity.this,"网络连接失败",Toast.LENGTH_SHORT);
                 this.message = 1;

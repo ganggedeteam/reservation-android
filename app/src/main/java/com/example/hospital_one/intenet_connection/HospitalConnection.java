@@ -8,20 +8,31 @@ import java.util.List;
 
 public class HospitalConnection {
 
+/*
     String jsonResult = null;
-    public final String hospitalGradeKey = "hospitalGrade",
-                        hospitalIdKey = "hospitalId" ,
-                        hospitalManagerKey = "hospitalManager" ,
-                        hospitalNameKey = "hospitalName" ,
-                        managerNameKey = "managerName";
-    public HospitalConnection(String key,String data){
+
+    private String[] keys = {
+            "hospitalGrade",
+            "hospitalId",
+            "hospitalManager",
+            "isValid",
+            "hospitalName",
+            "managerName"
+    };
+
+    public static final int hospitalGradeKey = 1,
+                        hospitalIdKey = 2 ,
+                        hospitalManagerKey = 3 ,
+                        hospitalNameKey = 4 ,
+                        managerNameKey = 5;
+    public HospitalConnection(int key,String data){
         switch (key){
             case hospitalGradeKey:break;
             case hospitalIdKey:break;
             case hospitalManagerKey:break;
             case hospitalNameKey:break;
             case managerNameKey:break;
-            default:return;
+            default:jsonResult = makeJson(0,null);return;
         }
         jsonResult = makeJson(key,data);
     }
@@ -30,15 +41,19 @@ public class HospitalConnection {
         return this.jsonResult;
     }
 
-    public String makeJson(String key,String data){
+    public String makeJson(int key,String data){
         String jsonData = null;
         try {
-            jsonData = new JSONObject().put(key, data).toString();
+            if(key == 0 || data == null){
+                jsonData = new JSONObject().toString();
+            }else
+                jsonData = new JSONObject().put(keys[key], data).toString();
         } catch (JSONException e) {
             e.printStackTrace();
         }
         return jsonData;
     }
+*/
 
     public class JsonHead {
         public int total;

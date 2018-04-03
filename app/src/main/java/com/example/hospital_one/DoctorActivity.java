@@ -1,17 +1,14 @@
 package com.example.hospital_one;
 
-import android.app.ActionBar;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ListView;
 import android.widget.TextView;
 import com.example.hospital_one.part_hospital.OnItemClickListener;
 import com.example.hospital_one.searchresult.Doctor;
-import com.example.hospital_one.searchresult.DoctorAdapter;
+import com.example.hospital_one.part_hospital.DoctorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -55,37 +52,46 @@ public class DoctorActivity extends AcitivityBase {
 
     }
 
+    private String departmentTypeId = null;
     private void initDoctorActivity(){
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)
             actionBar.hide();
         Intent intent =getIntent();
-        int num = intent.getIntExtra("data",2);
-        TextView keshiName = (TextView)findViewById(R.id.keshiName);
-        if(num == quickFindDoctor)
-            keshiName.setText("快速找医生");
-        else
-            keshiName.setText(title[num]);
+        if(intent.getStringExtra("departmentId").equals("")) {
+            int num = intent.getIntExtra("data", 2);
+            TextView keshiName = (TextView) findViewById(R.id.keshiName);
+            if (num == quickFindDoctor)
+                keshiName.setText("快速找医生");
+            else
+                keshiName.setText(title[num]);
+            testExample();
+        }
+        else{
+            TextView keshiName = (TextView) findViewById(R.id.keshiName);
+            keshiName.setText(intent.getStringExtra("departmentName"));
+            departmentTypeId = intent.getStringExtra("departmentTypeId");
+        }
+    }
 
-
+    public void testExample(){
         List<Doctor> doctors = new ArrayList<>();
-        for(int i = 0;i < 10;i++){
-            Doctor doctor = new Doctor("我是谁","儿科","专家","心脏手术专家",R.drawable.account);
+        for (int i = 0; i < 10; i++) {
+            Doctor doctor = new Doctor("我是谁", "儿科", "专家", "心脏手术专家", R.drawable.account);
             doctors.add(doctor);
         }
         RecyclerView doctorListView = (RecyclerView) findViewById(R.id.doctor_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         doctorListView.setLayoutManager(layoutManager);
         DoctorAdapter doctorAdapter = new DoctorAdapter(doctors);
-        doctorAdapter.setOnItemClickListener(new OnItemClickListener(){
+        doctorAdapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position){
+            public void onItemClick(View view, int position) {
 //                Intent intent1 = new Intent();
 //                intent1.putExtra("data",position);
 //                startActivity(intent1);
             }
         });
         doctorListView.setAdapter(doctorAdapter);
-
     }
 }

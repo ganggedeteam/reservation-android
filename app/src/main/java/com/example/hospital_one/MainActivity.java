@@ -24,8 +24,24 @@ public class MainActivity extends AcitivityBase {
         initMain();
     }
 
-    private void initMain(){
+    public void setHostFile(){
+        SharedPreferences.Editor editor = getSharedPreferences("host",MODE_PRIVATE).edit();
+        editor.putString("ip","http://192.168.191.1:8080");
+        editor.putString("menuAdd","/system/menu/add");
+        editor.putString("departmentPage","/code/departmenttype/pagelist");
+        editor.putString("hospitalPage","/hospital/hospital/pagelist");
+        editor.putString("addressPage","/code/address/pagelist");
+        editor.putString("loginBuser","/login/buser");
+        editor.putString("buserPage","/system//buser/pagelist");
+        editor.putString("patientAdd","/patient/add");
+        editor.putString("patientPage","/patient/pagelist");
+        editor.putString("userPage","/user/pagelist");
+        editor.apply();
 
+    }
+
+    private void initMain(){
+        setHostFile();
         SharedPreferences.Editor keshi_file = getSharedPreferences("keshi_name",MODE_PRIVATE).edit();
         for(int i = 0;i < 20;i++){
             keshi_file.putString("" + i, keshi_title[i]);
@@ -92,11 +108,8 @@ public class MainActivity extends AcitivityBase {
         yuYue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                DatePickerDialog
-
-//                Intent intent = new Intent(MainActivity.this,);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this,HospitalListActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -163,7 +176,7 @@ public class MainActivity extends AcitivityBase {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,PartOfHospitalActivity.class);
-                intent.putExtra("data",1);
+                intent.putExtra("keshi","YES");
                 startActivity(intent);
             }
         });

@@ -1,14 +1,13 @@
-package com.example.hospital_one.searchresult;
+package com.example.hospital_one.part_hospital;
 
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.hospital_one.R;
-import com.example.hospital_one.part_hospital.OnItemClickListener;
+import com.example.hospital_one.searchresult.Doctor;
 
 import java.util.List;
 
@@ -37,7 +36,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
 
     @Override
     public DoctorAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.doctor_search_result,parent,false);
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.doctor_search_result,parent,false);
         DoctorAdapter.ViewHolder holder = new DoctorAdapter.ViewHolder(view);
         return holder;
     }

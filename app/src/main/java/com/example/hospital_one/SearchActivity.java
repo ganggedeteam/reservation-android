@@ -2,16 +2,13 @@ package com.example.hospital_one;
 
 import android.graphics.Color;
 import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.*;
 import com.example.hospital_one.searchresult.Doctor;
-import com.example.hospital_one.searchresult.DoctorAdapter;
-import org.w3c.dom.Text;
+import com.example.hospital_one.part_hospital.DoctorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -96,21 +93,13 @@ public class SearchActivity extends AcitivityBase {
         List<Doctor> list = new ArrayList<>();
         return list;
     }
-
     public void SearchThing(){
         List<Doctor> doctors = new ArrayList<>();
         for(int i = 0;i < 10;i++){
             Doctor doctor = new Doctor("我是谁","儿科","专家","心脏手术专家",R.drawable.account);
             doctors.add(doctor);
         }
-
-//        List<Doctor> doctorList
-
-
-
         //向医生RecyclerView添加搜索结果
-
-
         doctorListView = (RecyclerView) findViewById(R.id.search_result_doctor_list);
         LinearLayoutManager layoutManager = new LinearLayoutManager(SearchActivity.this);
         doctorListView.setLayoutManager(layoutManager);
