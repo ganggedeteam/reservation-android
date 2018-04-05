@@ -33,7 +33,7 @@ public class PartOfHospitalActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)actionBar.hide();
         Intent intent = getIntent();
-        String keshi = intent.getStringExtra("keshi");
+        String keshi = intent.getStringExtra("keshiId");
         if(keshi.equals("YES"))keshiYes();
         else if(keshi.equals("NO")){
             hospitalID = intent.getStringExtra("hospitalId");

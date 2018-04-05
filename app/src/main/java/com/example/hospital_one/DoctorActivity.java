@@ -58,7 +58,7 @@ public class DoctorActivity extends AcitivityBase {
         if(actionBar != null)
             actionBar.hide();
         Intent intent =getIntent();
-        if(intent.getStringExtra("departmentId").equals("")) {
+        if(intent.getStringExtra("departmentTypeId").equals("")) {
             int num = intent.getIntExtra("data", 2);
             TextView keshiName = (TextView) findViewById(R.id.keshiName);
             if (num == quickFindDoctor)

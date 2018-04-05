@@ -145,8 +145,6 @@ public class HospitalListActivity extends AppCompatActivity {
 //            editor.putString("result",result.message+result.data.size()+result.status+result.total + result.data.get(0).hospitalName);
 //            editor.apply();
             if(result == null){
-                Toast.makeText(
-                        HospitalListActivity.this,"网络连接失败",Toast.LENGTH_SHORT).show();
                 this.message = 1;
                 return true;
             }

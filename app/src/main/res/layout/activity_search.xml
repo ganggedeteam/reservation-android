@@ -14,16 +14,17 @@
             android:layout_height="match_parent"
             >
 
-        <TextView
-                android:background="#3f51b5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.2"/>
-
         <LinearLayout
                 android:orientation="vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
+            <TextView
+                    android:background="#3f51b5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="12sp"/>
 
             <LinearLayout
                     android:orientation="horizontal"
@@ -41,12 +42,32 @@
                         android:layout_weight="1"
                         android:background="@color/colorPrimary"/>
 
-                <SearchView
-                        android:background="@drawable/searchbox"
+                <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="6"
-                        android:id="@+id/searchTarget"/>
+                        android:layout_weight="6">
+
+                    <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                    <SearchView
+                            android:background="@drawable/searchbox"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="9"
+                            android:id="@+id/searchTarget">
+
+                    </SearchView>
+
+                    <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                </LinearLayout>
 
                 <TextView
                         android:background="@color/colorPrimary"
@@ -60,21 +81,25 @@
                         android:id="@+id/searchResult"/>
 
             </LinearLayout>
-        </LinearLayout>
 
-        <TextView
-                android:background="#3f51b5"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="0.2"/>
+            <TextView
+                    android:background="#3f51b5"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="12sp"/>
+
+        </LinearLayout>
 
         <TabHost
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:id="@+id/searchTabHost"
                 android:layout_weight="15">
 
             <LinearLayout
+                    android:paddingLeft="@dimen/activity_horizontal_margin"
+                    android:paddingRight="@dimen/activity_horizontal_margin"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:orientation="vertical">
@@ -82,13 +107,13 @@
                 <TabWidget
                         android:id="@android:id/tabs"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="wrap_content"
                         android:layout_weight="1"/>
 
                 <FrameLayout
                         android:id="@android:id/tabcontent"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="9">
 
                     <LinearLayout
@@ -163,6 +188,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:orientation="vertical">
+
                         <android.support.v7.widget.RecyclerView
                                 android:layout_weight="9"
                                 android:id="@+id/search_result_illness_list"

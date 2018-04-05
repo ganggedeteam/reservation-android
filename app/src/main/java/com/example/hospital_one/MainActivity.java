@@ -178,7 +178,7 @@ public class MainActivity extends AcitivityBase {
                 if(tabId.equals("Person")) {
                     SharedPreferences reader =
                             getSharedPreferences("start_file", MODE_PRIVATE);
-                    boolean status = reader.getBoolean("status", false);
+                    boolean status = reader.getBoolean("status", true);
                     if (status) {
                         showPerson();
                     } else {
@@ -220,7 +220,9 @@ public class MainActivity extends AcitivityBase {
 //                intent.putExtra("data",DoctorActivity.quickFindDoctor);
 //                startActivity(intent);
 
-                Intent intent = new Intent(MainActivity.this, LoginHospitalActivity.class);
+                Intent intent = new Intent(
+                        MainActivity.this, LoginHospitalActivity.class);
+                intent.putExtra("keshi","NO");
                 startActivity(intent);
 
             }
@@ -289,7 +291,9 @@ public class MainActivity extends AcitivityBase {
             linearLayout.setOnClickListener(new View.OnClickListener(){
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(MainActivity.this,DoctorActivity.class);
+                    Intent intent = new Intent(
+                            MainActivity.this,DoctorActivity.class);
+                    intent.putExtra("departmentTypeId","");
                     intent.putExtra("data",name);
                     startActivity(intent);
                 }
@@ -300,7 +304,7 @@ public class MainActivity extends AcitivityBase {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this,PartOfHospitalActivity.class);
-                intent.putExtra("keshi","YES");
+                intent.putExtra("keshiId","YES");
                 startActivity(intent);
             }
         });

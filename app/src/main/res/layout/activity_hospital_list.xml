@@ -42,12 +42,30 @@
                         android:background="@color/colorPrimary"
                         android:contentDescription="TODO"/>
 
-                <SearchView
-                        android:background="@drawable/searchbox"
+                <LinearLayout
+                        android:orientation="horizontal"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="4"
-                        android:id="@+id/searchHospitalTarget"/>
+                        android:layout_weight="4">
+
+                    <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                    <SearchView
+                            android:background="@drawable/searchbox"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="17"
+                            android:id="@+id/searchHospitalTarget"/>
+
+                    <Space
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"/>
+
+                </LinearLayout>
 
                 <TextView
                         android:background="@color/colorPrimary"
