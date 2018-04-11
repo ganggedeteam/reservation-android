@@ -127,7 +127,7 @@
                     <TextView
                             android:text="用户名"
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:id="@+id/textView38"
                             android:layout_weight="1.5"
                             android:textSize="24sp"/>
@@ -137,16 +137,23 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/InformationUserNameText"
-                            android:layout_weight="3.5"
+                            android:layout_weight="4.5"
+                            android:textAlignment="viewEnd"
+                            android:textSize="20sp"
+                            android:visibility="visible"/>
+
+                    <EditText
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:inputType="textPersonName"
+                            android:text="Name"
+                            android:ems="10"
+                            android:id="@+id/InformationUserNameEditText"
+                            android:layout_weight="4.5"
+                            android:visibility="gone"
                             android:textAlignment="viewEnd"
                             android:textSize="20sp"/>
 
-                    <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:srcCompat="@drawable/more"
-                            android:id="@+id/imageView18"
-                            android:layout_weight="1"/>
                 </LinearLayout>
 
                 <TextView
@@ -379,7 +386,8 @@
                             android:layout_weight="3"
                             android:textSize="20sp"
                             android:visibility="gone"
-                            android:hint="不要超过十个字符"/>
+                            android:hint="不要超过十个字符"
+                            android:textAlignment="viewEnd"/>
                 </LinearLayout>
 
                 <TextView

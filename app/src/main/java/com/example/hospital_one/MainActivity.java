@@ -25,7 +25,6 @@ public class MainActivity extends AcitivityBase {
         setContentView(R.layout.activity_main);
         personCenter = (LinearLayout)findViewById(R.id.PersonCenter);
         personCenterElse = (LinearLayout)findViewById(R.id.PersonCenterElse);
-        intitPersonCenter();
         initMain();
     }
 
@@ -65,7 +64,7 @@ public class MainActivity extends AcitivityBase {
     }
 
 
-    private void intitPersonCenter(){
+    private void initPersonCenter(){
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)actionBar.hide();
         LinearLayout personInformation = (LinearLayout)findViewById(R.id.personInformation);
@@ -73,7 +72,6 @@ public class MainActivity extends AcitivityBase {
             @Override
             public void onClick(View v) {
 //                Intent intent = new Intent(this,);
-
 //                startActivity(intent);
             }
         });
@@ -146,10 +144,11 @@ public class MainActivity extends AcitivityBase {
         });
 
     }
-
-
     void showPerson(){
-
+        initPersonCenter();
+        SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
+        TextView userName = (TextView)findViewById(R.id.userAccount);
+        userName.setText(reader.getString("userName",""));
         personCenter.setVisibility(View.VISIBLE);
         personCenterElse.setVisibility(View.GONE);
     }
@@ -199,9 +198,6 @@ public class MainActivity extends AcitivityBase {
                 }
             }
         });
-
-
-
 
         //搜索框事件
 

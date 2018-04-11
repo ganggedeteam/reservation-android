@@ -29,10 +29,13 @@ public class UserInformationActivity extends AppCompatActivity {
     private TextView cityText;
     private TextView quText;
     private TextView addrText;
+    private EditText userNameEditText;
+    private EditText addrEditText;
 
     String provinceAddressId = "-1";
     String cityAddressId = "-1";
     String quAddressId = "-1";
+    String sex = "0";
     int provinceId = -1;
     int cityId = -1;
     int quId = -1;
@@ -41,6 +44,7 @@ public class UserInformationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_information);
+        userNameEditText = (EditText)findViewById(R.id.InformationUserNameEditText);
         saveInformation = (Button)findViewById(R.id.InformationSave);
         userNameText = (TextView)findViewById(R.id.InformationUserNameText);
         telephoneText = (TextView)findViewById(R.id.InformationTelephoneText);
@@ -49,6 +53,7 @@ public class UserInformationActivity extends AppCompatActivity {
         cityText = (TextView)findViewById(R.id.InformationCityText);
         quText = (TextView)findViewById(R.id.InformationQuText);
         addrText = (TextView)findViewById(R.id.InformationAddrText);
+        addrEditText = (EditText)findViewById(R.id.InformationAddrEditText);
         initUserInformationActity();
         SharedPreferences reader =
                 getSharedPreferences("start_file",MODE_PRIVATE);
@@ -67,15 +72,40 @@ public class UserInformationActivity extends AppCompatActivity {
                 SharedPreferences readerHost =
                         getSharedPreferences("host",MODE_PRIVATE);
                 task = task = new UserInformationTask(readerHost.getString("userUpdate",""),
-                        "{   \"city\": ,\n" +
-                                "      \"userPhone\": \"\",\n" +
-                                "      \"sex\": \"\",\n" +
-                                "      \"county\": ,\n" +
-                                "      \"userPwd\": \"\",\n" +
-                                "      \"userName\": \"\",\n" +
-                                "      \"detailAddr\": \"\",\n" +
-                                "      \"province\": ,}");
+                        "{   \"city\": "+ cityId + ",\n" +
+                                "      \"userPhone\": \" " + telephoneText.getText().toString() + "\",\n" +
+                                "      \"sex\": \""+ sex + "\",\n" +
+                                "      \"county\": "+ quId +",\n" +
+                                "      \"userName\": \""+ userNameText.getText().toString() +"\",\n" +
+                                "      \"detailAddr\": \"" + addrText.getText() + "\",\n" +
+                                "      \"province\": " + provinceId + "}");
                 task.execute((Void)null);
+            }
+        });
+
+        userNameText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setUserNameText(true);
+            }
+        });
+        userNameEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(!userNameText.getText().equals(userNameEditText
+                            .getText()))saveInformation.setVisibility(View.VISIBLE);
+                    setUserNameText(false);
+                }else{
+                    userNameEditText.setText(userNameText.getText());
+                }
+            }
+        });
+
+        sexText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showSexSingleChoiceDialog();
             }
         });
 
@@ -96,7 +126,7 @@ public class UserInformationActivity extends AppCompatActivity {
                     addressTask = new AddressTask(1, "\"preId\": \"" + provinceAddressId + "\"");
                     addressTask.execute((Void) null);
                 }else{
-                    showErrorMessage("请检查省分信息是否填写");
+                    showErrorMessage("请检查省份信息是否填写");
                 }
             }
         });
@@ -106,7 +136,6 @@ public class UserInformationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(!cityText.getText().toString().equals("无")) {
-
                     addressTask = new AddressTask(2, "\"preId\": \"" + cityAddressId + "\"");
                     addressTask.execute((Void) null);
                 }else{
@@ -117,9 +146,45 @@ public class UserInformationActivity extends AppCompatActivity {
         addrText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                setDeatilAdress(true);
             }
         });
+        addrEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    if(!addrEditText.getText().equals(addrText
+                            .getText()))saveInformation.setVisibility(View.VISIBLE);
+                    setDeatilAdress(false);
+                }else{
+                    addrEditText.setText(addrText.getText());
+                }
+            }
+        });
+    }
+
+    void setDeatilAdress(boolean cursor){
+        if(cursor){
+            addrText.setVisibility(View.GONE);
+            addrEditText.setVisibility(View.VISIBLE);
+            addrEditText.requestFocus();
+        }else{
+            addrText.setText(addrEditText.getText());
+            addrText.setVisibility(View.VISIBLE);
+            addrEditText.setVisibility(View.GONE);
+        }
+    }
+
+    void setUserNameText(boolean cursor){
+        if(cursor){
+            userNameText.setVisibility(View.GONE);
+            userNameEditText.setVisibility(View.VISIBLE);
+            userNameEditText.requestFocus();
+        }else{
+            userNameText.setText(userNameEditText.getText());
+            userNameText.setVisibility(View.VISIBLE);
+            userNameEditText.setVisibility(View.GONE);
+        }
     }
 
     public List<String> mesToList(List<AddressConnection.AddressMessage> list){
@@ -169,6 +234,7 @@ public class UserInformationActivity extends AppCompatActivity {
                 textView.setText(list.get(itemsNum));
                 if(cursor == 0){
                     if(!string.equals(list.get(itemsNum))){
+                        saveInformation.setVisibility(View.VISIBLE);
                         provinceAddressId = addressMessageList.get(itemsNum).addressId;
                         provinceId = addressMessageList.get(itemsNum).id;
                         cityText.setText("无");
@@ -176,12 +242,14 @@ public class UserInformationActivity extends AppCompatActivity {
                     }
                 }else if(cursor == 1){
                     if(!string.equals(list.get(itemsNum))){
+                        saveInformation.setVisibility(View.VISIBLE);
                         cityId = addressMessageList.get(itemsNum).id;
                         cityAddressId = addressMessageList.get(itemsNum).addressId;
                         quText.setText("无");
                     }
                 }else if(cursor == 2){
                     if(!string.equals(list.get(itemsNum))){
+                        saveInformation.setVisibility(View.VISIBLE);
                         quId = addressMessageList.get(itemsNum).id;
                         quAddressId = addressMessageList.get(itemsNum).addressId;
                     }
@@ -201,6 +269,45 @@ public class UserInformationActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    private void showSexSingleChoiceDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        String[] showString = {"男","女"};
+        final String sexResult = sex;
+        builder.setSingleChoiceItems(showString,
+                Character.digit(sex.charAt(0),10), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                sex = "" + which;
+            }
+        });
+
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(!sexResult.equals(sex))
+                    saveInformation.setVisibility(View.VISIBLE);
+                if (sex.equals("0")) {
+                    sexText.setText("男");
+                } else if (sex.equals("1")) {
+                    sexText.setText("女");
+                }
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                sex = sexResult;
+                dialog.dismiss();
+            }
+        });
+
+        builder.setCancelable(true);
+        AlertDialog dialog= builder.create();
+        dialog.show();
+    }
+
     private void setData(UserInformationConnection.UserInformation infor){
 
         userNameText.setText(infor.userName);
@@ -208,6 +315,7 @@ public class UserInformationActivity extends AppCompatActivity {
         if(infor.sex == null || infor.sex.equals("")){
             sexText.setText("无");
         }else {
+            sex = infor.sex;
             if (infor.sex.equals("0")) {
                 sexText.setText("男");
             } else if (infor.sex.equals("1")) {
@@ -297,7 +405,6 @@ public class UserInformationActivity extends AppCompatActivity {
         }
     }
 
-
     public class AddressTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String jsonData;
@@ -323,9 +430,6 @@ public class UserInformationActivity extends AppCompatActivity {
                         getString("ip", "")
                         + reader.getString("addressPage", "");
                 String response = InternetConnection.ForInternetConnection(url, jsonData + (i+1)+ "\"}");
-                SharedPreferences.Editor editor = getSharedPreferences("error_file", MODE_PRIVATE).edit();
-                editor.putString("messsage", response);
-                editor.apply();
                 result = AddressConnection.parseJsonData(response);
                 if (result == null) {
                     this.message = 1;

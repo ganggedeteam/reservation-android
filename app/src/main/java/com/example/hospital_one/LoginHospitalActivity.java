@@ -429,7 +429,6 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                             editor1.putString("password",this.mPassword);
                             editor1.apply();
                         }else{
-
                             //将登录账号数据清空
                             SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
                             editor.remove(this.mEmail);
@@ -446,6 +445,8 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                         SharedPreferences.Editor editorStartFile =
                                 getSharedPreferences("start_file",MODE_PRIVATE).edit();
                         editorStartFile.putBoolean("status",true);
+                        editorStartFile.putString("account",this.mEmail);
+                        editorStartFile.putString("userName",result.data.get(0).userName);
                         editorStartFile.apply();
                         return true;
                     }
@@ -460,7 +461,6 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                 message = 3;
                 return true;
             }
-
 //            for(int i = 0;i < DUMMY_CREDENTIALS.length;i++){
 //                String string = DUMMY_CREDENTIALS[i];
 //                String[] data = string.split(":");
