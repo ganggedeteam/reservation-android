@@ -48,15 +48,7 @@ public class HospitalListActivity extends AppCompatActivity {
         searchResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    task = new HospitalTask(
-                            new JSONObject().put("hospitalName",editText.getText().toString()).toString());
-                } catch (JSONException e) {
-//                    e.printStackTrace();
-                    SharedPreferences.Editor editor = getSharedPreferences("jsonResult",MODE_PRIVATE).edit();
-                    editor.putString("error","error");
-                    editor.apply();
-                }
+                task = new HospitalTask("\"hospitalName\":\"" + editText.getText().toString() +"\"");
                 task.execute((Void) null);
             }
         });
@@ -66,7 +58,7 @@ public class HospitalListActivity extends AppCompatActivity {
     public void initHospitalListActivity(){
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)actionBar.hide();
-        task = new HospitalTask("{}");
+        task = new HospitalTask("");
         task.execute((Void) null);
     }
 
@@ -129,34 +121,37 @@ public class HospitalListActivity extends AppCompatActivity {
         private int message = 0;
 
         HospitalTask(String jsonData) {
-            this.jsonData = jsonData;
+            this.jsonData = "{" + jsonData + ",\"pageNo\":\"";
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-            HospitalConnection.JsonHead result;
-            SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
-            String ip = reader.getString("ip","");
-            String last = reader.getString("hospitalPage","");
-            result = HospitalConnection.parseJsonData(
-                    InternetConnection.ForInternetConnection(ip + last,jsonData));
-//            SharedPreferences.Editor editor = getSharedPreferences("jsonResult",MODE_PRIVATE).edit();
-//            editor.putString("result",result.message+result.data.size()+result.status+result.total + result.data.get(0).hospitalName);
-//            editor.apply();
-            if(result == null){
-                this.message = 1;
-                return true;
-            }
-            if(result.message.equals("success")){
-                if(result.data.size() == 0){
-                    message = 2;
-                }else{
-                    connectResult = result.data;
+            int i = 0,size = 0;
+            while(i < 1 || i < size/10 + 1) {
+                HospitalConnection.JsonHead result;
+                SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+                String ip = reader.getString("ip", "");
+                String last = reader.getString("hospitalPage", "");
+                result = HospitalConnection.parseJsonData(
+                        InternetConnection.ForInternetConnection(ip + last, jsonData + (i + 1) + "\"}"));
+                if (result == null) {
+                    this.message = 1;
+                    return true;
                 }
-            }else{
-                message = 3;
+                if (result.message.equals("success")) {
+                    size = result.total;
+                    if (result.total == 0) {
+                        message = 2;
+                    } else if(result.data.size() != 0){
+                        connectResult.addAll(result.data);
+                    }
+                } else {
+                    message = 3;
+                }
+                i++;
             }
+
             // TODO: register the new account here.
             return true;
         }

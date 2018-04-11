@@ -8,6 +8,7 @@
         tools:context="com.example.hospital_one.UserInformationActivity">
 
     <LinearLayout
+            android:background="#eff2f4"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -58,6 +59,7 @@
                     android:layout_height="wrap_content">
 
                 <LinearLayout
+                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -68,7 +70,7 @@
                             android:layout_height="match_parent"
                             app:srcCompat="@drawable/account"
                             android:id="@+id/imageView11"
-                            android:layout_weight="1"/>
+                            android:layout_weight="2"/>
 
                     <LinearLayout
                             android:orientation="vertical"
@@ -77,13 +79,25 @@
                             android:layout_weight="4">
 
                         <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView46"
+                                android:layout_weight="4"/>
+
+                        <TextView
                                 android:text="选择头像"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView43"
                                 android:layout_weight="4"
-                                android:textSize="22sp"
+                                android:textSize="24sp"
                                 android:textAlignment="center"/>
+
+                        <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/textView47"
+                                android:layout_weight="4"/>
 
                     </LinearLayout>
 
@@ -102,11 +116,13 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
+                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:visibility="visible">
+                        android:visibility="visible"
+                        android:id="@+id/InformationUserName">
 
                     <TextView
                             android:text="用户名"
@@ -114,13 +130,13 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView38"
                             android:layout_weight="1.5"
-                            android:textSize="22sp"/>
+                            android:textSize="24sp"/>
 
                     <TextView
                             android:text="Mr Wu"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView44"
+                            android:id="@+id/InformationUserNameText"
                             android:layout_weight="3.5"
                             android:textAlignment="viewEnd"
                             android:textSize="20sp"/>
@@ -140,10 +156,12 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
+                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:id="@+id/InformationTelephone">
 
                     <TextView
                             android:text="电话"
@@ -151,23 +169,17 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView45"
                             android:layout_weight="1.5"
-                            android:textSize="22sp"/>
+                            android:textSize="24sp"/>
 
                     <TextView
                             android:text="111111111"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView46"
+                            android:id="@+id/InformationTelephoneText"
                             android:layout_weight="3.5"
                             android:textAlignment="viewEnd"
                             android:textSize="20sp"/>
 
-                    <ImageView
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            app:srcCompat="@drawable/more"
-                            android:id="@+id/imageView19"
-                            android:layout_weight="1"/>
                 </LinearLayout>
 
                 <TextView
@@ -176,10 +188,12 @@
                         android:id="@+id/textView40"/>
 
                 <LinearLayout
+                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:id="@+id/InformationSex">
 
                     <TextView
                             android:text="性别"
@@ -187,13 +201,13 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView48"
                             android:layout_weight="1.5"
-                            android:textSize="22sp"/>
+                            android:textSize="24sp"/>
 
                     <TextView
                             android:text="男"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView47"
+                            android:id="@+id/InformationSexText"
                             android:layout_weight="3.5"
                             android:textAlignment="textEnd"
                             android:textSize="20sp"/>
@@ -213,25 +227,27 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
+                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:id="@+id/InformationProvince">
 
                     <TextView
                             android:text="省（直辖市）"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView50"
-                            android:layout_weight="2.5"
-                            android:textSize="22sp"/>
+                            android:layout_weight="3"
+                            android:textSize="24sp"/>
 
                     <TextView
-                            android:text="山东"
+                            android:text="无"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView49"
-                            android:layout_weight="2.5"
+                            android:id="@+id/InformationProvinceText"
+                            android:layout_weight="2"
                             android:textSize="20sp"
                             android:textAlignment="textEnd"/>
 
@@ -250,10 +266,12 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
+                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:id="@+id/InformationCity">
 
                     <TextView
                             android:text="市"
@@ -261,13 +279,13 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView52"
                             android:layout_weight="1.5"
-                            android:textSize="22sp"/>
+                            android:textSize="24sp"/>
 
                     <TextView
-                            android:text="威海"
+                            android:text=" 无"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView51"
+                            android:id="@+id/InformationCityText"
                             android:layout_weight="3.5"
                             android:textAlignment="textEnd"
                             android:textSize="20sp"/>
@@ -288,25 +306,27 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
+                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:id="@+id/InformationQu">
 
                     <TextView
                             android:text="区（县）"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/textView56"
-                            android:layout_weight="1.5"
-                            android:textSize="22sp"/>
+                            android:layout_weight="2"
+                            android:textSize="24sp"/>
 
                     <TextView
-                            android:text="环翠区"
+                            android:text="无"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView55"
-                            android:layout_weight="3.5"
+                            android:id="@+id/InformationQuText"
+                            android:layout_weight="3"
                             android:textAlignment="textEnd"
                             android:textSize="20sp"/>
 
@@ -326,6 +346,7 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
+                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -336,14 +357,14 @@
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
                             android:id="@+id/textView58"
-                            android:layout_weight="1"
-                            android:textSize="22sp"/>
+                            android:layout_weight="1.5"
+                            android:textSize="24sp"/>
 
                     <TextView
                             android:text="哈尔滨工业大学"
                             android:layout_width="0dp"
                             android:layout_height="match_parent"
-                            android:id="@+id/textView59"
+                            android:id="@+id/InformationAddrText"
                             android:layout_weight="3"
                             android:textSize="20sp"
                             android:textAlignment="textEnd"
@@ -354,11 +375,39 @@
                             android:layout_height="match_parent"
                             android:inputType="text|textLongMessage"
                             android:ems="10"
-                            android:id="@+id/editText"
+                            android:id="@+id/InformationAddrEditText"
                             android:layout_weight="3"
                             android:textSize="20sp"
                             android:visibility="gone"
                             android:hint="不要超过十个字符"/>
+                </LinearLayout>
+
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView44"
+                        android:layout_weight="1"
+                        android:textSize="20sp"/>
+
+                <LinearLayout
+                        android:background="@android:color/background_light"
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1">
+
+                    <Button
+                            android:text="保存修改"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/InformationSave"
+                            android:layout_weight="1"
+                            android:background="@android:color/holo_red_light"
+                            android:textColor="@android:color/background_light"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:visibility="gone"/>
                 </LinearLayout>
             </LinearLayout>
 

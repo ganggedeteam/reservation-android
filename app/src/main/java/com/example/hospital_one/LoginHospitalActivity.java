@@ -31,6 +31,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import com.example.hospital_one.intenet_connection.InternetConnection;
 import com.example.hospital_one.intenet_connection.LoginConnection;
+import com.example.hospital_one.intenet_connection.UserInformationConnection;
 import okhttp3.*;
 
 import java.io.*;
@@ -394,14 +395,14 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             //String result = null;
-
-            /*LoginConnection.JsonHead result = null;
+            UserInformationConnection.JsonHead result = null;
             SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
             String ip = reader.getString("ip","");
-            String last = reader.getString("loginBuser","");
+            String last = reader.getString("userPage","");
             String jsonResult = InternetConnection.ForInternetConnection
-                    (ip + last,"{ \"account\":\"" + this.mEmail +"\"}");
+                    (ip + last,"{ \"userPhone\": \""+ mEmail +"\"}");
             //待定
+            result = UserInformationConnection.parseJsonData(jsonResult);
             if(result == null){
                 Toast.makeText(LoginHospitalActivity.this,"网络连接失败",Toast.LENGTH_SHORT);
                 this.message = 1;
@@ -412,10 +413,10 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                     message = 2;
                     return true;
                 }else{
-                    LoginConnection.BuserInfoData
-                            buserInfoData = result.data.get(0);
+                    UserInformationConnection.
+                            UserInformation buserInfoData = result.data.get(0);
                     //密码正确的操作
-                    if(buserInfoData.loginPwd.equals(mPassword)){
+                    if(buserInfoData.userPwd.equals(mPassword)){
                         if(mPasswordCheckBox.isChecked()) {
                             //保存密码
                             SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
@@ -458,52 +459,52 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             }else {
                 message = 3;
                 return true;
-            }*/
-
-            for(int i = 0;i < DUMMY_CREDENTIALS.length;i++){
-                String string = DUMMY_CREDENTIALS[i];
-                String[] data = string.split(":");
-                if(data[0].equals(mEmail) && data[1].equals(mPassword)) {
-                    if (mPasswordCheckBox.isChecked()) {
-                        //保存密码
-                        SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
-                        editor.putString(this.mEmail, this.mPassword);
-                        editor.apply();
-
-                        //将登录的账号密码写入startfile文件，以便下次启动时自动登录
-                        SharedPreferences.Editor editor1 = getSharedPreferences("start_file", MODE_PRIVATE).edit();
-                        editor1.putString("account", this.mEmail);
-                        editor1.putString("password", this.mPassword);
-                        editor1.apply();
-                    } else {
-
-                        //将登录账号数据清空
-                        SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
-                        editor.remove(this.mEmail);
-                        editor.apply();
-
-                        //将start_file文件中的数据清空，保护用户信息
-                        SharedPreferences.Editor editor1 = getSharedPreferences("start_file", MODE_PRIVATE).edit();
-                        editor1.putString("account", "");
-                        editor1.putString("password", "");
-                        editor1.apply();
-
-                    }
-
-                    SharedPreferences.Editor editorStartFile =
-                            getSharedPreferences("start_file", MODE_PRIVATE).edit();
-                    editorStartFile.putBoolean("status", true);
-                    editorStartFile.apply();
-                    message = 0;
-                    return true;
-                }else{
-                    SharedPreferences.Editor editorStartFileFail =
-                            getSharedPreferences("start_file",MODE_PRIVATE).edit();
-                    editorStartFileFail.putBoolean("status",false);
-                    editorStartFileFail.apply();
-                }
             }
-            return false;
+
+//            for(int i = 0;i < DUMMY_CREDENTIALS.length;i++){
+//                String string = DUMMY_CREDENTIALS[i];
+//                String[] data = string.split(":");
+//                if(data[0].equals(mEmail) && data[1].equals(mPassword)) {
+//                    if (mPasswordCheckBox.isChecked()) {
+//                        //保存密码
+//                        SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
+//                        editor.putString(this.mEmail, this.mPassword);
+//                        editor.apply();
+//
+//                        //将登录的账号密码写入startfile文件，以便下次启动时自动登录
+//                        SharedPreferences.Editor editor1 = getSharedPreferences("start_file", MODE_PRIVATE).edit();
+//                        editor1.putString("account", this.mEmail);
+//                        editor1.putString("password", this.mPassword);
+//                        editor1.apply();
+//                    } else {
+//
+//                        //将登录账号数据清空
+//                        SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
+//                        editor.remove(this.mEmail);
+//                        editor.apply();
+//
+//                        //将start_file文件中的数据清空，保护用户信息
+//                        SharedPreferences.Editor editor1 = getSharedPreferences("start_file", MODE_PRIVATE).edit();
+//                        editor1.putString("account", "");
+//                        editor1.putString("password", "");
+//                        editor1.apply();
+//
+//                    }
+//
+//                    SharedPreferences.Editor editorStartFile =
+//                            getSharedPreferences("start_file", MODE_PRIVATE).edit();
+//                    editorStartFile.putBoolean("status", true);
+//                    editorStartFile.apply();
+//                    message = 0;
+//                    return true;
+//                }else{
+//                    SharedPreferences.Editor editorStartFileFail =
+//                            getSharedPreferences("start_file",MODE_PRIVATE).edit();
+//                    editorStartFileFail.putBoolean("status",false);
+//                    editorStartFileFail.apply();
+//                }
+//            }
+//            return false;
             // TODO: register the new account here.
 //            return false;
         }

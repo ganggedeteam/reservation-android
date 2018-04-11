@@ -59,6 +59,7 @@ public class MainActivity extends AcitivityBase {
         editor.putString("patientAdd","/patient/add");
         editor.putString("patientPage","/patient/pagelist");
         editor.putString("userPage","/user/pagelist");
+        editor.putString("userUpdate","/user/update");
         editor.apply();
 
     }
@@ -133,6 +134,17 @@ public class MainActivity extends AcitivityBase {
                 startActivity(intent);
             }
         });
+
+        LinearLayout personInformation1 = (LinearLayout)findViewById(R.id.personInformation);
+        personInformation1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        MainActivity.this,UserInformationActivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
 
@@ -243,9 +255,9 @@ public class MainActivity extends AcitivityBase {
         today.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,PartOfHospitalActivity.class);
-                intent.putExtra("data",1);
-                startActivity(intent);
+//                Intent intent = new Intent(MainActivity.this,PartOfHospitalActivity.class);
+//                intent.putExtra("data",1);
+//                startActivity(intent);
             }
         });
 

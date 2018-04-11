@@ -61,10 +61,11 @@
                     android:textSize="12sp"/>
 
             <LinearLayout
+                    android:background="@android:color/background_light"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:id="@+id/personInformation">
 
                 <ImageView
@@ -81,10 +82,11 @@
                         android:layout_height="match_parent"
                         android:layout_weight="5">
 
-                    <Space
+                    <TextView
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
-                            android:layout_weight="1"/>
+                            android:id="@+id/textView49"
+                            android:layout_weight="2"/>
 
                     <TextView
                             android:text="TextView"
@@ -106,6 +108,7 @@
             </LinearLayout>
 
             <LinearLayout
+                    android:background="@android:color/background_light"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -118,7 +121,8 @@
                         android:id="@+id/paientManger"
                         android:layout_weight="1"
                         android:background="@android:color/background_light"
-                        android:textColor="@android:color/holo_green_light"/>
+                        android:textColor="@android:color/holo_green_light"
+                        android:textSize="20sp"/>
 
                 <Button
                         android:text="我的医生"
@@ -127,7 +131,8 @@
                         android:id="@+id/MyDoctor"
                         android:layout_weight="1"
                         android:background="@android:color/background_light"
-                        android:textColor="@android:color/holo_green_dark"/>
+                        android:textColor="@android:color/holo_green_dark"
+                        android:textSize="20sp"/>
             </LinearLayout>
 
             <TextView
@@ -136,6 +141,7 @@
                     android:id="@+id/textView27"/>
 
             <LinearLayout
+                    android:background="@android:color/background_light"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -154,11 +160,6 @@
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="5">
-
-                    <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="2"/>
 
                     <TextView
                             android:text="挂号记录"
@@ -186,6 +187,7 @@
                     android:id="@+id/textView28"/>
 
             <LinearLayout
+                    android:background="@android:color/background_light"
                     android:orientation="horizontal"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
@@ -203,12 +205,7 @@
                         android:orientation="vertical"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
-                        android:layout_weight="4">
-
-                    <Space
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="2"/>
+                        android:layout_weight="5">
 
                     <TextView
                             android:text="更改密码"
@@ -239,9 +236,10 @@
             <Space
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="5"/>
 
             <LinearLayout
+                    android:background="@android:color/background_light"
                     android:orientation="vertical"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
