@@ -58,7 +58,7 @@ public class UserInformationActivity extends AppCompatActivity {
         SharedPreferences reader =
                 getSharedPreferences("start_file",MODE_PRIVATE);
         SharedPreferences readerHost = getSharedPreferences("host",MODE_PRIVATE);
-        task = new UserInformationTask(readerHost.getString("userPage",""),
+        task = new UserInformationTask(0,
                 "{\"userPhone\": \""+ reader.getString("account","") + "\"}");
         task.execute((Void)null);
     }
@@ -71,7 +71,7 @@ public class UserInformationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences readerHost =
                         getSharedPreferences("host",MODE_PRIVATE);
-                task = task = new UserInformationTask(readerHost.getString("userUpdate",""),
+                task = task = new UserInformationTask(1,
                         "{   \"city\": "+ cityId + ",\n" +
                                 "      \"userPhone\": \" " + telephoneText.getText().toString() + "\",\n" +
                                 "      \"sex\": \""+ sex + "\",\n" +
@@ -348,29 +348,44 @@ public class UserInformationActivity extends AppCompatActivity {
 
     public class UserInformationTask extends AsyncTask<Void, Void, Boolean> {
 
+        private final int cursor;
         private final String jsonData;
-        private final String urlLast;
         private int message = 0;
         UserInformationConnection.JsonHead result = null;
+        UserInformationConnection.UserInformationUpdateBackMessage
+                updateResult = null;
 
-        UserInformationTask(String url,String jsonData) {
-            this.urlLast = url;
+        UserInformationTask(int cursor,String jsonData) {
+            this.cursor = cursor;
             this.jsonData = jsonData;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-            SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
-            String url = reader.
-                    getString("ip","") + this.urlLast;
-            String response = InternetConnection.ForInternetConnection(url,jsonData);
-            result = UserInformationConnection.parseJsonData(response);
-            if(result == null){
-                this.message = 1;
-            }else{
-                if(result.data.size() == 0){
-                    this.message = 2;
+            if(this.cursor == 0){
+                SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+                String url = reader.
+                        getString("ip", "") + reader.getString("userPage","");
+                String response = InternetConnection.ForInternetConnection(url, jsonData);
+                result = UserInformationConnection.parseJsonData(response);
+                if (result == null) {
+                    this.message = 1;
+                } else {
+                    if (result.data.size() == 0) {
+                        this.message = 2;
+                    }
+                }
+            }else if(this.cursor == 1) {
+                SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+                String url = reader.
+                        getString("ip", "") + reader.getString("userUpdate","");
+                String response = InternetConnection.ForInternetConnection(url, jsonData);
+                updateResult = UserInformationConnection.parseUpdateMessageJsonData(response);
+                if (updateResult == null) {
+                    this.message = 1;
+                } else {
+
                 }
             }
             // TODO: register the new account here.

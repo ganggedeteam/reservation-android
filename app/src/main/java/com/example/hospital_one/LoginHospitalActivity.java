@@ -416,7 +416,7 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                     UserInformationConnection.
                             UserInformation buserInfoData = result.data.get(0);
                     //密码正确的操作
-                    if(buserInfoData.userPwd.equals(mPassword)){
+                    if(buserInfoData.userPwd.equals(UserInformationConnection.md5(mPassword))){
                         if(mPasswordCheckBox.isChecked()) {
                             //保存密码
                             SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();

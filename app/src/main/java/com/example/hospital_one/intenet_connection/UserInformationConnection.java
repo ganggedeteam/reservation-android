@@ -95,4 +95,85 @@ public class UserInformationConnection {
         return list;
     }
 
+    public class UserInformationUpdateBackMessage{
+        String total;
+        String pageSize;
+        String pageNo;
+        String userPhone;
+        String userName;
+        String sex;
+        String province;
+        String provinceName;
+        String city;
+        String cityName;
+        String county;
+        String countyName;
+        String detailAddr;
+        String userPwd;
+        String gmtCreate;
+        String gmtModified;
+        String startRecode;
+        public UserInformationUpdateBackMessage(
+                String total,
+                String pageSize,
+                String pageNo,
+                String userPhone,
+                String userName,
+                String sex,
+                String province,
+                String provinceNam,
+                String city,
+                String cityName,
+                String county,
+                String countyName,
+                String detailAddr,
+                String userPwd,
+                String gmtCreate,
+                String gmtModified,
+                String startRecode){
+            this.total = total;
+            this.pageSize = pageSize;
+            this.pageNo = pageNo;
+            this.userPhone = userPhone;
+            this.userName = userName;
+            this.sex = sex;
+            this.province = province;
+            this.provinceName = provinceName;
+            this.city = city;
+            this.cityName = cityName;
+            this.county = county;
+            this.countyName = countyName;
+            this.detailAddr = detailAddr;
+            this.userPwd = userPwd;
+            this.gmtCreate = gmtCreate;
+            this.gmtModified = gmtModified;
+            this.startRecode = startRecode;
+        }
+    }
+
+    public class UserInformationAddBackMessage{
+        List<UserInformationUpdateBackMessage> data;
+        String message;
+        boolean status;
+        public UserInformationAddBackMessage(
+                List<UserInformationUpdateBackMessage> data,
+                String message,
+                boolean status){
+            this.data = data;
+            this.message = message;
+            this.status = status;
+        }
+    }
+
+    public static UserInformationUpdateBackMessage parseUpdateMessageJsonData(String jsonData){
+        Gson gson = new Gson();
+        UserInformationUpdateBackMessage list = gson.fromJson(jsonData, UserInformationUpdateBackMessage.class);
+        return list;
+    }
+
+    public static UserInformationAddBackMessage parseAddMessageJsonData(String jsonData){
+        Gson gson = new Gson();
+        UserInformationAddBackMessage list = gson.fromJson(jsonData, UserInformationAddBackMessage.class);
+        return list;
+    }
 }

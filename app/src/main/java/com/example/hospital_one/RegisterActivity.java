@@ -3,6 +3,9 @@ package com.example.hospital_one;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -31,6 +34,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.hospital_one.intenet_connection.InternetConnection;
+import com.example.hospital_one.intenet_connection.UserInformationConnection;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -195,11 +200,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
             mEmailView.requestFocus();
-            mEmailView.setError("请检查邮箱是否输入正确");
-            return;
-        } else if (!checkEmail(email)) {
-            mEmailView.requestFocus();
-            mEmailView.setError("请检查邮箱格式是否正确");
+            mEmailView.setError("请检查手机号码是否输入正确");
             return;
         }
         // Check for a valid password, if the user entered one.
@@ -214,8 +215,6 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             mRessurePassword.setError("请确认此处输入正确");
             return;
         }
-
-
 
         // Show a progress spinner, and kick off a background task to
         // perform the user login attempt.
@@ -355,6 +354,21 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         int IS_PRIMARY = 1;
     }
 
+    void showMessageDialog(String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示信息");
+        builder.setMessage(message);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(true);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
 
     /**
      * Represents an asynchronous login/registration task used to authenticate
@@ -362,62 +376,50 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
      */
     public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 
-
-        private final String mEmail;
-        private final String mPassword;
-        private final String mUserName;
+        private final String jsonData;
         private int message = 0;
-        private final int USERNAME = 1;
-        private final int EMAIL = 2;
+        private final String phoneNumber;
 
         UserRegisterTask(String userName,String email, String password) {
-            mUserName = userName;
-            mEmail = email;
-            mPassword = password;
+            phoneNumber = email;
+            jsonData = "{\"userName\": \"" + userName
+                    + "\",\"userPhone\": \"" + email + "\",\"userPwd\": \"" + password +"\"}";
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            String result = null;
-            //连接服务器，注册账号
-            try {
-                // Simulate network access.
-                Thread.sleep(2000);
-                /*String url = "";
-                MediaType JSON = MediaType.parse("application/json;charset=utf-8");
-                OkHttpClient client = new OkHttpClient();
-                RequestBody body = RequestBody.create(JSON,makeJson(mUserName,mEmail,mPassword));
-                Request request = new Request.Builder()
-                        .url(url)
-                        .post(body)
-                        .build();
-                Response response= client.newCall(request).execute();
-                result = response.body().string();
+            UserInformationConnection.JsonHead result = null;
+            SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
+            String url1 = reader.getString("ip","") + reader.getString("userPage","");
 
-            } catch (IOException e) {
+            result = UserInformationConnection.parseJsonData(
+                    InternetConnection.ForInternetConnection(url1,"\"userPhone\": \"" + phoneNumber + "\""));
+            if(result == null){
                 message = 1;
                 return true;
-            }
-            if(result == null){
-                Toast.makeText(RegisterActivity.this,"网络连接失败",Toast.LENGTH_SHORT);
-                return true;
-            }
-            RegisterResult registerResult = getJson(result);
-            if(registerResult == null){
-                //
-                this.message = 3;
-                return true;
             }else{
-                //
-                this.message = registerResult.message;
-            }*/
-            }catch (Exception ex){
-                ex.printStackTrace();
+                if(result.total != 0){
+                    message = 2;
+                    return true;
+                }
             }
+
+            String url2 = reader.getString("ip",
+                    "") + reader.getString("userAdd","");
+            String respone = InternetConnection.ForInternetConnection(url2,jsonData);
+            result = UserInformationConnection.parseJsonData(respone);
+            if(result == null){
+                message = 1;
+            }else{
+                if(result.message.equals("success")){
+                    message = 0;
+                }
+            }
+
             // TODO: register the new account here.
-            return false;
+            return true;
         }
 
         @Override
@@ -426,21 +428,28 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             showProgress(false);
 
             if (success) {
-                if(message == USERNAME) {
-                    mUserNameView.requestFocus();
-                    Toast.makeText(RegisterActivity.this, "用户名已存在，请更改", Toast.LENGTH_SHORT).show();
-                }
-                else if(message == EMAIL) {
-                    mEmailView.requestFocus();
-                    Toast.makeText(RegisterActivity.this, "该邮箱已注册，请更改", Toast.LENGTH_SHORT).show();
-                }else if(message == 0) {
-                    Toast.makeText(RegisterActivity.this, "请到邮箱验证信息", Toast.LENGTH_SHORT).show();
-                    finish();
+                if(message == 0){
+                    AlertDialog.Builder builder = new AlertDialog.Builder(RegisterActivity.this);
+                    builder.setTitle("提示信息");
+                    builder.setMessage("用户创建成功!");
+                    builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                            finish();
+                        }
+                    });
+                    builder.setCancelable(true);
+                    AlertDialog dialog = builder.create();
+                    dialog.show();
+                }else if(message == 1){
+                    showMessageDialog("网络连接失败！");
+                }else if (message == 2){
+                    showMessageDialog("用户已存在！");
                 }else{
-                    Toast.makeText(RegisterActivity.this,"未知错误，接受代码出错",Toast.LENGTH_LONG).show();
+                    Toast.makeText(RegisterActivity.this,"信息代码错误",Toast.LENGTH_LONG).show();
                 }
             } else {
-                Toast.makeText(RegisterActivity.this, "请到邮箱验证信息", Toast.LENGTH_SHORT).show();
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
                 mPasswordView.requestFocus();
             }

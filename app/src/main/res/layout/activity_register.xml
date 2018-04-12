@@ -89,14 +89,14 @@
                 android:layout_height="wrap_content">
 
                 <EditText
-                    android:completionThreshold="2"
-                    android:id="@+id/register_email"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="@string/register_email"
-                    android:maxLines="1"
-                    android:singleLine="true"
-                    android:inputType="text"/>
+                        android:completionThreshold="2"
+                        android:id="@+id/register_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="手机号码"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:inputType="phone"/>
 
             </android.support.design.widget.TextInputLayout>
 

@@ -60,7 +60,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         holder.patientDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.onButtonClick(v);
+                mOnItemClickListener.onButtonClick(v,patient.getPatientId());
             }
         });
     }

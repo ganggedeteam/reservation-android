@@ -1,6 +1,11 @@
 package com.example.hospital_one.intenet_connection;
 
+import com.google.gson.Gson;
+
+import java.util.List;
+
 public class PatientConnection {
+    public static final String[] relationName = {"本人","父母","夫妻","子女","亲戚","其他"};
     public class PatientMessage{
         String patientId;
         String patientName;
@@ -9,7 +14,6 @@ public class PatientConnection {
         String relation;
         String gmtCreate;
         String gmtModified;
-        final String[] relationName = {"本人","父母","夫妻","子女","亲戚","其他"};
         public String getPatientId(){
             return this.patientId;
         }
@@ -40,13 +44,13 @@ public class PatientConnection {
         }
 
         public PatientMessage(
-                String patientId,
                 String patientName,
-                String userId,
+                String gmtModified,
+                String patientId,
                 String idCard,
-                String relation,
+                String userId,
                 String gmtCreate,
-                String gmtModified){
+                String relation){
             this.patientId = patientId;
             this.patientName = patientName;
             this.userId = userId;
@@ -55,5 +59,24 @@ public class PatientConnection {
             this.gmtCreate = gmtCreate;
             this.gmtModified = gmtModified;
         }
+    }
+
+    public class JsonHead{
+        public int total;
+        public List<PatientMessage> data;
+        public String message;
+        public boolean status;
+        public JsonHead(int total,List<PatientMessage> data,String message,boolean status){
+            this.total = total;
+            this.data = data;
+            this.message = message;
+            this.status = status;
+        }
+    }
+
+    public static JsonHead parseJsonData(String jsonData){
+        Gson gson = new Gson();
+        JsonHead list = gson.fromJson(jsonData, JsonHead.class);
+        return list;
     }
 }
