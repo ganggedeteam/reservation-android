@@ -30,6 +30,7 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import com.example.hospital_one.intenet_connection.InternetConnection;
+import com.example.hospital_one.intenet_connection.LoginBackMessage;
 import com.example.hospital_one.intenet_connection.LoginConnection;
 import com.example.hospital_one.intenet_connection.UserInformationConnection;
 import okhttp3.*;
@@ -62,6 +63,7 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
      * /data/data/com.example.hospital_one/shared_prefs/start_file.xml
      */
     private UserLoginTask mAuthTask = null;
+    private UserNameTask mUserNameTask = null;
 
     // UI references.
     private AutoCompleteTextView mEmailView;    //账号输入框
@@ -72,6 +74,19 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
     private ImageButton backButton; //返回按钮
     private Button forgetPassword;
     private Button registerButton;
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences reader =
+                getSharedPreferences("start_file", MODE_PRIVATE);
+        boolean status = reader.getBoolean("status", false);
+        if(status){
+            mUserNameTask = new UserNameTask(
+                    "{\"userPhone\": \""+ reader.getString("account","") + "\"}");
+            mUserNameTask.execute((Void)null);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,6 +141,10 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
     }
 
     public void intitLoginHospitalActivity(){
+
+        SharedPreferences.Editor editor = getSharedPreferences("start_file", MODE_PRIVATE).edit();
+        editor.putBoolean("status", false);
+        editor.apply();
 
         //屏蔽标题栏
         ActionBar actionBar = this.getSupportActionBar();
@@ -395,72 +414,56 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             //String result = null;
-            UserInformationConnection.JsonHead result = null;
             SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
             String ip = reader.getString("ip","");
-            String last = reader.getString("userPage","");
-            String jsonResult = InternetConnection.ForInternetConnection
-                    (ip + last,"{ \"userPhone\": \""+ mEmail +"\"}");
-            //待定
-            result = UserInformationConnection.parseJsonData(jsonResult);
-            if(result == null){
-                Toast.makeText(LoginHospitalActivity.this,"网络连接失败",Toast.LENGTH_SHORT);
+            String last = reader.getString("login","");
+            String response = InternetConnection.ForInternetConnection
+                    (ip + last,"{ \"userPhone\": \"" + mEmail + "\",\n" +
+                            "\"userPwd\": \"" + mPassword + "\"}");
+            if(response == null || response.equals("")){
                 this.message = 1;
                 return true;
             }
-            if(result.message.equals("success")){
-                if(result.data.size() == 0){
-                    message = 2;
-                    return true;
+            this.message = LoginBackMessage.parseJson(response);
+            if(this.message == 0){
+                if(mPasswordCheckBox.isChecked()) {
+                    //保存密码
+                    SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
+                    editor.putString(this.mEmail, this.mPassword);
+                    editor.apply();
+
+                    //将登录的账号密码写入startfile文件，以便下次启动时自动登录
+                    SharedPreferences.Editor editor1 = getSharedPreferences("start_file",MODE_PRIVATE).edit();
+                    editor1.putString("account",this.mEmail);
+                    editor1.putString("password",this.mPassword);
+                    editor1.apply();
                 }else{
-                    UserInformationConnection.
-                            UserInformation buserInfoData = result.data.get(0);
-                    //密码正确的操作
-                    if(buserInfoData.userPwd.equals(UserInformationConnection.md5(mPassword))){
-                        if(mPasswordCheckBox.isChecked()) {
-                            //保存密码
-                            SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
-                            editor.putString(this.mEmail, this.mPassword);
-                            editor.apply();
+                    //将登录账号数据清空
+                    SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
+                    editor.remove(this.mEmail);
+                    editor.apply();
 
-                            //将登录的账号密码写入startfile文件，以便下次启动时自动登录
-                            SharedPreferences.Editor editor1 = getSharedPreferences("start_file",MODE_PRIVATE).edit();
-                            editor1.putString("account",this.mEmail);
-                            editor1.putString("password",this.mPassword);
-                            editor1.apply();
-                        }else{
-                            //将登录账号数据清空
-                            SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
-                            editor.remove(this.mEmail);
-                            editor.apply();
+                    //将start_file文件中的数据清空，保护用户信息
+                    SharedPreferences.Editor editor1 = getSharedPreferences("start_file",MODE_PRIVATE).edit();
+                    editor1.putString("account","");
+                    editor1.putString("password","");
+                    editor1.apply();
 
-                            //将start_file文件中的数据清空，保护用户信息
-                            SharedPreferences.Editor editor1 = getSharedPreferences("start_file",MODE_PRIVATE).edit();
-                            editor1.putString("account","");
-                            editor1.putString("password","");
-                            editor1.apply();
-
-                        }
-
-                        SharedPreferences.Editor editorStartFile =
-                                getSharedPreferences("start_file",MODE_PRIVATE).edit();
-                        editorStartFile.putBoolean("status",true);
-                        editorStartFile.putString("account",this.mEmail);
-                        editorStartFile.putString("userName",result.data.get(0).userName);
-                        editorStartFile.apply();
-                        return true;
-                    }
-                    //密码错误的操作
-                    SharedPreferences.Editor editorStartFileFail =
-                            getSharedPreferences("start_file",MODE_PRIVATE).edit();
-                    editorStartFileFail.putBoolean("status",false);
-                    editorStartFileFail.apply();
-                    return false;
                 }
-            }else {
-                message = 3;
+                SharedPreferences.Editor editorStartFile =
+                        getSharedPreferences("start_file",MODE_PRIVATE).edit();
+                editorStartFile.putBoolean("status",true);
+                editorStartFile.putString("account",this.mEmail);
+//                editorStartFile.putString("userName",result.data.get(0).userName);
+                editorStartFile.apply();
                 return true;
             }
+            //密码错误的操作
+            SharedPreferences.Editor editorStartFileFail =
+                    getSharedPreferences("start_file",MODE_PRIVATE).edit();
+            editorStartFileFail.putBoolean("status",false);
+            editorStartFileFail.apply();
+            return false;
 //            for(int i = 0;i < DUMMY_CREDENTIALS.length;i++){
 //                String string = DUMMY_CREDENTIALS[i];
 //                String[] data = string.split(":");
@@ -538,6 +541,60 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+    }
+    public class UserNameTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String jsonData;
+        private int message = 0;
+        UserInformationConnection.JsonHead result = null;
+        UserNameTask(String jsonData) {
+            this.jsonData = jsonData;
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+            String url = reader.
+                    getString("ip", "") + reader.getString("userPage","");
+            String response = InternetConnection.ForInternetConnection(url, jsonData);
+            result = UserInformationConnection.parseJsonData(response);
+            if (result == null) {
+                this.message = 1;
+            } else {
+                if (result.data.size() == 0) {
+                    this.message = 2;
+                }
+            }
+            // TODO: register the new account here.
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            if (success) {
+                if(message == 1){
+                    Toast.makeText(LoginHospitalActivity
+                            .this,"网络连接错误",Toast.LENGTH_LONG).show();
+                }else if(message == 2){
+//                    showSearchResult();
+                    Toast.makeText(LoginHospitalActivity
+                            .this,"查找不到本用户",Toast.LENGTH_LONG).show();
+                }else if(message == 0) {
+                    SharedPreferences.Editor editor = getSharedPreferences("start_file", MODE_PRIVATE).edit();
+                    editor.putString("userName",result.data.get(0).userName);
+                    editor.apply();
+                }else{
+                    Toast.makeText(LoginHospitalActivity
+                            .this,"未知错误",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            mUserNameTask = null;
         }
     }
 }

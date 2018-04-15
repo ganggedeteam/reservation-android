@@ -2,13 +2,17 @@ package com.example.hospital_one;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.TabHost;
-import android.widget.TextView;
+import android.widget.*;
+import com.example.hospital_one.intenet_connection.AddressConnection;
+import com.example.hospital_one.intenet_connection.InternetConnection;
+import com.example.hospital_one.intenet_connection.UserInformationConnection;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AcitivityBase {
 
@@ -54,6 +58,8 @@ public class MainActivity extends AcitivityBase {
         editor.putString("hospitalPage","/hospital/hospital/pagelist");
         editor.putString("addressPage","/code/address/pagelist");
         editor.putString("loginBuser","/login/buser");
+        editor.putString("register","/user/register");
+        editor.putString("login","/user/login");
         editor.putString("buserPage","/system//buser/pagelist");
         editor.putString("patientAdd","/patient/add");
         editor.putString("patientDelete","/patient/deleteList");
@@ -61,6 +67,7 @@ public class MainActivity extends AcitivityBase {
         editor.putString("userAdd","/user/add");
         editor.putString("userPage","/user/pagelist");
         editor.putString("userUpdate","/user/update");
+        editor.putString("hospitalDepartment","/hospital/department/pagelist");
         editor.apply();
 
     }
@@ -244,7 +251,8 @@ public class MainActivity extends AcitivityBase {
         yuYue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,HospitalListActivity.class);
+                Intent intent = new Intent(
+                        MainActivity.this,HospitalListActivity.class);
                 startActivity(intent);
             }
         });

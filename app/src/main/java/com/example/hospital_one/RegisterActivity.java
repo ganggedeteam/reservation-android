@@ -35,6 +35,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.hospital_one.intenet_connection.InternetConnection;
+import com.example.hospital_one.intenet_connection.LoginBackMessage;
 import com.example.hospital_one.intenet_connection.UserInformationConnection;
 import com.google.gson.Gson;
 
@@ -377,7 +378,7 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
     public class UserRegisterTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String jsonData;
-        private int message = 0;
+        private int message = 1;
         private final String phoneNumber;
 
         UserRegisterTask(String userName,String email, String password) {
@@ -390,34 +391,16 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
-            UserInformationConnection.JsonHead result = null;
             SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
-            String url1 = reader.getString("ip","") + reader.getString("userPage","");
-
-            result = UserInformationConnection.parseJsonData(
-                    InternetConnection.ForInternetConnection(url1,"\"userPhone\": \"" + phoneNumber + "\""));
-            if(result == null){
-                message = 1;
+            String url = reader.getString("ip","")
+                    + reader.getString("register","");
+            String response =
+                    InternetConnection.ForInternetConnection(url, jsonData);
+            if(response == null || response.equals("")){
+                this.message = 1;
                 return true;
-            }else{
-                if(result.total != 0){
-                    message = 2;
-                    return true;
-                }
             }
-
-            String url2 = reader.getString("ip",
-                    "") + reader.getString("userAdd","");
-            String respone = InternetConnection.ForInternetConnection(url2,jsonData);
-            result = UserInformationConnection.parseJsonData(respone);
-            if(result == null){
-                message = 1;
-            }else{
-                if(result.message.equals("success")){
-                    message = 0;
-                }
-            }
-
+            this.message = LoginBackMessage.parseJson(response);
             // TODO: register the new account here.
             return true;
         }
@@ -446,6 +429,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
                     showMessageDialog("网络连接失败！");
                 }else if (message == 2){
                     showMessageDialog("用户已存在！");
+                }else if(this.message == 3){
+                    Toast.makeText(RegisterActivity.this,"数据解析错误",Toast.LENGTH_LONG).show();
                 }else{
                     Toast.makeText(RegisterActivity.this,"信息代码错误",Toast.LENGTH_LONG).show();
                 }

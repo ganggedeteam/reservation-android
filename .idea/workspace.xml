@@ -14,25 +14,31 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="898a337f-c08e-4cbe-8647-b812b0ca5453" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/patient_add_layout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/DepartmentControllerConnection.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/LoginBackMessage.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/DepartmentKindsAdapter.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/javaCompile.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/LoginHospitalActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/LoginHospitalActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PartOfHospitalActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PartOfHospitalActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/RegisterActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/RegisterActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/PatientConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/PatientConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/DepartmentConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/DepartmentConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/HospitalConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/HospitalConnection.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/UserInformationConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/UserInformationConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/OnButtonClickListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/OnButtonClickListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PatientAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PatientAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_patient_manager.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_patient_manager.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/dialog_layout.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/HospitalAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/HospitalAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PartOfHospitalAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PartOfHospitalAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/hospital_item.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/hospital_item.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -65,44 +71,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="57" column="22" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="22" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="method#onResume#0;class#MainActivity#0" />
-                <element signature="method#initMain#0;class#MainActivity#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="UserInformationConnection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/UserInformationConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="167" column="50" selection-start-line="167" selection-start-column="18" selection-end-line="167" selection-end-column="50" />
-              <folding>
-                <element signature="method#md5#0;class#UserInformationConnection#0" />
-                <element signature="class#UserInformation#0;class#UserInformationConnection#0" />
-                <element signature="class#JsonHead#0;class#UserInformationConnection#0" />
-                <element signature="method#parseJsonData#0;class#UserInformationConnection#0" />
-                <element signature="class#UserInformationUpdateBackMessage#0;class#UserInformationConnection#0" />
-                <element signature="class#UserInformationAddBackMessage#0;class#UserInformationConnection#0" />
-                <element signature="method#parseUpdateMessageJsonData#0;class#UserInformationConnection#0" />
-                <element signature="method#parseUpdateMessageJsonData#1;class#UserInformationConnection#0" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="UserInformationActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="404" column="40" lean-forward="true" selection-start-line="404" selection-start-column="40" selection-end-line="404" selection-end-column="40" />
+            <state relative-caret-position="368">
+              <caret line="340" column="16" lean-forward="true" selection-start-line="340" selection-start-column="16" selection-end-line="340" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="method#setDeatilAdress#0;class#UserInformationActivity#0" />
@@ -110,7 +83,9 @@
                 <element signature="method#mesToList#0;class#UserInformationActivity#0" />
                 <element signature="method#showErrorMessage#0;class#UserInformationActivity#0" />
                 <element signature="method#showSingleChoiceDialog#0;class#UserInformationActivity#0" />
-                <element signature="method#setData#0;class#UserInformationActivity#0" />
+                <element signature="method#doInBackground#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
+                <element signature="method#onPostExecute#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
+                <element signature="method#onCancelled#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
                 <element signature="class#AddressTask#0;class#UserInformationActivity#0" />
                 <element signature="method#AddressTask#0;class#AddressTask#0;class#UserInformationActivity#0" />
                 <element signature="method#doInBackground#0;class#AddressTask#0;class#UserInformationActivity#0" />
@@ -124,8 +99,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -2183,10 +2158,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/keshi_name.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/doctor_search_result.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/searchresult/Doctor.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_home.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_forget_password.xml" />
@@ -2200,24 +2171,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/ForgetPasswordActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/SearchActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/InternetConnection.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/HospitalConnection.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/hospital_item.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/HospitalAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PartOfHospitalAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/DepartmentConnection.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_doctor.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_person_center.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PersonCenterActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PartOfHospitalActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/DoctorActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_search.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/AdressConnection.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/person_center.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/AddressConnection.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/dialog_layout.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_user_information.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/patient_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/DoctorAdapter.java" />
@@ -2228,11 +2191,23 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/PatientConnection.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_patient_manager.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/LoginBackMessage.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/LoginHospitalActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/DepartmentControllerConnection.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PartOfHospitalAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/DepartmentAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/DepartmentKindsAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/DepartmentConnection.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/RegisterActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/LoginHospitalActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/UserInformationConnection.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/HospitalConnection.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/HospitalAdapter.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/hospital_item.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PartOfHospitalActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java" />
       </list>
     </option>
@@ -2244,17 +2219,19 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="157" />
-    <option name="y" value="2" />
+    <option name="x" value="137" />
+    <option name="y" value="16" />
     <option name="width" value="1099" />
-    <option name="height" value="620" />
+    <option name="height" value="614" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
-    <navigator proportions="" version="1">
+    <navigator currentView="AndroidView" proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -2286,40 +2263,12 @@
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Hospital_one" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital_one" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="hospital_one" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Hospital_one" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital_one" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Hospital_one" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital_one" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="res" type="462c0819:PsiDirectoryNode" />
-              <item name="layout" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="AndroidView">
         <subPane>
           <expand>
@@ -2344,6 +2293,13 @@
               <item name="java" type="edd41e36:AndroidSourceTypeNode" />
               <item name="hospital_one" type="cbb59c9e:AndroidPsiDirectoryNode" />
               <item name="intenet_connection" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Hospital_one" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="java" type="edd41e36:AndroidSourceTypeNode" />
+              <item name="hospital_one" type="cbb59c9e:AndroidPsiDirectoryNode" />
+              <item name="part_hospital" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Hospital_one" type="1abcf292:AndroidViewProjectNode" />
@@ -2447,7 +2403,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523521996081" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523717986227" />
       </method>
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
@@ -2493,7 +2449,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523521996083" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1523717986229" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2626,14 +2582,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="157" y="2" width="1099" height="620" extended-state="0" />
+    <frame x="137" y="16" width="1099" height="614" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" />
-      <window_info anchor="bottom" id="Android Profiler" order="0" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Android Profiler" order="0" />
       <window_info id="Build Variants" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.5015129" side_tool="true" weight="0.22570017" />
       <window_info anchor="right" id="Maven Projects" order="9" weight="0.32980332" />
-      <window_info anchor="bottom" id="Logcat" order="2" weight="0.3607908" />
+      <window_info anchor="bottom" id="Logcat" order="2" weight="0.42339373" />
       <window_info id="Capture Tool" order="1" />
       <window_info id="Designer" order="2" />
       <window_info anchor="bottom" id="Build" order="3" sideWeight="0.49848714" weight="0.2836439" />
@@ -2651,7 +2608,7 @@
       <window_info anchor="bottom" id="Run" order="9" />
       <window_info anchor="bottom" id="Terminal" order="5" />
       <window_info id="Captures" order="4" weight="0.32980332" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.2560154" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.39846006" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.32980332" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
@@ -2662,13 +2619,48 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="7" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="bottom" id="Build" order="3" sideWeight="0.49848714" weight="0.2836439" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Palette" order="5" />
+      <window_info anchor="bottom" id="Run" order="9" />
+      <window_info id="Build Variants" order="6" side_tool="true" />
+      <window_info id="Image Layers" order="3" />
+      <window_info anchor="right" id="Commander" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="8" weight="0.24962178" />
+      <window_info id="UI Designer" order="0" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Captures" order="4" weight="0.32980332" />
+      <window_info id="Capture Tool" order="1" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="bottom" id="Android Profiler" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.5015129" side_tool="true" weight="0.22570017" />
+      <window_info anchor="right" id="Preview" order="2" weight="0.32980332" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="7" />
+      <window_info anchor="right" id="Device File Explorer" order="10" side_tool="true" weight="0.36686838" />
+      <window_info active="true" anchor="bottom" id="Logcat" order="2" visible="true" weight="0.42339373" />
+      <window_info anchor="bottom" id="Version Control" order="4" weight="0.35610765" />
+      <window_info anchor="right" id="Maven Projects" order="9" weight="0.32980332" />
+      <window_info anchor="bottom" id="Terminal" order="5" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.32980332" />
+      <window_info content_ui="combo" id="Project" order="7" weight="0.31316188" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="right" id="Palette&#9;" order="0" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="10" weight="0.4" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="8" />
+      <option name="time" value="10" />
     </breakpoint-manager>
   </component>
   <component name="antWorkspaceConfiguration">
@@ -2676,48 +2668,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/26.1.0/8279b00f5194701ff18363fa2958c5a26670b0ef/support-fragment-26.1.0-sources.jar!/android/support/v4/app/BaseFragmentActivityApi16.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-43">
-          <caret line="33" column="62" lean-forward="true" selection-start-line="33" selection-start-column="49" selection-end-line="33" selection-end-column="74" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/content/Context.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-110382">
-          <caret line="86" column="22" selection-start-line="86" selection-start-column="22" selection-end-line="86" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/content/ContextWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
-          <caret line="53" column="41" selection-start-line="53" selection-start-column="36" selection-end-line="53" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/view/ContextThemeWrapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="29" column="49" selection-start-line="29" selection-start-column="41" selection-end-line="29" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/app/Activity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="205">
-          <caret line="692" column="39" lean-forward="true" selection-start-line="692" selection-start-column="30" selection-end-line="692" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-compat/26.1.0/73bfdb5cca1949a51219d3676700996990ea3b52/support-compat-26.1.0-sources.jar!/android/support/v4/app/SupportActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="37" column="39" selection-start-line="37" selection-start-column="37" selection-end-line="37" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.support/support-fragment/26.1.0/8279b00f5194701ff18363fa2958c5a26670b0ef/support-fragment-26.1.0-sources.jar!/android/support/v4/app/BaseFragmentActivityApi14.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="123">
@@ -2739,13 +2689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/AcitivityBase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Android/Sdk/sources/android-26/android/widget/Toast.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="47">
@@ -2757,27 +2700,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="1118" selection-start-line="1118" selection-end-line="1118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/DoctorActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="60" selection-start-line="60" selection-end-line="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/InternetConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="23" column="51" lean-forward="true" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PartOfHospitalActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -2845,30 +2767,32 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/AddressConnection.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/OnItemClickListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="17" column="34" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="34" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state relative-caret-position="125">
+          <caret line="5" column="45" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="45" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/DoctorAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/Cdsfdsd.java" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/AcitivityBase.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="875">
-          <caret line="62" column="52" lean-forward="true" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
-          <folding>
-            <element signature="class#ViewHolder#0;class#DoctorAdapter#0" />
-          </folding>
+        <state relative-caret-position="150">
+          <caret line="7" column="38" lean-forward="true" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/HospitalAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/DoctorActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="186">
-          <caret line="88" column="36" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="36" />
+        <state relative-caret-position="-457">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/ForgetPasswordActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7493">
+          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -2879,29 +2803,38 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/OnItemClickListener.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="125">
-          <caret line="5" column="45" lean-forward="true" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="45" />
+        <state relative-caret-position="-332">
+          <caret line="247" column="47" lean-forward="true" selection-start-line="247" selection-start-column="47" selection-end-line="247" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PartOfHospitalAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/SearchActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="531">
-          <caret line="54" column="71" lean-forward="true" selection-start-line="54" selection-start-column="71" selection-end-line="54" selection-end-column="71" />
+        <state relative-caret-position="-1882">
+          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PatientAdapter.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/searchresult/Doctor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="62" column="75" selection-start-line="62" selection-start-column="75" selection-end-line="62" selection-end-column="75" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2495#2689#0" expanded="true" />
-            <element signature="e#2688#2689#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="-168">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/searchresult/DoctorSearchResult.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="50">
+          <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/DoctorAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="307">
+          <caret line="62" column="52" lean-forward="true" selection-start-line="62" selection-start-column="52" selection-end-line="62" selection-end-column="52" />
         </state>
       </provider>
     </entry>
@@ -2912,61 +2845,96 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/dialog_layout.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/patient_add_layout.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="175">
-          <caret line="38" column="8" selection-start-line="38" selection-start-column="8" selection-end-line="38" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/patient_layout.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MyDoctorActivity.java">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_my_doctor.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_hospital.xml">
-      <provider editor-type-id="android-designer2" />
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PatientAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="25">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="169">
-          <caret line="110" column="45" selection-start-line="110" selection-start-column="45" selection-end-line="110" selection-end-column="45" />
+        <state relative-caret-position="82">
+          <caret line="62" column="75" selection-start-line="62" selection-start-column="75" selection-end-line="62" selection-end-column="75" />
           <folding>
-            <element signature="method#doInBackground#0;class#HospitalTask#0;class#HospitalListActivity#0" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/LoginConnection.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/AddressConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1225">
-          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+        <state relative-caret-position="25">
+          <caret line="17" column="34" selection-start-line="17" selection-start-column="23" selection-end-line="17" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/InternetConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/ForgetPswConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="950">
+          <caret line="46" column="56" lean-forward="true" selection-start-line="46" selection-start-column="56" selection-end-line="46" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PartOfHospitalAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1075">
+          <caret line="61" lean-forward="true" selection-start-line="13" selection-end-line="61" />
+          <folding>
+            <element signature="method#onBindViewHolder#0;class#PartOfHospitalAdapter#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/DepartmentKindsAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="12" column="35" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="35" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/DepartmentControllerConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="200">
+          <caret line="47" lean-forward="true" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="class#DepartmentOfHos#0;class#DepartmentControllerConnection#0" />
+            <element signature="e#305#306#0" expanded="true" />
+            <element signature="e#339#340#0" expanded="true" />
+            <element signature="e#399#400#0" expanded="true" />
+            <element signature="e#448#449#0" expanded="true" />
+            <element signature="e#497#498#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#593#594#0" expanded="true" />
+            <element signature="e#640#641#0" expanded="true" />
+            <element signature="e#687#688#0" expanded="true" />
+            <element signature="e#730#731#0" expanded="true" />
+            <element signature="class#JsonHead#0;class#DepartmentControllerConnection#0" />
+            <element signature="method#parseJsonData#0;class#DepartmentControllerConnection#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/DepartmentConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="50" column="40" selection-start-line="50" selection-start-column="40" selection-end-line="50" selection-end-column="40" />
+          <folding>
+            <element signature="method#DepartmentKindsMes#0;class#DepartmentKindsMes#0;class#DepartmentConnection#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/PatientConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="175">
+        <state relative-caret-position="125">
           <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -2974,54 +2942,119 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_patient_manager.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_register.xml">
-      <provider selected="true" editor-type-id="android-designer2" />
-      <provider editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/RegisterActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="919">
-          <caret line="450" selection-start-line="450" selection-end-line="450" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3444">
-          <caret line="247" column="47" lean-forward="true" selection-start-line="247" selection-start-column="47" selection-end-line="247" selection-end-column="47" />
+        <state relative-caret-position="393">
+          <caret line="398" column="53" lean-forward="true" selection-start-line="398" selection-start-column="53" selection-end-line="398" selection-end-column="53" />
+          <folding>
+            <element signature="method#mayRequestContacts#0;class#RegisterActivity#0" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/LoginHospitalActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-823">
-          <caret line="418" column="93" selection-start-line="418" selection-start-column="93" selection-end-line="418" selection-end-column="93" />
+        <state relative-caret-position="1025">
+          <caret line="535" column="41" selection-start-line="535" selection-start-column="41" selection-end-line="535" selection-end-column="41" />
           <folding>
-            <element signature="e#18304#18366#0" />
+            <element signature="method#onCreate#0;class#LoginHospitalActivity#0" />
+            <element signature="method#populateAutoComplete#0;class#LoginHospitalActivity#0" />
+            <element signature="method#mayRequestContacts#0;class#LoginHospitalActivity#0" />
+            <element signature="docComment;method#onRequestPermissionsResult#0;class#LoginHospitalActivity#0" />
+            <element signature="method#onRequestPermissionsResult#0;class#LoginHospitalActivity#0" />
+            <element signature="docComment;method#attemptLogin#0;class#LoginHospitalActivity#0" />
+            <element signature="method#attemptLogin#0;class#LoginHospitalActivity#0" />
+            <element signature="method#isEmailValid#0;class#LoginHospitalActivity#0" />
+            <element signature="method#isPasswordValid#0;class#LoginHospitalActivity#0" />
+            <element signature="docComment;method#showProgress#0;class#LoginHospitalActivity#0" />
+            <element signature="method#showProgress#0;class#LoginHospitalActivity#0" />
+            <element signature="method#onCreateLoader#0;class#LoginHospitalActivity#0" />
+            <element signature="method#onLoadFinished#0;class#LoginHospitalActivity#0" />
+            <element signature="method#onLoaderReset#0;class#LoginHospitalActivity#0" />
+            <element signature="method#addEmailsToAutoComplete#0;class#LoginHospitalActivity#0" />
+            <element signature="class#ProfileQuery#0;class#LoginHospitalActivity#0" />
+            <element signature="docComment;class#UserLoginTask#0;class#LoginHospitalActivity#0" />
+            <element signature="e#18193#18255#0" />
+            <element signature="class#UserNameTask#0;class#LoginHospitalActivity#0" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/RegisterConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="75">
-          <caret line="57" column="22" selection-start-line="57" selection-start-column="22" selection-end-line="57" selection-end-column="22" />
+        <state relative-caret-position="100">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/LoginConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="507">
+          <caret line="57" column="5" selection-start-line="57" selection-start-column="5" selection-end-line="57" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/LoginBackMessage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="350">
+          <caret line="14" column="24" selection-start-line="14" selection-start-column="24" selection-end-line="14" selection-end-column="24" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="method#onResume#0;class#MainActivity#0" />
-            <element signature="method#initMain#0;class#MainActivity#0" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/HospitalConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="207">
+          <caret line="20" column="9" lean-forward="true" selection-start-line="20" selection-start-column="9" selection-end-line="20" selection-end-column="9" />
+          <folding>
+            <element signature="class#HospitalMes#0;class#HospitalConnection#0" />
+            <element signature="method#parseJsonData#0;class#HospitalConnection#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/HospitalAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="82">
+          <caret line="70" column="5" selection-start-line="70" selection-start-column="5" selection-end-line="70" selection-end-column="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_hospital.xml">
+      <provider editor-type-id="android-designer2" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="57" column="64" lean-forward="true" selection-start-line="53" selection-start-column="16" selection-end-line="57" selection-end-column="64" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="93" column="72" selection-start-line="93" selection-start-column="72" selection-end-line="93" selection-end-column="72" />
+          <folding>
+            <element signature="n#LinearLayout#0;n#LinearLayout#0;n#android.support.constraint.ConstraintLayout#0;n#!!top" />
+            <element signature="e#3925#3960#0" expanded="true" />
+            <element signature="e#3998#4033#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/hospital_item.xml">
+      <provider selected="true" editor-type-id="android-designer2" />
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="83" column="57" selection-start-line="83" selection-start-column="57" selection-end-line="83" selection-end-column="57" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/UserInformationConnection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="167" column="50" selection-start-line="167" selection-start-column="18" selection-end-line="167" selection-end-column="50" />
+        <state relative-caret-position="150">
+          <caret line="11" column="25" selection-start-line="11" selection-start-column="25" selection-end-line="11" selection-end-column="25" />
           <folding>
             <element signature="method#md5#0;class#UserInformationConnection#0" />
             <element signature="class#UserInformation#0;class#UserInformationConnection#0" />
@@ -3030,15 +3063,57 @@
             <element signature="class#UserInformationUpdateBackMessage#0;class#UserInformationConnection#0" />
             <element signature="class#UserInformationAddBackMessage#0;class#UserInformationConnection#0" />
             <element signature="method#parseUpdateMessageJsonData#0;class#UserInformationConnection#0" />
-            <element signature="method#parseUpdateMessageJsonData#1;class#UserInformationConnection#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="141">
+          <caret line="50" column="99" selection-start-line="50" selection-start-column="99" selection-end-line="50" selection-end-column="99" />
+          <folding>
+            <element signature="method#initHospitalListActivity#0;class#HospitalListActivity#0" />
+            <element signature="method#showRecycle#0;class#HospitalListActivity#0" />
+            <element signature="method#showSearchResult#0;class#HospitalListActivity#0" />
+            <element signature="method#setRecyclerView#0;class#HospitalListActivity#0" />
+            <element signature="class#HospitalTask#0;class#HospitalListActivity#0" />
+            <element signature="method#onPostExecute#0;class#HospitalTask#0;class#HospitalListActivity#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PartOfHospitalActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="124">
+          <caret line="111" column="58" selection-start-line="111" selection-start-column="58" selection-end-line="111" selection-end-column="58" />
+          <folding>
+            <element signature="method#setAdapter#0;class#PartOfHospitalActivity#0" />
+            <element signature="method#keshiYes#0;class#PartOfHospitalActivity#0" />
+            <element signature="method#onPostExecute#0;class#PartOfHospitalTask#0;class#PartOfHospitalActivity#0" />
+            <element signature="e#6500#6501#0" expanded="true" />
+            <element signature="e#6535#6536#0" expanded="true" />
+            <element signature="class#DepartmentKindsTask#0;class#PartOfHospitalActivity#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1057">
+          <caret line="134" column="30" selection-start-line="134" selection-start-column="30" selection-end-line="134" selection-end-column="30" />
+          <folding>
+            <element signature="method#setHostFile#0;class#MainActivity#0" />
+            <element signature="method#initMain#0;class#MainActivity#0" />
+            <element signature="e#8933#9455#0" expanded="true" />
+            <element signature="e#9454#9455#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="404" column="40" lean-forward="true" selection-start-line="404" selection-start-column="40" selection-end-line="404" selection-end-column="40" />
+        <state relative-caret-position="368">
+          <caret line="340" column="16" lean-forward="true" selection-start-line="340" selection-start-column="16" selection-end-line="340" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="method#setDeatilAdress#0;class#UserInformationActivity#0" />
@@ -3046,7 +3121,9 @@
             <element signature="method#mesToList#0;class#UserInformationActivity#0" />
             <element signature="method#showErrorMessage#0;class#UserInformationActivity#0" />
             <element signature="method#showSingleChoiceDialog#0;class#UserInformationActivity#0" />
-            <element signature="method#setData#0;class#UserInformationActivity#0" />
+            <element signature="method#doInBackground#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
+            <element signature="method#onPostExecute#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
+            <element signature="method#onCancelled#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
             <element signature="class#AddressTask#0;class#UserInformationActivity#0" />
             <element signature="method#AddressTask#0;class#AddressTask#0;class#UserInformationActivity#0" />
             <element signature="method#doInBackground#0;class#AddressTask#0;class#UserInformationActivity#0" />

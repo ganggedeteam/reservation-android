@@ -7,47 +7,18 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.hospital_one.R;
+import com.example.hospital_one.intenet_connection.HospitalConnection;
 
 import java.util.List;
 
 public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHolder> {
 
-    public static class HospitalNativeMes{
-        public String hospitalId;
-        public String hospitalGrade;
-        public String hospitalName;
-        public String hospitalAddress;
-        public int hospitalPic = R.drawable.account;
-
-        public HospitalNativeMes(String hospitalId,
-                           String hospitalGrade,
-                           String hospitalName,
-                           String hospitalAddress){
-            this.hospitalId = hospitalId;
-            this.hospitalGrade = hospitalGrade;
-            this.hospitalName = hospitalName;
-            this.hospitalAddress = hospitalAddress;
-        }
-
-        public HospitalNativeMes(String hospitalId,
-                                 String hospitalGrade,
-                                 String hospitalName,
-                                 String hospitalAddress,
-                                 int hospitalPic){
-            this.hospitalId = hospitalId;
-            this.hospitalGrade = hospitalGrade;
-            this.hospitalName = hospitalName;
-            this.hospitalAddress = hospitalAddress;
-            this.hospitalPic = hospitalPic;
-        }
-
-    }
-
     static class ViewHolder extends RecyclerView.ViewHolder {
-        ImageView hospitalView;
         TextView hospitalName;
         TextView hospitalGrade;
         TextView hospitalAddress;
+        TextView hospitalTelephone;
+        TextView hospitalIntroduction;
         View partView;
 
         public ViewHolder(View view) {
@@ -56,13 +27,14 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
             hospitalName = (TextView) view.findViewById(R.id.HospitalItemName);
             hospitalGrade = (TextView) view.findViewById(R.id.HospitalItemGrade);
             hospitalAddress = (TextView) view.findViewById(R.id.HospitalItemAddress);
-            hospitalView = (ImageView)view.findViewById(R.id.HospitalItemView);
+            hospitalIntroduction = (TextView)view.findViewById(R.id.HospitalIntroduction);
+            hospitalTelephone = (TextView)view.findViewById(R.id.HospitalTelephone);
         }
     }
 
-    private List<HospitalNativeMes> hospitalList;
+    private List<HospitalConnection.HospitalMes> hospitalList;
 
-    public HospitalAdapter(List<HospitalNativeMes> hospitalList) {
+    public HospitalAdapter(List<HospitalConnection.HospitalMes> hospitalList) {
         this.hospitalList = hospitalList;
     }
 
@@ -77,11 +49,18 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if(position>this.hospitalList.size())return;
-        HospitalNativeMes name = this.hospitalList.get(position);
+        HospitalConnection.HospitalMes name = this.hospitalList.get(position);
+        String province = name.provinceName;
+        String city = name.cityName;
+        String county = name.countyName;
+        String detail = name.detailAddr;
         holder.hospitalName.setText(name.hospitalName);
         holder.hospitalGrade.setText(name.hospitalGrade);
-        holder.hospitalAddress.setText(name.hospitalAddress);
-        holder.hospitalView.setImageResource(name.hospitalPic);
+        String addr = (province == null?"":province)
+                +(city == null?"":city)+(county == null?"":county)+(detail == null?"":detail);
+        holder.hospitalTelephone.setText(name.hospitalPhone==null?"暂无":name.hospitalPhone);
+        holder.hospitalIntroduction.setText(name.introduction == null?"暂无":name.introduction);
+        holder.hospitalAddress.setText(addr.equals("")?"暂无":addr);
         holder.partView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

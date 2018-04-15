@@ -11,8 +11,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
 import com.example.hospital_one.intenet_connection.DepartmentConnection;
+import com.example.hospital_one.intenet_connection.DepartmentControllerConnection;
 import com.example.hospital_one.intenet_connection.HospitalConnection;
 import com.example.hospital_one.intenet_connection.InternetConnection;
+import com.example.hospital_one.part_hospital.DepartmentKindsAdapter;
 import com.example.hospital_one.part_hospital.OnItemClickListener;
 import com.example.hospital_one.part_hospital.PartOfHospitalAdapter;
 
@@ -27,6 +29,7 @@ public class PartOfHospitalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_part_of_hospital);
         initPartOfHospitalActivity();
     }
+    DepartmentKindsTask kindsTask = null;
     PartOfHospitalTask task = null;
     String hospitalID = null;
     private void initPartOfHospitalActivity(){
@@ -34,18 +37,20 @@ public class PartOfHospitalActivity extends AppCompatActivity {
         if(actionBar != null)actionBar.hide();
         Intent intent = getIntent();
         String keshi = intent.getStringExtra("keshiId");
-        if(keshi.equals("YES"))keshiYes();
+        if(keshi.equals("YES")){
+            kindsTask = new DepartmentKindsTask();
+            kindsTask.execute((Void)null);
+        }
         else if(keshi.equals("NO")){
             hospitalID = intent.getStringExtra("hospitalId");
-            task = new PartOfHospitalTask("{}");
+            task = new PartOfHospitalTask("\"hospitalId\": \"" + hospitalID + "\"");
             task.execute((Void) null);
         }
-
     }
 
-    List<PartOfHospitalAdapter.PartOfHospitalMes> connectResult = null;
+    List<DepartmentControllerConnection.DepartmentOfHos> connectResult = null;
 
-    public void setAdapter(List<PartOfHospitalAdapter.PartOfHospitalMes> list){
+    public void setAdapter(List<DepartmentControllerConnection.DepartmentOfHos> list){
         RecyclerView keshiListView = (RecyclerView) findViewById(R.id.keshiListView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         keshiListView.setLayoutManager(layoutManager);
@@ -55,30 +60,24 @@ public class PartOfHospitalActivity extends AppCompatActivity {
             public void onItemClick(View view, int position){
                 Intent intent1 = new Intent(
                         PartOfHospitalActivity.this,DoctorActivity.class);
-                intent1.putExtra("hospitalId",hospitalID);
-                intent1.putExtra("departmentTypeId"
-                        ,connectResult.get(position).departmentTypeId);
-                intent1.putExtra("departmentName"
-                        ,connectResult.get(position).departmentName);
+//                intent1.putExtra("hospitalId",hospitalID);
+//                intent1.putExtra("departmentTypeId"
+//                        ,connectResult.get(position).departmentTypeId);
+//                intent1.putExtra("departmentName"
+//                        ,connectResult.get(position).departmentName);
                 startActivity(intent1);
             }
         });
         keshiListView.setAdapter(partOfHospitalAdapter);
     }
 
+    List<DepartmentConnection.DepartmentKindsMes> connectKindsResult = null;
     public void keshiYes(){
-
-        List<PartOfHospitalAdapter.PartOfHospitalMes> partOfHospital = new ArrayList<>();
-
-        for(int i = 0;i < DoctorActivity.title.length;i++){
-            partOfHospital.add(new
-                    PartOfHospitalAdapter.PartOfHospitalMes(DoctorActivity.title[i]));
-        }
         RecyclerView keshiListView = (RecyclerView) findViewById(R.id.keshiListView);
         LinearLayoutManager layoutManager = new LinearLayoutManager(this);
         keshiListView.setLayoutManager(layoutManager);
-        PartOfHospitalAdapter partOfHospitalAdapter = new PartOfHospitalAdapter(partOfHospital);
-        partOfHospitalAdapter.setOnItemClickListener(new OnItemClickListener(){
+        DepartmentKindsAdapter departmentKindsAdapter = new DepartmentKindsAdapter(connectKindsResult);
+        departmentKindsAdapter.setOnItemClickListener(new OnItemClickListener(){
             @Override
             public void onItemClick(View view, int position){
                 Intent intent1 = new Intent(PartOfHospitalActivity.this,DoctorActivity.class);
@@ -87,7 +86,7 @@ public class PartOfHospitalActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
-        keshiListView.setAdapter(partOfHospitalAdapter);
+        keshiListView.setAdapter(departmentKindsAdapter);
     }
 
     public class PartOfHospitalTask extends AsyncTask<Void, Void, Boolean> {
@@ -96,28 +95,37 @@ public class PartOfHospitalActivity extends AppCompatActivity {
         private int message = 0;
 
         PartOfHospitalTask(String jsonData) {
-            this.jsonData = jsonData;
+            this.jsonData = "{" + jsonData + ",\"pageNo\":\"";
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
-            DepartmentConnection.JsonHead result = null;
-            SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
-            String ip = reader.getString("ip","");
-            String last = reader.getString("departmentPage","");
-            result = DepartmentConnection.paraseJson(
-                    InternetConnection.ForInternetConnection(ip + last,jsonData));
-
-            if(result == null){
-                this.message = 1;
-            }else{
-                connectResult = result.data;
-                if(result.data.size() == 0){
-                    this.message = 2;
+            int i = 0,size = 0;
+            while(i < 1 || i < size/10 + 1) {
+                DepartmentControllerConnection.JsonHead result;
+                SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+                String ip = reader.getString("ip", "");
+                String last = reader.getString("hospitalDepartment", "");
+                result = DepartmentControllerConnection.parseJsonData(
+                        InternetConnection.ForInternetConnection(ip + last, jsonData + (i + 1) + "\"}"));
+                if(i==0)connectResult = new ArrayList<>();
+                if (result == null) {
+                    this.message = 1;
+                    return true;
                 }
+                if (result.message.equals("success")) {
+                    size = result.total;
+                    if (result.total == 0) {
+                        message = 2;
+                    } else if(result.data.size() != 0){
+                        connectResult.addAll(result.data);
+                    }
+                } else {
+                    message = 3;
+                }
+                i++;
             }
-
             // TODO: register the new account here.
             return true;
         }
@@ -134,8 +142,6 @@ public class PartOfHospitalActivity extends AppCompatActivity {
                             .this,"查找不到结果",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
                     setAdapter(connectResult);
-//                    task = null;
-//                    finish();
                 }else{
                     Toast.makeText(PartOfHospitalActivity
                             .this,"未知错误",Toast.LENGTH_LONG).show();
@@ -145,8 +151,71 @@ public class PartOfHospitalActivity extends AppCompatActivity {
 
         @Override
         protected void onCancelled() {
-//            setRecyclerView(getConnect());
             task = null;
+        }
+    }
+
+    public class DepartmentKindsTask extends AsyncTask<Void, Void, Boolean>{
+        private final String jsonData;
+        private int message = 0;
+
+        DepartmentKindsTask() {
+            this.jsonData = "{\"pageNo\":\"";
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            int i = 0,size = 0;
+            while(i < 1 || i < size/10 + 1) {
+                DepartmentConnection.JsonHead result;
+                SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+                String ip = reader.getString("ip", "");
+                String last = reader.getString("departmentPage", "");
+                result = DepartmentConnection.parseJsonData(
+                        InternetConnection.ForInternetConnection(ip + last, jsonData + (i + 1) + "\"}"));
+                if (result == null) {
+                    this.message = 1;
+                    return true;
+                }
+                if (result.message.equals("success")) {
+                    size = result.total;
+                    if (result.total == 0) {
+                        message = 2;
+                    } else if(result.data.size() != 0){
+                        connectKindsResult.addAll(result.data);
+                    }
+                } else {
+                    message = 3;
+                }
+                i++;
+            }
+            // TODO: register the new account here.
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            if (success) {
+                if(message == 1){
+                    Toast.makeText(PartOfHospitalActivity
+                            .this,"网络连接错误",Toast.LENGTH_LONG).show();
+                }else if(message == 2){
+//                    showSearchResult();
+                    Toast.makeText(PartOfHospitalActivity
+                            .this,"查找不到结果",Toast.LENGTH_LONG).show();
+                }else if(message == 0) {
+                    keshiYes();
+                }else{
+                    Toast.makeText(PartOfHospitalActivity
+                            .this,"未知错误",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            kindsTask = null;
         }
     }
 

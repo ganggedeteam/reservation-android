@@ -71,14 +71,17 @@ public class UserInformationActivity extends AppCompatActivity {
             public void onClick(View v) {
                 SharedPreferences readerHost =
                         getSharedPreferences("host",MODE_PRIVATE);
-                task = task = new UserInformationTask(1,
-                        "{   \"city\": "+ cityId + ",\n" +
-                                "      \"userPhone\": \" " + telephoneText.getText().toString() + "\",\n" +
-                                "      \"sex\": \""+ sex + "\",\n" +
-                                "      \"county\": "+ quId +",\n" +
-                                "      \"userName\": \""+ userNameText.getText().toString() +"\",\n" +
-                                "      \"detailAddr\": \"" + addrText.getText() + "\",\n" +
-                                "      \"province\": " + provinceId + "}");
+                String city = "\"city\": "+ cityId + ",";
+                String province = "\"province\": " + provinceId + ",";
+                String county = "\"county\": "+ quId +",";
+                String detailAddr = "\"detailAddr\": \"" + addrText.getText().toString() + "\",";
+                String userphone = "\"userPhone\": \"" + telephoneText.getText().toString() + "\"";
+                String sexJson = "\"sex\":\""+ sex +"\",";
+                task = new UserInformationTask(1,
+                        "{"+(provinceId == -1? "":province)
+                                + (cityId == -1 ? "":city)+ (quId == -1?"":county)
+                                + (addrText.getText().toString().equals("无")?"":detailAddr)
+                                + (sexText.getText().toString().equals("无")?"":sexJson)+ userphone +"}");
                 task.execute((Void)null);
             }
         });
@@ -162,7 +165,6 @@ public class UserInformationActivity extends AppCompatActivity {
             }
         });
     }
-
     void setDeatilAdress(boolean cursor){
         if(cursor){
             addrText.setVisibility(View.GONE);
@@ -322,24 +324,24 @@ public class UserInformationActivity extends AppCompatActivity {
                 sexText.setText("女");
             }
         }
-        if(infor.provinceName == null || infor.provinceName.equals("")) {
-            provinceText.setText("无");
-        }else {
-            provinceId = infor.province;
-            provinceText.setText(infor.provinceName);
-        }
-        if(infor.cityName == null || infor.cityName.equals(""))
-            cityText.setText("无");
-        else {
-            cityId = infor.city;
-            cityText.setText(infor.cityName);
-        }
-        if(infor.countyName== null || infor.countyName.equals(""))
-            quText.setText("无");
-        else {
-            quId = infor.country;
-            quText.setText(infor.countyName);
-        }
+//        if(infor.provinceName == null || infor.provinceName.equals("")) {
+//            provinceText.setText("无");
+//        }else {
+//            provinceId = infor.province;
+//            provinceText.setText(infor.provinceName);
+//        }
+//        if(infor.cityName == null || infor.cityName.equals(""))
+//            cityText.setText("无");
+//        else {
+//            cityId = infor.city;
+//            cityText.setText(infor.cityName);
+//        }
+//        if(infor.countyName== null || infor.countyName.equals(""))
+//            quText.setText("无");
+//        else {
+//            quId = infor.country;
+//            quText.setText(infor.countyName);
+//        }
         if(infor.detailAddr == null || infor.detailAddr.equals(""))
             addrText.setText("无");
         else
@@ -403,7 +405,23 @@ public class UserInformationActivity extends AppCompatActivity {
                     Toast.makeText(UserInformationActivity
                             .this,"查找不到本用户",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
-                    setData(result.data.get(0));
+                    if(cursor == 0)
+                        setData(result.data.get(0));
+                    else{
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UserInformationActivity.this);
+                        builder.setMessage("更新成功!");
+                        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        });
+                        builder.setCancelable(true);
+                        AlertDialog dialog = builder.create();
+                        dialog.show();
+                        saveInformation.setVisibility(View.GONE);
+                    }
 //                    task = null;
 //                    finish();
                 }else{

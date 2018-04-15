@@ -48,7 +48,7 @@ public class HospitalListActivity extends AppCompatActivity {
         searchResult.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                task = new HospitalTask("\"hospitalName\":\"" + editText.getText().toString() +"\"");
+                task = new HospitalTask("\"hospitalName\":\"" + editText.getText().toString() +"\",");
                 task.execute((Void) null);
             }
         });
@@ -63,27 +63,6 @@ public class HospitalListActivity extends AppCompatActivity {
     }
 
     List<HospitalConnection.HospitalMes> connectResult = null;
-    public List<HospitalAdapter.HospitalNativeMes> getConnect(){
-        List<HospitalAdapter.HospitalNativeMes> list = null;
-        if(connectResult == null){
-            return null;
-        }else {
-            list = toNative(connectResult);
-        }
-        return list;
-    }
-
-    public List<HospitalAdapter.
-            HospitalNativeMes> toNative(List<HospitalConnection.HospitalMes> target){
-
-        List<HospitalAdapter.HospitalNativeMes> list = new ArrayList<>();
-        for (int i = 0 ;i < target.size();i++){
-            HospitalConnection.HospitalMes s = target.get(i);
-            list.add(new HospitalAdapter.
-                    HospitalNativeMes(s.hospitalId,s.hospitalName,s.hospitalGrade,"暂无"));
-        }
-        return list;
-    }
 
     public void showRecycle(){
         LinearLayout recycler = (LinearLayout)findViewById(R.id.HospitalListView),
@@ -98,7 +77,7 @@ public class HospitalListActivity extends AppCompatActivity {
         searchResullt.setVisibility(View.VISIBLE);
     }
 
-    public void setRecyclerView(final List<HospitalAdapter.HospitalNativeMes> list){
+    public void setRecyclerView(final List<HospitalConnection.HospitalMes> list){
         LinearLayoutManager layoutManager = new LinearLayoutManager(HospitalListActivity.this);
         hospitalRecycler.setLayoutManager(layoutManager);
         HospitalAdapter hospitalAdapter = new HospitalAdapter(list);
@@ -121,7 +100,7 @@ public class HospitalListActivity extends AppCompatActivity {
         private int message = 0;
 
         HospitalTask(String jsonData) {
-            this.jsonData = "{" + jsonData + ",\"pageNo\":\"";
+            this.jsonData = "{" + jsonData + "\"pageNo\":\"";
         }
 
         @Override
@@ -135,6 +114,7 @@ public class HospitalListActivity extends AppCompatActivity {
                 String last = reader.getString("hospitalPage", "");
                 result = HospitalConnection.parseJsonData(
                         InternetConnection.ForInternetConnection(ip + last, jsonData + (i + 1) + "\"}"));
+                if(i==0)connectResult = new ArrayList<>();
                 if (result == null) {
                     this.message = 1;
                     return true;
@@ -168,7 +148,7 @@ public class HospitalListActivity extends AppCompatActivity {
                             .this,"查找不到结果",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
                     showRecycle();
-                    setRecyclerView(getConnect());
+                    setRecyclerView(connectResult);
 //                    finish();
                 }
                 else{

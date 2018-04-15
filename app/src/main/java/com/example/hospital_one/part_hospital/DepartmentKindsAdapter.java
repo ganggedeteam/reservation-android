@@ -6,11 +6,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.example.hospital_one.R;
-import com.example.hospital_one.intenet_connection.DepartmentControllerConnection;
+import com.example.hospital_one.intenet_connection.DepartmentConnection;
 
 import java.util.List;
 
-public class PartOfHospitalAdapter extends RecyclerView.Adapter<PartOfHospitalAdapter.ViewHolder> {
+public class DepartmentKindsAdapter extends RecyclerView.Adapter<DepartmentKindsAdapter.ViewHolder>{
 
     static class ViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
@@ -23,13 +23,13 @@ public class PartOfHospitalAdapter extends RecyclerView.Adapter<PartOfHospitalAd
     }
 
 
-    private List<DepartmentControllerConnection.DepartmentOfHos> keshiList;
-    public PartOfHospitalAdapter( List<DepartmentControllerConnection.DepartmentOfHos> keshiList){
+    private List<DepartmentConnection.DepartmentKindsMes> keshiList;
+    public DepartmentKindsAdapter( List<DepartmentConnection.DepartmentKindsMes> keshiList){
         this.keshiList = keshiList;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent,int viewType){
+    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.keshi_name,parent,false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
@@ -37,8 +37,8 @@ public class PartOfHospitalAdapter extends RecyclerView.Adapter<PartOfHospitalAd
 
     @Override
     public void onBindViewHolder(final ViewHolder holder,int position){
-        DepartmentControllerConnection.DepartmentOfHos name = this.keshiList.get(position);
-        holder.textView.setText(name.getDepartmentName());
+        DepartmentConnection.DepartmentKindsMes name = this.keshiList.get(position);
+        holder.textView.setText(name.getDepartmentTypeName());
         holder.partView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,5 +59,6 @@ public class PartOfHospitalAdapter extends RecyclerView.Adapter<PartOfHospitalAd
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
     }
+
 
 }

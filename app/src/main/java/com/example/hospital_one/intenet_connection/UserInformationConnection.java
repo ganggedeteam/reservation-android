@@ -33,7 +33,9 @@ public class UserInformationConnection {
     }
 
     public class UserInformation{
+        public String detailAddr;
         public String gmtModified;
+        public int province;
         public int city;
         public String userPhone;
         public String sex;
@@ -41,25 +43,18 @@ public class UserInformationConnection {
         public String userPwd;
         public String userName;
         public String gmtCreate;
-        public String detailAddr;
-        public int province;
-        public String cityName;
-        public String provinceName;
-        public String countyName;
         public UserInformation(
+                String detailAddr,
                 String gmtModified,
+                int province,
                 int city,
                 String userPhone,
                 String sex,
                 int country,
                 String userPwd,
                 String userName,
-                String gmtCreate,
-                String detailAddr,
-                int province,
-                String cityName,
-                String provinceName,
-                String countyName) {
+                String gmtCreate
+        ) {
             this.gmtModified = gmtModified;
             this.city = city;
             this.userPhone = userPhone;
@@ -70,9 +65,6 @@ public class UserInformationConnection {
             this.gmtCreate = gmtCreate;
             this.detailAddr = detailAddr;
             this.province = province;
-            this.cityName = cityName;
-            this.provinceName = provinceName;
-            this.countyName = countyName;
         }
     }
 
