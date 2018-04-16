@@ -16,14 +16,11 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:textSize="30sp"
-                android:id="@+id/keshiCellName"/>
+                android:id="@+id/keshiCellName"
+                android:textStyle="bold|italic"
+                android:textAlignment="center"
+                android:textColor="@android:color/background_dark"/>
 
-        <ImageView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                app:srcCompat="@drawable/more"
-                android:id="@+id/imageView9"
-                android:layout_weight="1"/>
     </LinearLayout>
 
     <TextView

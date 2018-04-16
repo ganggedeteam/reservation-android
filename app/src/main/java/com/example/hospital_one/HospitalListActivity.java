@@ -85,9 +85,21 @@ public class HospitalListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(View view, int position){
                 Intent intent1 = new Intent(
-                        HospitalListActivity.this,PartOfHospitalActivity.class);
-                intent1.putExtra("keshiId","NO");
-                intent1.putExtra("hospitalId",list.get(position).hospitalId);
+                        HospitalListActivity.this,HospitalDetailMessageActivity.class);
+                HospitalConnection.HospitalMes name = list.get(position);
+                String province = name.provinceName;
+                String city = name.cityName;
+                String county = name.countyName;
+                String detail = name.detailAddr;
+                String addr = (province == null?"":province)
+                        +(city == null?"":city)+(county == null?"":county)+(detail == null?"":detail);
+                intent1.putExtra("hospitalName",name.hospitalName==null?"暂无":name.hospitalName);
+                intent1.putExtra("hospitalGrade",name.hospitalGrade==null?"暂无":name.hospitalGrade);
+                intent1.putExtra("hospitalPhone",name.hospitalPhone==null?"暂无":name.hospitalPhone);
+                intent1.putExtra("hospitalManager",name.hospitalManager == null ?"暂无":name.hospitalManager);
+                intent1.putExtra("introduction",name.introduction == null?"暂无":name.introduction);
+                intent1.putExtra("address",addr.equals("")?"暂无":addr);
+                intent1.putExtra("hospitalId",name.hospitalId);
                 startActivity(intent1);
             }
         });

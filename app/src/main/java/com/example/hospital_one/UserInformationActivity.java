@@ -18,32 +18,34 @@ import java.util.List;
 
 public class UserInformationActivity extends AppCompatActivity {
 
-    private AddressTask addressTask = null;
-    private List<AddressConnection.AddressMessage> addressMessageList = null;
-    private UserInformationTask task;
-    private Button saveInformation;
-    private TextView userNameText;
-    private TextView telephoneText;
-    private TextView sexText;
-    private TextView provinceText;
-    private TextView cityText;
-    private TextView quText;
-    private TextView addrText;
-    private EditText userNameEditText;
-    private EditText addrEditText;
+    private AddressTask addressTask = null;     //地址查找线程
+    private List<AddressConnection.AddressMessage> addressMessageList = null; //地址信息类列表
+    private UserInformationTask task; //用户信息查询列表
+    private Button saveInformation;   //保存用户信息按钮
+    private TextView userNameText;    //用户名显示
+    private TextView telephoneText;   //电话号码显示
+    private TextView sexText;          //性别显示
+    private TextView provinceText;      //省地址显示
+    private TextView cityText;          //城市地址显示
+    private TextView quText;            //区地址显示
+    private TextView addrText;          //详细地址显示
+    private EditText userNameEditText;     //用户名编辑框
+    private EditText addrEditText;          //详细地址编辑框
 
-    String provinceAddressId = "-1";
-    String cityAddressId = "-1";
-    String quAddressId = "-1";
-    String sex = "0";
-    int provinceId = -1;
-    int cityId = -1;
-    int quId = -1;
+    String provinceAddressId = "-1";  //省地址标识ID
+    String cityAddressId = "-1"; //城市地址标识ID
+    String quAddressId = "-1";  //区地址地址标识ID
+    String sex = "0";   //性别标识ID
+    int provinceId = -1;  //省地质序号
+    int cityId = -1;    //城市地址序号
+    int quId = -1;  //区地址序号
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_information);
+
+        //界面按钮及TextView初始化
         userNameEditText = (EditText)findViewById(R.id.InformationUserNameEditText);
         saveInformation = (Button)findViewById(R.id.InformationSave);
         userNameText = (TextView)findViewById(R.id.InformationUserNameText);
@@ -54,21 +56,40 @@ public class UserInformationActivity extends AppCompatActivity {
         quText = (TextView)findViewById(R.id.InformationQuText);
         addrText = (TextView)findViewById(R.id.InformationAddrText);
         addrEditText = (EditText)findViewById(R.id.InformationAddrEditText);
+        //各种控件事件初始化
         initUserInformationActity();
+        //获取用户信息线程启动
         SharedPreferences reader =
                 getSharedPreferences("start_file",MODE_PRIVATE);
         SharedPreferences readerHost = getSharedPreferences("host",MODE_PRIVATE);
         task = new UserInformationTask(0,
                 "{\"userPhone\": \""+ reader.getString("account","") + "\"}");
         task.execute((Void)null);
+
+        showUserMessagePane(false);
+        try{
+            Thread.sleep(1000);
+            showAddressData();
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }finally {
+            showUserMessagePane(true);
+        }
     }
 
     private void initUserInformationActity(){
+        //屏蔽标题栏
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)actionBar.hide();
+
+        //修改用户信息按钮事件
         saveInformation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //输入栏聚焦消除
+                addrEditText.clearFocus();
+                userNameEditText.clearFocus();
                 SharedPreferences readerHost =
                         getSharedPreferences("host",MODE_PRIVATE);
                 String city = "\"city\": "+ cityId + ",";
@@ -77,6 +98,7 @@ public class UserInformationActivity extends AppCompatActivity {
                 String detailAddr = "\"detailAddr\": \"" + addrText.getText().toString() + "\",";
                 String userphone = "\"userPhone\": \"" + telephoneText.getText().toString() + "\"";
                 String sexJson = "\"sex\":\""+ sex +"\",";
+                //修改用户信息线程
                 task = new UserInformationTask(1,
                         "{"+(provinceId == -1? "":province)
                                 + (cityId == -1 ? "":city)+ (quId == -1?"":county)
@@ -86,6 +108,7 @@ public class UserInformationActivity extends AppCompatActivity {
             }
         });
 
+        //用户名显示和用户名编辑事件
         userNameText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +128,7 @@ public class UserInformationActivity extends AppCompatActivity {
             }
         });
 
+        //性别事件
         sexText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -112,6 +136,7 @@ public class UserInformationActivity extends AppCompatActivity {
             }
         });
 
+        //省显示事件
         LinearLayout province = (LinearLayout)findViewById(R.id.InformationProvince);
         province.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +146,7 @@ public class UserInformationActivity extends AppCompatActivity {
             }
         });
 
+        //城市事件
         LinearLayout city = (LinearLayout)findViewById(R.id.InformationCity);
         city.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -134,6 +160,7 @@ public class UserInformationActivity extends AppCompatActivity {
             }
         });
 
+        //区事件
         LinearLayout qu = (LinearLayout)findViewById(R.id.InformationQu);
         qu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -146,6 +173,8 @@ public class UserInformationActivity extends AppCompatActivity {
                 }
             }
         });
+
+        //详细地址显示及编辑事件
         addrText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -165,6 +194,38 @@ public class UserInformationActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void showAddressData(){
+        if(provinceId > 0){
+            addressTask = new AddressTask(6,"\"id\": " + provinceId + "");
+            addressTask.execute((Void)null);
+        }
+
+        if(cityId > 0){
+            addressTask = new AddressTask(6,"\"id\": " + cityAddressId + "");
+            addressTask.execute((Void)null);
+        }
+
+        if(quId > 0){
+            addressTask = new AddressTask(6,"\"id\": " + quId + "");
+            addressTask.execute((Void)null);
+        }
+    }
+
+    private void showUserMessagePane(boolean cursor){
+        ScrollView messagePane = (ScrollView)findViewById(R.id.UserMessagePane);
+        LinearLayout progressBar = (LinearLayout)findViewById(R.id.UserInformationProgressBar);
+        if(cursor){
+            messagePane.setVisibility(View.VISIBLE);
+            progressBar.setVisibility(View.GONE);
+        }else{
+            messagePane.setVisibility(View.GONE);
+            progressBar.setVisibility(View.VISIBLE);
+        }
+
+    }
+
+    //设置详细地址的显示与编辑交替
     void setDeatilAdress(boolean cursor){
         if(cursor){
             addrText.setVisibility(View.GONE);
@@ -177,6 +238,7 @@ public class UserInformationActivity extends AppCompatActivity {
         }
     }
 
+    //设置用户名的显示与编辑交替
     void setUserNameText(boolean cursor){
         if(cursor){
             userNameText.setVisibility(View.GONE);
@@ -189,6 +251,7 @@ public class UserInformationActivity extends AppCompatActivity {
         }
     }
 
+    //将地址信息类列表转化为单纯的地址名称列表
     public List<String> mesToList(List<AddressConnection.AddressMessage> list){
         List<String> result = new ArrayList<>();
         for(int i = 0 ;i < list.size();i++ ){
@@ -197,6 +260,7 @@ public class UserInformationActivity extends AppCompatActivity {
         return result;
     }
 
+    //显示错误信息Dialog
     private void showErrorMessage(String message){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("友情提示");
@@ -212,6 +276,7 @@ public class UserInformationActivity extends AppCompatActivity {
 
     }
 
+    //显示地址单选界面
     int itemsNum = 0;
     private void showSingleChoiceDialog(final int cursor,final TextView textView, final List<String> list) {
         itemsNum = 0;
@@ -271,6 +336,7 @@ public class UserInformationActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    //显示性别单选界面
     private void showSexSingleChoiceDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         String[] showString = {"男","女"};
@@ -310,6 +376,7 @@ public class UserInformationActivity extends AppCompatActivity {
         dialog.show();
     }
 
+    //初始化开始的数据显示
     private void setData(UserInformationConnection.UserInformation infor){
 
         userNameText.setText(infor.userName);
@@ -324,38 +391,36 @@ public class UserInformationActivity extends AppCompatActivity {
                 sexText.setText("女");
             }
         }
-//        if(infor.provinceName == null || infor.provinceName.equals("")) {
-//            provinceText.setText("无");
-//        }else {
-//            provinceId = infor.province;
-//            provinceText.setText(infor.provinceName);
-//        }
-//        if(infor.cityName == null || infor.cityName.equals(""))
-//            cityText.setText("无");
-//        else {
-//            cityId = infor.city;
-//            cityText.setText(infor.cityName);
-//        }
-//        if(infor.countyName== null || infor.countyName.equals(""))
-//            quText.setText("无");
-//        else {
-//            quId = infor.country;
-//            quText.setText(infor.countyName);
-//        }
+        if(infor.province == 0) {
+            provinceText.setText("无");
+        }else {
+            provinceId = infor.province;
+        }
+        if(infor.city == 0)
+            cityText.setText("无");
+        else {
+            cityId = infor.city;
+        }
+        if(infor.country == 0)
+            quText.setText("无");
+        else {
+            quId = infor.country;
+        }
         if(infor.detailAddr == null || infor.detailAddr.equals(""))
             addrText.setText("无");
         else
             addrText.setText(infor.detailAddr);
     }
 
+    //用户信息修改、查询线程类
     public class UserInformationTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final int cursor;
-        private final String jsonData;
-        private int message = 0;
-        UserInformationConnection.JsonHead result = null;
+        private final int cursor; //用户操作标识（0代表查询，1代表更新）
+        private final String jsonData; //传输到服务器的json数据
+        private int message = 0;   //与服务器连接的信息（0代表成功，1代表无网络连接，2代表查无此用户）
+        UserInformationConnection.JsonHead result = null;  //服务器返回信息转化的类
         UserInformationConnection.UserInformationUpdateBackMessage
-                updateResult = null;
+                updateResult = null; //服务器传回的更矮用户信息的信息类
 
         UserInformationTask(int cursor,String jsonData) {
             this.cursor = cursor;
@@ -366,10 +431,14 @@ public class UserInformationActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             if(this.cursor == 0){
+
+                //读取本地文件的服务器地址
                 SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
                 String url = reader.
                         getString("ip", "") + reader.getString("userPage","");
+                //与服务器连接并传回的信息
                 String response = InternetConnection.ForInternetConnection(url, jsonData);
+                //将json数据转化为类
                 result = UserInformationConnection.parseJsonData(response);
                 if (result == null) {
                     this.message = 1;
@@ -379,10 +448,13 @@ public class UserInformationActivity extends AppCompatActivity {
                     }
                 }
             }else if(this.cursor == 1) {
+                //读取本地文件的服务器地址
                 SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
                 String url = reader.
                         getString("ip", "") + reader.getString("userUpdate","");
+                //与服务器连接并传回的信息
                 String response = InternetConnection.ForInternetConnection(url, jsonData);
+                //将json数据转化为类
                 updateResult = UserInformationConnection.parseUpdateMessageJsonData(response);
                 if (updateResult == null) {
                     this.message = 1;
@@ -401,14 +473,13 @@ public class UserInformationActivity extends AppCompatActivity {
                     Toast.makeText(UserInformationActivity
                             .this,"网络连接错误",Toast.LENGTH_LONG).show();
                 }else if(message == 2){
-//                    showSearchResult();
                     Toast.makeText(UserInformationActivity
                             .this,"查找不到本用户",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
                     if(cursor == 0)
                         setData(result.data.get(0));
                     else{
-
+                        //更新成功弹出信息提示框
                         AlertDialog.Builder builder = new AlertDialog.Builder(UserInformationActivity.this);
                         builder.setMessage("更新成功!");
                         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -422,8 +493,6 @@ public class UserInformationActivity extends AppCompatActivity {
                         dialog.show();
                         saveInformation.setVisibility(View.GONE);
                     }
-//                    task = null;
-//                    finish();
                 }else{
                     Toast.makeText(UserInformationActivity
                             .this,"未知错误",Toast.LENGTH_LONG).show();
@@ -433,17 +502,23 @@ public class UserInformationActivity extends AppCompatActivity {
 
         @Override
         protected void onCancelled() {
-//            setRecyclerView(getConnect());
             task = null;
         }
     }
 
+    //地址信息查询线程类
     public class AddressTask extends AsyncTask<Void, Void, Boolean> {
 
-        private final String jsonData;
+        private final String jsonData; //传输到服务器的接送数据
+        //用户操作标识（0代表省查询，1代表城市查询，2代表区查询，
+        // 3代表省AddressId查询，4代表城市AddressId查询，5代表区AddressId查询
+        // 6代表省名称查询，7代表城市名称查询，8代表区名称查询）
         private final int cursor;
+        //与服务器连接信息
         private int message = 0;
-        AddressConnection.JsonHead result = null;
+        AddressConnection.JsonHead result = null;  //服务器返回信息转化的类
+
+        //地址信息类列表
         List<AddressConnection.
                 AddressMessage> listResult = new ArrayList<>();
 
@@ -458,11 +533,17 @@ public class UserInformationActivity extends AppCompatActivity {
             int i = 0;
             int size = 0;
             while(i < 1 || i < size/10 + 1) {
+
+                //读取服务器地址
                 SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
                 String url = reader.
                         getString("ip", "")
                         + reader.getString("addressPage", "");
-                String response = InternetConnection.ForInternetConnection(url, jsonData + (i+1)+ "\"}");
+                //与服务器建立连接并接受返回消息
+                String response = InternetConnection.
+                        ForInternetConnection(url, jsonData + (i+1)+ "\"}");
+
+                //将json数据转化为类
                 result = AddressConnection.parseJsonData(response);
                 if (result == null) {
                     this.message = 1;
@@ -471,6 +552,7 @@ public class UserInformationActivity extends AppCompatActivity {
                     if (result.total == 0) {
                         this.message = 2;
                     }else if(result.data.size() != 0){
+                        //将接受的地址信息提取
                         listResult.addAll(result.data);
                     }
                 }
@@ -491,8 +573,8 @@ public class UserInformationActivity extends AppCompatActivity {
                             .this,"查找不到本用户",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
                     addressMessageList = listResult;
-
                     if(this.cursor == 0){
+                        //显示相应的信息
                         List<String> list = mesToList(addressMessageList);
                         showSingleChoiceDialog(0,provinceText,list);
                     }else if(this.cursor == 1){
@@ -507,12 +589,16 @@ public class UserInformationActivity extends AppCompatActivity {
                         cityAddressId = addressMessageList.get(0).addressId;
                     }else if(this.cursor == 5){
                         quAddressId = addressMessageList.get(0).addressId;
+                    }else if(this.cursor == 6){
+                        provinceText.setText(listResult.get(0).addressName);
+                    }else if(this.cursor == 7){
+                        cityText.setText(listResult.get(0).addressName);
+                    }else if(this.cursor == 8){
+                        quText.setText(listResult.get(0).addressName);
                     }else{
                         Toast.makeText(UserInformationActivity
                                 .this,"标识代码错误",Toast.LENGTH_LONG).show();
                     }
-//                    task = null;
-//                    finish();
                 }else{
                     Toast.makeText(UserInformationActivity
                             .this,"未知错误",Toast.LENGTH_LONG).show();
@@ -522,9 +608,7 @@ public class UserInformationActivity extends AppCompatActivity {
 
         @Override
         protected void onCancelled() {
-//            setRecyclerView(getConnect());
             addressTask = null;
         }
     }
-
 }

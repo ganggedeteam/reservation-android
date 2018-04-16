@@ -60,6 +60,7 @@ public class MainActivity extends AcitivityBase {
         editor.putString("loginBuser","/login/buser");
         editor.putString("register","/user/register");
         editor.putString("login","/user/login");
+        editor.putString("doctorPage","/hospital/doctor/pagelist");
         editor.putString("buserPage","/system//buser/pagelist");
         editor.putString("patientAdd","/patient/add");
         editor.putString("patientDelete","/patient/deleteList");

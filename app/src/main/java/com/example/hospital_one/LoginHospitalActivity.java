@@ -77,7 +77,6 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         SharedPreferences reader =
                 getSharedPreferences("start_file", MODE_PRIVATE);
         boolean status = reader.getBoolean("status", false);
@@ -86,6 +85,13 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                     "{\"userPhone\": \""+ reader.getString("account","") + "\"}");
             mUserNameTask.execute((Void)null);
         }
+        try{
+            showProgress(true);
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        super.onDestroy();
     }
 
     @Override
@@ -242,8 +248,6 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             }
         }
     }
-
-
     /**
      * Attempts to sign in or register the account specified by the login form.
      * If there are form errors (invalid email, missing fields, etc.), the
@@ -384,7 +388,6 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
 
         mEmailView.setAdapter(adapter);
     }
-
 
     private interface ProfileQuery {
         String[] PROJECTION = {

@@ -16,9 +16,6 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView hospitalName;
         TextView hospitalGrade;
-        TextView hospitalAddress;
-        TextView hospitalTelephone;
-        TextView hospitalIntroduction;
         View partView;
 
         public ViewHolder(View view) {
@@ -26,9 +23,6 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
             partView = view;
             hospitalName = (TextView) view.findViewById(R.id.HospitalItemName);
             hospitalGrade = (TextView) view.findViewById(R.id.HospitalItemGrade);
-            hospitalAddress = (TextView) view.findViewById(R.id.HospitalItemAddress);
-            hospitalIntroduction = (TextView)view.findViewById(R.id.HospitalIntroduction);
-            hospitalTelephone = (TextView)view.findViewById(R.id.HospitalTelephone);
         }
     }
 
@@ -50,17 +44,13 @@ public class HospitalAdapter extends RecyclerView.Adapter<HospitalAdapter.ViewHo
     public void onBindViewHolder(final ViewHolder holder, int position) {
         if(position>this.hospitalList.size())return;
         HospitalConnection.HospitalMes name = this.hospitalList.get(position);
-        String province = name.provinceName;
-        String city = name.cityName;
-        String county = name.countyName;
-        String detail = name.detailAddr;
+
         holder.hospitalName.setText(name.hospitalName);
         holder.hospitalGrade.setText(name.hospitalGrade);
-        String addr = (province == null?"":province)
-                +(city == null?"":city)+(county == null?"":county)+(detail == null?"":detail);
-        holder.hospitalTelephone.setText(name.hospitalPhone==null?"暂无":name.hospitalPhone);
-        holder.hospitalIntroduction.setText(name.introduction == null?"暂无":name.introduction);
-        holder.hospitalAddress.setText(addr.equals("")?"暂无":addr);
+
+//        holder.hospitalTelephone.setText(name.hospitalPhone==null?"暂无":name.hospitalPhone);
+//        holder.hospitalIntroduction.setText(name.introduction == null?"暂无":name.introduction);
+//        holder.hospitalAddress.setText(addr.equals("")?"暂无":addr);
         holder.partView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
