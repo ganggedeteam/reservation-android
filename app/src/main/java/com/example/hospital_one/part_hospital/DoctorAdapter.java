@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.hospital_one.R;
+import com.example.hospital_one.intenet_connection.DoctorConnection;
 import com.example.hospital_one.searchresult.Doctor;
 
 import java.util.List;
@@ -29,8 +30,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         }
     }
 
-    private List<Doctor> doctorsList;
-    public DoctorAdapter( List<Doctor> doctorsList){
+    private List<DoctorConnection.DoctorMessage> doctorsList;
+    public DoctorAdapter( List<DoctorConnection.DoctorMessage> doctorsList){
         this.doctorsList = doctorsList;
     }
 
@@ -45,12 +46,12 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
     @Override
     public void onBindViewHolder(DoctorAdapter.ViewHolder holder, int position){
         if(position>this.doctorsList.size())return;
-        Doctor doctor = this.doctorsList.get(position);
-        holder.doctorImage.setImageResource(doctor.getImageid());
-        holder.doctorName.setText(doctor.getName());
-        holder.doctorKeshi.setText(doctor.getKeshi());
-        holder.doctorZhicheng.setText(doctor.getZhicheng());
-        holder.doctorSpecial.setText(doctor.getSpecial());
+        DoctorConnection.DoctorMessage doctor = this.doctorsList.get(position);
+//        holder.doctorImage.setImageResource();
+        holder.doctorName.setText(doctor.doctorName);
+        holder.doctorKeshi.setText(doctor.typeName);
+        holder.doctorZhicheng.setText(doctor.doctorTitle);
+        holder.doctorSpecial.setText(doctor.skill);
     }
 
     @Override

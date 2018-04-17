@@ -6,15 +6,17 @@ import java.util.List;
 
 public class DoctorConnection {
     public class DoctorMessage{
-        String doctorName;
-        String doctorPhoto;
-        String doctorTitle;
-        String doctorId;
-        String hospitalId;
-        String sex;
-        String typeName;
-        int typeId;
-        String hospitalName;
+        public String doctorName;
+        public String doctorPhoto;
+        public String doctorTitle;
+        public String doctorId;
+        public String hospitalId;
+        public String sex;
+        public String skill;
+        public String typeName;
+        public int typeId;
+        public String hospitalName;
+        public String introduction;
         public DoctorMessage(
                 String doctorName,
                 String doctorPhoto,
@@ -22,18 +24,22 @@ public class DoctorConnection {
                 String doctorId,
                 String hospitalId,
                 String sex,
+                String skill,
                 String typeName,
                 int typeId,
-                String hospitalName){
+                String hospitalName,
+                String introduction){
             this.doctorName = doctorName;
             this.doctorPhoto = doctorPhoto;
             this.doctorTitle = doctorTitle;
             this.doctorId = doctorId;
             this.hospitalId = hospitalId;
             this.sex = sex;
+            this.skill = skill;
             this.typeName = typeName;
             this.typeId = typeId;
             this.hospitalName = hospitalName;
+            this.introduction = introduction;
 
         }
     }

@@ -18,7 +18,10 @@ import java.util.List;
 
 public class UserInformationActivity extends AppCompatActivity {
 
-    private AddressTask addressTask = null;     //地址查找线程
+    private AddressTask addressTask = null;
+    private AddressTask provinceTask = null;     //地址查找线程
+    private AddressTask cityTask = null;
+    private AddressTask quTask = null;
     private List<AddressConnection.AddressMessage> addressMessageList = null; //地址信息类列表
     private UserInformationTask task; //用户信息查询列表
     private Button saveInformation;   //保存用户信息按钮
@@ -68,9 +71,7 @@ public class UserInformationActivity extends AppCompatActivity {
 
         showUserMessagePane(false);
         try{
-            Thread.sleep(1000);
-            showAddressData();
-            Thread.sleep(1000);
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
@@ -196,19 +197,23 @@ public class UserInformationActivity extends AppCompatActivity {
     }
 
     private void showAddressData(){
+//        for(;;){
+//            if(task == null)break;
+//        }
+
         if(provinceId > 0){
-            addressTask = new AddressTask(6,"\"id\": " + provinceId + "");
-            addressTask.execute((Void)null);
+            provinceTask = new AddressTask(6,"\"id\": " + provinceId + "");
+            provinceTask.execute((Void)null);
         }
 
         if(cityId > 0){
-            addressTask = new AddressTask(6,"\"id\": " + cityAddressId + "");
-            addressTask.execute((Void)null);
+            cityTask = new AddressTask(7,"\"id\": " + cityId + "");
+            cityTask.execute((Void)null);
         }
 
         if(quId > 0){
-            addressTask = new AddressTask(6,"\"id\": " + quId + "");
-            addressTask.execute((Void)null);
+            quTask = new AddressTask(8,"\"id\": " + quId + "");
+            quTask.execute((Void)null);
         }
     }
 
@@ -401,15 +406,17 @@ public class UserInformationActivity extends AppCompatActivity {
         else {
             cityId = infor.city;
         }
-        if(infor.country == 0)
+        if(infor.county == 0)
             quText.setText("无");
         else {
-            quId = infor.country;
+            quId = infor.county;
         }
         if(infor.detailAddr == null || infor.detailAddr.equals(""))
             addrText.setText("无");
         else
             addrText.setText(infor.detailAddr);
+
+        showAddressData();
     }
 
     //用户信息修改、查询线程类
@@ -608,7 +615,13 @@ public class UserInformationActivity extends AppCompatActivity {
 
         @Override
         protected void onCancelled() {
-            addressTask = null;
+            switch (this.cursor){
+                case 6: provinceTask = null;break;
+                case 7:cityTask = null;break;
+                case 8:quTask = null;break;
+                    default:
+                        addressTask = null;
+            }
         }
     }
 }

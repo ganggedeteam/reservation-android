@@ -104,17 +104,17 @@
 
                         <TextView
                                 android:text="等级（三甲）"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/HospitalDetailGrade"
                                 android:layout_weight="1"
                                 android:textSize="24sp"
-                                android:textAlignment="center"
+                                android:textAlignment="viewEnd"
                                 android:textColor="@android:color/holo_green_dark"/>
 
                         <LinearLayout
                                 android:orientation="vertical"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1">
 
@@ -124,7 +124,8 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/textView72"
                                     android:layout_weight="1"
-                                    android:textColor="@android:color/holo_green_dark"/>
+                                    android:textColor="@android:color/holo_green_dark"
+                                    android:textAlignment="viewEnd"/>
 
                             <TextView
                                     android:text="1231231312313"
@@ -133,7 +134,8 @@
                                     android:id="@+id/HospitalDetailTelephone"
                                     android:layout_weight="1"
                                     android:textColor="@android:color/holo_blue_bright"
-                                    android:textStyle="bold"/>
+                                    android:textStyle="bold"
+                                    android:textAlignment="viewEnd"/>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -149,7 +151,7 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView74"
                                 android:layout_weight="1"
-                                android:textSize="25sp"
+                                android:textSize="20sp"
                                 android:textAlignment="center"
                                 />
 
@@ -185,7 +187,7 @@
 
                         <TextView
                                 android:text="详细地址"
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView77"
                                 android:layout_weight="1"
@@ -193,7 +195,7 @@
 
                         <TextView
                                 android:text="                                                       "
-                                android:layout_width="wrap_content"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView79"
                                 android:layout_weight="1"/>
@@ -208,16 +210,40 @@
                             android:textStyle="italic"/>
                 </LinearLayout>
 
+                <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView66"
+                        android:textSize="30sp"/>
+
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                        android:layout_height="match_parent"
+                        android:visibility="gone"
+                        android:id="@+id/hospital_detail_message">
 
                     <android.support.v7.widget.RecyclerView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             tools:listitem="@layout/keshi_name"
                             android:id="@+id/HospitalDetailDepartmentList"/>
+                </LinearLayout>
+
+                <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/hospital_detail_message_noResult">
+
+                    <TextView
+                            android:text="暂无数据"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/textView67"
+                            android:textStyle="bold"
+                            android:textAlignment="center"
+                            android:textSize="30sp"/>
                 </LinearLayout>
 
             </LinearLayout>

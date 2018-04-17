@@ -28,4 +28,16 @@ public class InternetConnection {
         }
         return result;
     }
+
+    public static String ForInternetConnection(String url){
+        OkHttpClient client = new OkHttpClient();
+        String response = null;
+        try{
+            Request request = new Request.Builder().url(url).build();
+            response = client.newCall(request).execute().body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return response;
+    }
 }

@@ -33,40 +33,53 @@
                     android:layout_weight="1">
 
                 <TextView
-                        android:text="TextView"
+                        android:text="姓名"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/doctorName"
                         android:layout_weight="1"
                         android:textSize="22sp"
-                        android:textColor="@android:color/background_dark"/>
+                        android:textColor="@android:color/background_dark"
+                        android:textAlignment="center"/>
 
                 <TextView
-                        android:text="TextView"
+                        android:text="职称"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/doctorclass"
                         android:layout_weight="1"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp"
+                        android:textStyle="italic"
+                        android:textAlignment="center"/>
 
                 <TextView
-                        android:text="TextView"
+                        android:text="所在科室"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/doctor_ke"
                         android:layout_weight="1"
-                        android:textSize="20sp"/>
+                        android:textSize="20sp"
+                        android:textStyle="italic"/>
             </LinearLayout>
 
             <TextView
+                    android:text="     主治："
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:id="@+id/textView65"
+                    android:layout_weight="1"
+                    android:textSize="20sp"/>
+
+            <TextView
                     android:background="@drawable/line_down"
-                    android:text="TextView"
+                    android:text="医生简介"
                     android:layout_width="match_parent"
                     android:layout_height="0dp"
                     android:id="@+id/doctor_special"
-                    android:textAlignment="textStart"
+                    android:textAlignment="center"
                     android:textSize="20sp"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:textStyle="italic"/>
 
         </LinearLayout>
     </LinearLayout>

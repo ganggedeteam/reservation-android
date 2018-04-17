@@ -70,6 +70,7 @@ public class HospitalListActivity extends AppCompatActivity {
         recycler.setVisibility(View.VISIBLE);
         searchResullt.setVisibility(View.GONE);
     }
+
     public void showSearchResult(){
         LinearLayout recycler = (LinearLayout)findViewById(R.id.HospitalListView),
                 searchResullt = (LinearLayout)findViewById(R.id.HospitalResult);

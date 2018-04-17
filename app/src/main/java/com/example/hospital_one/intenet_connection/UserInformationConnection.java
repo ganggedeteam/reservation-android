@@ -39,7 +39,7 @@ public class UserInformationConnection {
         public int city;
         public String userPhone;
         public String sex;
-        public int country;
+        public int county;
         public String userPwd;
         public String userName;
         public String gmtCreate;
@@ -50,7 +50,7 @@ public class UserInformationConnection {
                 int city,
                 String userPhone,
                 String sex,
-                int country,
+                int county,
                 String userPwd,
                 String userName,
                 String gmtCreate
@@ -59,7 +59,7 @@ public class UserInformationConnection {
             this.city = city;
             this.userPhone = userPhone;
             this.sex = sex;
-            this.country = country;
+            this.county = county;
             this.userPwd = userPwd;
             this.userName = userName;
             this.gmtCreate = gmtCreate;

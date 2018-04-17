@@ -68,6 +68,7 @@ public class MainActivity extends AcitivityBase {
         editor.putString("userAdd","/user/add");
         editor.putString("userPage","/user/pagelist");
         editor.putString("userUpdate","/user/update");
+        editor.putString("changePwd","/user/changepwd");
         editor.putString("hospitalDepartment","/hospital/department/pagelist");
         editor.apply();
 
@@ -112,12 +113,12 @@ public class MainActivity extends AcitivityBase {
 //                startActivity(intent);
             }
         });
-        LinearLayout ChangePassWord = (LinearLayout)findViewById(R.id.ChangePassWord);
+        final LinearLayout ChangePassWord = (LinearLayout)findViewById(R.id.ChangePassWord);
         ChangePassWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(this,);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this,ChangePasswordActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -149,11 +150,27 @@ public class MainActivity extends AcitivityBase {
             public void onClick(View v) {
                 Intent intent = new Intent(
                         MainActivity.this,UserInformationActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
+
             }
         });
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode){
+            case 1:
+                if(resultCode == RESULT_OK){
+                    String result = data.getStringExtra("userName");
+                    TextView userName = (TextView)findViewById(R.id.userAccount);
+                    userName.setText(result);
+                }
+                break;
+                default:
+        }
+    }
+
     void showPerson(){
         initPersonCenter();
         SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);

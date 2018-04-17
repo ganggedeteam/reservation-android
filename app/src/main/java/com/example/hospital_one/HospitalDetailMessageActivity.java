@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.hospital_one.intenet_connection.DepartmentControllerConnection;
@@ -66,18 +67,31 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
     }
 
     private void setAdapter(List<DepartmentControllerConnection.DepartmentOfHos> list){
+        LinearLayout result = (LinearLayout)findViewById(R.id.hospital_detail_message);
+        LinearLayout noResult = (LinearLayout)findViewById(R.id.hospital_detail_message_noResult);
+        if(list.size() == 0){
+            result.setVisibility(View.GONE);
+            noResult.setVisibility(View.VISIBLE);
+        } else {
+            result.setVisibility(View.VISIBLE);
+            noResult.setVisibility(View.GONE);
 
-        RecyclerView departmentListView = (RecyclerView) findViewById(R.id.HospitalDetailDepartmentList);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        departmentListView.setLayoutManager(layoutManager);
-        PartOfHospitalAdapter partOfHospitalAdapter = new PartOfHospitalAdapter(list);
-        partOfHospitalAdapter.setOnItemClickListener(new OnItemClickListener(){
-            @Override
-            public void onItemClick(View view, int position){
+            RecyclerView departmentListView = (RecyclerView) findViewById(R.id.HospitalDetailDepartmentList);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            departmentListView.setLayoutManager(layoutManager);
+            PartOfHospitalAdapter partOfHospitalAdapter = new PartOfHospitalAdapter(list);
+            partOfHospitalAdapter.setOnItemClickListener(new OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
 
-            }
-        });
-        departmentListView.setAdapter(partOfHospitalAdapter);
+                    Intent intent = new Intent(
+                            HospitalDetailMessageActivity.this, DoctorActivity.class);
+                    startActivity(intent);
+
+                }
+            });
+            departmentListView.setAdapter(partOfHospitalAdapter);
+        }
 
     }
 

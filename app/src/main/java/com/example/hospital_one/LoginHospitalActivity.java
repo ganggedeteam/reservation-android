@@ -76,22 +76,15 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
     private Button registerButton;
 
     @Override
+    protected void onStop() {
+        super.onStop();
+
+    }
+
+    @Override
     protected void onDestroy() {
-        SharedPreferences reader =
-                getSharedPreferences("start_file", MODE_PRIVATE);
-        boolean status = reader.getBoolean("status", false);
-        if(status){
-            mUserNameTask = new UserNameTask(
-                    "{\"userPhone\": \""+ reader.getString("account","") + "\"}");
-            mUserNameTask.execute((Void)null);
-        }
-        try{
-            showProgress(true);
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         super.onDestroy();
+
     }
 
     @Override
@@ -528,6 +521,22 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                     Toast.makeText(LoginHospitalActivity
                             .this,"暂不存在此用户",Toast.LENGTH_LONG);
                 }else if(message == 0) {
+
+                    SharedPreferences reader =
+                            getSharedPreferences("start_file", MODE_PRIVATE);
+                    boolean status = reader.getBoolean("status", false);
+                    if(status){
+                        mUserNameTask = new UserNameTask(
+                                "{\"userPhone\": \""+ reader.getString("account","") + "\"}");
+                        mUserNameTask.execute((Void)null);
+                    }
+                    try{
+                        Thread.sleep(2000);
+                        showProgress(true);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     finish();
                 }
                 else{
@@ -588,6 +597,9 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                     SharedPreferences.Editor editor = getSharedPreferences("start_file", MODE_PRIVATE).edit();
                     editor.putString("userName",result.data.get(0).userName);
                     editor.apply();
+                    Intent intent = new Intent();
+                    intent.putExtra("userName",result.data.get(0).userName);
+                    setResult(RESULT_OK,intent);
                 }else{
                     Toast.makeText(LoginHospitalActivity
                             .this,"未知错误",Toast.LENGTH_LONG).show();

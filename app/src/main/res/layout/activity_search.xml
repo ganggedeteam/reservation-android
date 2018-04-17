@@ -122,14 +122,33 @@
                             android:layout_height="match_parent"
                             android:orientation="vertical">
 
-                        <android.support.v7.widget.RecyclerView
-                                android:layout_weight="9"
-                                android:id="@+id/search_result_all_list"
+                        <ScrollView
                                 android:layout_width="match_parent"
-                                android:layout_height="0dp">
+                                android:layout_height="0dp"
+                                android:layout_weight="9">
+
+                            <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="vertical">
+
+                                <android.support.v7.widget.RecyclerView
+                                        android:layout_weight="9"
+                                        android:id="@+id/search_hospital_result_in_all_list"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent">
 
 
-                        </android.support.v7.widget.RecyclerView>
+                                </android.support.v7.widget.RecyclerView>
+
+                                <android.support.v7.widget.RecyclerView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="9"
+                                        android:id="@+id/search_doctor_result_in_all_list"/>
+
+                            </LinearLayout>
+                        </ScrollView>
 
                     </LinearLayout>
 
@@ -148,6 +167,25 @@
 
                         </android.support.v7.widget.RecyclerView>
 
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="9"
+                                android:visibility="gone"
+                                android:id="@+id/HospitalSearchNoResult">
+
+                            <TextView
+                                    android:layout_gravity="center"
+                                    android:text="暂无结果"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/textView30"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"
+                                    android:textAlignment="center"/>
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -164,6 +202,26 @@
 
 
                         </android.support.v7.widget.RecyclerView>
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="9"
+                                android:visibility="gone"
+                                android:id="@+id/MedicineSearchNoResult">
+
+                            <TextView
+                                    android:layout_gravity="center"
+                                    android:text="暂无结果"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/textView30"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"
+                                    android:textAlignment="center"/>
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -181,6 +239,25 @@
 
                         </android.support.v7.widget.RecyclerView>
 
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="9"
+                                android:visibility="gone"
+                                android:id="@+id/DoctorSearchNoResult">
+
+                            <TextView
+                                    android:layout_gravity="center"
+                                    android:text="暂无结果"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/textView30"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"
+                                    android:textAlignment="center"/>
+                        </LinearLayout>
+
                     </LinearLayout>
 
                     <LinearLayout
@@ -197,6 +274,26 @@
 
 
                         </android.support.v7.widget.RecyclerView>
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_weight="9"
+                                android:visibility="gone"
+                                android:id="@+id/IllnessSearchNoResult">
+
+                            <TextView
+                                    android:layout_gravity="center"
+                                    android:text="暂无结果"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:id="@+id/textView30"
+                                    android:textStyle="bold"
+                                    android:textSize="20sp"
+                                    android:textAlignment="center"/>
+                        </LinearLayout>
+
                     </LinearLayout>
 
                 </FrameLayout>
