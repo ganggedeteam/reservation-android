@@ -30,6 +30,7 @@ public class MainActivity extends AcitivityBase {
         personCenter = (LinearLayout)findViewById(R.id.PersonCenter);
         personCenterElse = (LinearLayout)findViewById(R.id.PersonCenterElse);
         initMain();
+        initPersonCenter();
     }
 
     @Override
@@ -63,7 +64,7 @@ public class MainActivity extends AcitivityBase {
         editor.putString("doctorPage","/hospital/doctor/pagelist");
         editor.putString("buserPage","/system//buser/pagelist");
         editor.putString("patientAdd","/patient/add");
-        editor.putString("patientDelete","/patient/deleteList");
+        editor.putString("patientDelete","/patient/delete");
         editor.putString("patientPage","/patient/pagelist");
         editor.putString("userAdd","/user/add");
         editor.putString("userPage","/user/pagelist");
@@ -91,8 +92,8 @@ public class MainActivity extends AcitivityBase {
         paientManger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(this,);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this,PatientManagerActivity.class);
+                startActivity(intent);
             }
         });
 
@@ -117,7 +118,8 @@ public class MainActivity extends AcitivityBase {
         ChangePassWord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this,ChangePasswordActivity.class);
+                Intent intent = new Intent(
+                        MainActivity.this,ChangePasswordActivity.class);
                 startActivity(intent);
             }
         });
@@ -140,7 +142,7 @@ public class MainActivity extends AcitivityBase {
             public void onClick(View v) {
                 Intent intent = new Intent(
                         MainActivity.this,LoginHospitalActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent,1);
             }
         });
 
@@ -150,7 +152,7 @@ public class MainActivity extends AcitivityBase {
             public void onClick(View v) {
                 Intent intent = new Intent(
                         MainActivity.this,UserInformationActivity.class);
-                startActivityForResult(intent,1);
+                startActivity(intent);
 
             }
         });
@@ -172,7 +174,6 @@ public class MainActivity extends AcitivityBase {
     }
 
     void showPerson(){
-        initPersonCenter();
         SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
         TextView userName = (TextView)findViewById(R.id.userAccount);
         userName.setText(reader.getString("userName",""));

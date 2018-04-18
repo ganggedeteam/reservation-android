@@ -1,19 +1,20 @@
 package com.example.hospital_one;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.*;
 import com.example.hospital_one.intenet_connection.InternetConnection;
 import com.example.hospital_one.intenet_connection.LoginBackMessage;
-import com.example.hospital_one.intenet_connection.UserInformationConnection;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
@@ -49,6 +50,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                         if(!judgeEnsureNewpwd()){
                             ensureNewPassword.requestFocus();
                         }else{
+                            showProgress(false);
                             task = new ChangePasswordTask(oldPassword.
                                     getText().toString(),newPassword.getText().toString());
                             task.execute((Void)null);
@@ -57,6 +59,44 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
+
+
+        final LinearLayout messagePane = (LinearLayout) findViewById(R.id.ChangePwdPane);
+        final LinearLayout progressBar = (LinearLayout)findViewById(R.id.ChangePwdProgressPane);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            messagePane.setVisibility(show ? View.GONE : View.VISIBLE);
+            messagePane.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    messagePane.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+            progressBar.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+            messagePane.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 
     private boolean judgeOldPwd(){
@@ -136,6 +176,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(final Boolean success) {
             if (success) {
+                showProgress(false);
                 if(message == 1){
                     Toast.makeText(ChangePasswordActivity
                             .this,"网络连接错误",Toast.LENGTH_LONG).show();
@@ -147,6 +188,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
                     showMessageDialog("");
                 }else if(message == 0) {
                     showMessageDialog("密码更改成功");
+                    SharedPreferences.Editor editor =
+                            getSharedPreferences("start_file", MODE_PRIVATE).edit();
+                    editor.putBoolean("status", false);
+                    editor.apply();
                 }else{
                     Toast.makeText(ChangePasswordActivity
                             .this,"未知错误",Toast.LENGTH_LONG).show();

@@ -43,7 +43,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
     @Override
     public PatientAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.doctor_search_result,parent,false);
+                .inflate(R.layout.patient_layout,parent,false);
         PatientAdapter.ViewHolder holder = new PatientAdapter.ViewHolder(view);
         return holder;
     }
@@ -60,7 +60,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.ViewHold
         holder.patientDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mOnItemClickListener.onButtonClick(v,patient.getPatientId());
+                mOnItemClickListener.onButtonClick(holder.view,patient.getPatientId());
             }
         });
     }

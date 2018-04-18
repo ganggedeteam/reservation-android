@@ -74,19 +74,6 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
     private ImageButton backButton; //返回按钮
     private Button forgetPassword;
     private Button registerButton;
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

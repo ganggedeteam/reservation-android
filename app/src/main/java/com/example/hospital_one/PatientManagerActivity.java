@@ -12,10 +12,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.*;
 import com.example.hospital_one.intenet_connection.InternetConnection;
+import com.example.hospital_one.intenet_connection.LoginBackMessage;
 import com.example.hospital_one.intenet_connection.PatientConnection;
 import com.example.hospital_one.part_hospital.OnButtonClickListener;
 import com.example.hospital_one.part_hospital.PatientAdapter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class PatientManagerActivity extends AppCompatActivity {
@@ -45,7 +47,8 @@ public class PatientManagerActivity extends AppCompatActivity {
                 showAddPatientDialog();
             }
         });
-        patientSelectTask = new PatientTask(2,"");
+        SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
+        patientSelectTask = new PatientTask(2,reader.getString("account",""));
         patientSelectTask.execute((Void)null);
     }
 
@@ -109,7 +112,7 @@ public class PatientManagerActivity extends AppCompatActivity {
         patientAdapter.setOnButtonClickListener(new OnButtonClickListener(){
             @Override
             public void onButtonClick(View view,String patientId){
-                patientDeleteTask = new PatientTask(1,patientId);
+                patientDeleteTask = new PatientTask(1,patientId,view);
                 patientDeleteTask.execute((Void)null);
             }
         });
@@ -137,19 +140,32 @@ public class PatientManagerActivity extends AppCompatActivity {
         private final String jsonData;
         private final int cursor;
         private int message = 0;
+        private final View view;
         PatientConnection.JsonHead result = null;
+
+        PatientTask(int cursor,String jsonData,View view){
+            this.cursor = cursor;
+            if(cursor == 1){
+                this.jsonData = "{\"patientId\":\""+jsonData+"\"}";
+                this.view = view;
+            }else {
+                this.jsonData = "{\"pageNo\":\"";
+                this.view = null;
+            }
+        }
 
         PatientTask(int cursor,String jsonData) {
             this.cursor = cursor;
             if(cursor == 0){//0代表添加就诊人
                 this.jsonData = jsonData;
             }else if(cursor == 1){//1代表删除就诊人
-                this.jsonData = "{\"patient_id\":\""+jsonData+"\"}";
+                this.jsonData = "{\"patientId\":\""+jsonData+"\"}";
             }else if(cursor == 2) {//2代表查看所有就诊人
-                this.jsonData = "{\"\":\"" + jsonData + "\",\"pageNo\":\"";
+                this.jsonData = "{\"userId\":\"" + jsonData + "\",\"pageNo\":\"";
             }else{
                 this.jsonData = jsonData;
             }
+            this.view = null;
         }
 
         @Override
@@ -176,7 +192,6 @@ public class PatientManagerActivity extends AppCompatActivity {
                 }
 
             }else if(cursor == 1){
-
                 String url1 = ip + reader.getString("patientPage","");
                 result = PatientConnection.parseJsonData(
                         InternetConnection.ForInternetConnection(url1,jsonData));
@@ -189,22 +204,14 @@ public class PatientManagerActivity extends AppCompatActivity {
                         return true;
                     }
                 }
-
                 String url2  = ip +
                         reader.getString("patientDelete","");
                 String respone = InternetConnection.ForInternetConnection(url2,jsonData);
-                result = PatientConnection.parseJsonData(respone);
-                if (result == null) {
+                if (respone == null) {
                     this.message = 1;
-                } else if(result.message.equals("success")){
-                    if (result.total == 0) {
-                        this.message = 2;
-                    } else if (result.data.size() != 0) {
-//                            listResult.addAll(result.data);
-                    }
-                }else{
-                    return false;
                 }
+                this.message = LoginBackMessage.parseJson(respone);
+
             }else if(cursor == 2) {
                 int i = 0;
                 int size = 0;
@@ -213,6 +220,8 @@ public class PatientManagerActivity extends AppCompatActivity {
                             + reader.getString("patientPage", "");
                     String response = InternetConnection.ForInternetConnection(url, jsonData + (i + 1) + "\"}");
                     result = PatientConnection.parseJsonData(response);
+                    if(i == 0)patientMessageList = new ArrayList<>();
+
                     if (result == null) {
                         this.message = 1;
                     } else {
@@ -246,6 +255,7 @@ public class PatientManagerActivity extends AppCompatActivity {
                     if(this.cursor == 0){
                         showMessageDialog("添加成功！");
                     }else if(this.cursor == 1){
+                        view.setVisibility(View.GONE);
                         showMessageDialog("删除成功！");
                     }else if(this.cursor == 2){
                         setRecyclerView(patientMessageList);

@@ -7,13 +7,13 @@ import java.util.List;
 public class PatientConnection {
     public static final String[] relationName = {"本人","父母","夫妻","子女","亲戚","其他"};
     public class PatientMessage{
-        String patientId;
         String patientName;
-        String userId;
-        String idCard;
-        String relation;
-        String gmtCreate;
         String gmtModified;
+        String patientId;
+        String idCard;
+        String gmtCreate;
+        String userId;
+        String relation;
         public String getPatientId(){
             return this.patientId;
         }
@@ -51,13 +51,13 @@ public class PatientConnection {
                 String userId,
                 String gmtCreate,
                 String relation){
-            this.patientId = patientId;
             this.patientName = patientName;
-            this.userId = userId;
-            this.idCard = idCard;
-            this.relation = relation;
-            this.gmtCreate = gmtCreate;
             this.gmtModified = gmtModified;
+            this.patientId = patientId;
+            this.idCard = idCard;
+            this.userId = userId;
+            this.gmtCreate = gmtCreate;
+            this.relation = relation;
         }
     }
 

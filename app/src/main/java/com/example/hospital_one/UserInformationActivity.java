@@ -1,9 +1,13 @@
 package com.example.hospital_one;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -69,13 +73,13 @@ public class UserInformationActivity extends AppCompatActivity {
                 "{\"userPhone\": \""+ reader.getString("account","") + "\"}");
         task.execute((Void)null);
 
-        showUserMessagePane(false);
+        showProgress(false);
         try{
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
-            showUserMessagePane(true);
+            showProgress(true);
         }
     }
 
@@ -217,17 +221,42 @@ public class UserInformationActivity extends AppCompatActivity {
         }
     }
 
-    private void showUserMessagePane(boolean cursor){
-        ScrollView messagePane = (ScrollView)findViewById(R.id.UserMessagePane);
-        LinearLayout progressBar = (LinearLayout)findViewById(R.id.UserInformationProgressBar);
-        if(cursor){
-            messagePane.setVisibility(View.VISIBLE);
-            progressBar.setVisibility(View.GONE);
-        }else{
-            messagePane.setVisibility(View.GONE);
-            progressBar.setVisibility(View.VISIBLE);
-        }
+    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    private void showProgress(final boolean show) {
+        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
+        // for very easy animations. If available, use these APIs to fade-in
+        // the progress spinner.
 
+
+        final ScrollView messagePane = (ScrollView)findViewById(R.id.UserMessagePane);
+        final LinearLayout progressBar = (LinearLayout)findViewById(R.id.UserInformationProgressBar);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+
+            messagePane.setVisibility(show ? View.GONE : View.VISIBLE);
+            messagePane.animate().setDuration(shortAnimTime).alpha(
+                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    messagePane.setVisibility(show ? View.GONE : View.VISIBLE);
+                }
+            });
+
+            progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+            progressBar.animate().setDuration(shortAnimTime).alpha(
+                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+                }
+            });
+        } else {
+            // The ViewPropertyAnimator APIs are not available, so simply show
+            // and hide the relevant UI components.
+            progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
+            messagePane.setVisibility(show ? View.GONE : View.VISIBLE);
+        }
     }
 
     //设置详细地址的显示与编辑交替
