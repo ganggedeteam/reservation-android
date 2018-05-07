@@ -1,9 +1,11 @@
 package com.example.hospital_one;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,13 +14,13 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
-import com.example.hospital_one.intenet_connection.DepartmentControllerConnection;
-import com.example.hospital_one.intenet_connection.InternetConnection;
-import com.example.hospital_one.part_hospital.OnItemClickListener;
-import com.example.hospital_one.part_hospital.PartOfHospitalAdapter;
+import com.example.hospital_one.connection.DepartmentControllerConnection;
+import com.example.hospital_one.connection.InternetConnection;
+import com.example.hospital_one.connection.ReservationConnection;
+import com.example.hospital_one.adapter.OnItemClickListener;
+import com.example.hospital_one.adapter.PartOfHospitalAdapter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class HospitalDetailMessageActivity extends AppCompatActivity {
 
@@ -66,7 +68,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         task.execute((Void)null);
     }
 
-    private void setAdapter(List<DepartmentControllerConnection.DepartmentOfHos> list){
+    private void setAdapter(final List<DepartmentControllerConnection.DepartmentOfHos> list){
         LinearLayout result = (LinearLayout)findViewById(R.id.hospital_detail_message);
         LinearLayout noResult = (LinearLayout)findViewById(R.id.hospital_detail_message_noResult);
         if(list.size() == 0){
@@ -76,7 +78,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
             result.setVisibility(View.VISIBLE);
             noResult.setVisibility(View.GONE);
 
-            RecyclerView departmentListView = (RecyclerView) findViewById(R.id.HospitalDetailDepartmentList);
+            final RecyclerView departmentListView = (RecyclerView) findViewById(R.id.HospitalDetailDepartmentList);
             LinearLayoutManager layoutManager = new LinearLayoutManager(this);
             departmentListView.setLayoutManager(layoutManager);
             PartOfHospitalAdapter partOfHospitalAdapter = new PartOfHospitalAdapter(list);
@@ -84,15 +86,71 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                 @Override
                 public void onItemClick(View view, int position) {
 
-                    Intent intent = new Intent(
-                            HospitalDetailMessageActivity.this, DoctorActivity.class);
-                    startActivity(intent);
+                    SharedPreferences reader
+                            = getSharedPreferences("start_file",MODE_PRIVATE);
+                    boolean status = reader.getBoolean("status", false);
+                    if(!status){
+                        showMessage("请登陆账号");
+                    }else {
+                        departmentId = list.get(position).getDepartmentId();
+                        TimeServer timeServer = new TimeServer();
+                        timeServer.execute((Void)null);
+                    }
 
                 }
             });
             departmentListView.setAdapter(partOfHospitalAdapter);
         }
+    }
 
+    int dateNum = 0;
+    String departmentId;
+    private void showDateDialog(final String[] date){
+        dateNum = 0;
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("请选择日期");
+        builder.setSingleChoiceItems(date, 0, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dateNum = which;
+            }
+        });
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                Intent intent = new Intent(
+                        HospitalDetailMessageActivity.this, DoctorCalendarActivity.class);
+                String[] target = date[dateNum].split(" ");
+                intent.putExtra("year",stringToInt(target[0]));
+                intent.putExtra("month",stringToInt(target[1]));
+                intent.putExtra("day",stringToInt(target[2]));
+                intent.putExtra("hospitalId",hospitalId);
+                intent.putExtra("departmentId",departmentId);
+                startActivity(intent);
+            }
+        });
+        builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
+
+    private void showMessage(String message){
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("提示信息");
+        builder.setMessage(message);
+        builder.setPositiveButton("", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 
     public class DepartmentTask extends AsyncTask<Void, Void, Boolean> {
@@ -160,5 +218,154 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         protected void onCancelled() {
             task = null;
         }
+    }
+
+    public class TimeServer extends AsyncTask<Void, Void, Boolean>{
+        int message;
+        ReservationConnection.TimeMessage result;
+
+        public TimeServer(){}
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
+
+            String url = reader.getString("ip","") +
+                    reader.getString("reservationList","");
+
+            String response = InternetConnection.ForInternetConnection(url,"{,}");
+            result = ReservationConnection.parseTimeMessage(response);
+            if(result == null){
+                this.message = 1;
+            }else{
+                this.message = 0;
+            }
+
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            if (success) {
+                if(message == 1){
+                    Toast.makeText(HospitalDetailMessageActivity
+                            .this,"网络连接失败!", Toast.LENGTH_LONG).show();
+                }else if(message == 0){
+                    String time = result.timestamp.substring(0,10);
+                    String[] dateDetail = time.split("-");
+                    int year,month,day;
+                    year = stringToInt(dateDetail[0]);
+                    month = stringToInt(dateDetail[1]);
+                    day = stringToInt(dateDetail[2]);
+                    showDateDialog(getDate(year,month,day));
+                }
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+
+        }
+
+    }
+
+    public int stringToInt(String target){
+        int sum = 0;
+        for(int i = 0; i < target.length();i++){
+            if(Character.isDigit(target.charAt(i))){
+                sum = sum *10 + Character.digit(target.charAt(i),10);
+            }else break;
+        }
+        return sum;
+    }
+
+    public String[] getDate(int year,int month,int day){
+        String[] date = new String[7];
+        Set<Integer> month31 = new HashSet<>();
+        month31.add(1);
+        month31.add(3);
+        month31.add(5);
+        month31.add(7);
+        month31.add(8);
+        month31.add(10);
+        month31.add(12);
+        for(int i = 0;i < 7; i++){
+            if(month == 2){
+                if(isLeapYear(year)){
+                    if(day < 29){
+                        day++;
+                        date[i] = "" + year + " " + month + " " + day;
+                        continue;
+                    }else{
+                        month ++;
+                        if(month == 13){
+                            year ++;
+                            month = 1;
+                        }
+                        day = 1;
+                        date[i] = "" + year + " " + month + " " + day;
+                        continue;
+                    }
+                }else{
+                    if(day < 28){
+                        day++;
+                        date[i] = "" + year + " " + month + " " + day;
+                        continue;
+                    }else{
+                        month ++;
+                        if(month == 13){
+                            year ++;
+                            month = 1;
+                        }
+                        day = 1;
+                        date[i] = "" + year + " " + month + " " + day;
+                        continue;
+                    }
+                }
+            }
+            if(!month31.contains(month)){
+                if(day < 30){
+                    day++;
+                    date[i] = "" + year + " " + month + " " + day;
+                    continue;
+                }else{
+                    month ++;
+                    if(month == 13){
+                        year ++;
+                        month = 1;
+                    }
+                    day = 1;
+                    date[i] = "" + year + " " + month + " " + day;
+                    continue;
+                }
+            }
+            if(month31.contains(month)){
+
+                if(day < 31){
+                    day++;
+                    date[i] = "" + year + " " + month + " " + day;
+                    continue;
+                }else{
+                    month ++;
+                    if(month == 13){
+                        year ++;
+                        month = 1;
+                    }
+                    day = 1;
+                    date[i] = "" + year + " " + month + " " + day;
+                    continue;
+                }
+            }
+        }
+        return date;
+    }
+
+    public boolean isLeapYear(int dateNum){
+        if(dateNum % 100 == 0){
+            if(dateNum%4 == 0)return true;
+        }else if(dateNum % 4 == 0){
+            return true;
+        }
+        return false;
     }
 }

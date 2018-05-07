@@ -13,9 +13,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
-import com.example.hospital_one.intenet_connection.AddressConnection;
-import com.example.hospital_one.intenet_connection.InternetConnection;
-import com.example.hospital_one.intenet_connection.UserInformationConnection;
+import com.example.hospital_one.connection.AddressConnection;
+import com.example.hospital_one.connection.InternetConnection;
+import com.example.hospital_one.connection.UserInformationConnection;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,18 +68,18 @@ public class UserInformationActivity extends AppCompatActivity {
         //获取用户信息线程启动
         SharedPreferences reader =
                 getSharedPreferences("start_file",MODE_PRIVATE);
-        SharedPreferences readerHost = getSharedPreferences("host",MODE_PRIVATE);
+//        SharedPreferences readerHost = getSharedPreferences("host",MODE_PRIVATE);
         task = new UserInformationTask(0,
                 "{\"userPhone\": \""+ reader.getString("account","") + "\"}");
         task.execute((Void)null);
 
-        showProgress(false);
+        showProgress(true);
         try{
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }finally {
-            showProgress(true);
+            showProgress(false);
         }
     }
 

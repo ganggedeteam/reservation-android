@@ -29,13 +29,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.*;
-import com.example.hospital_one.intenet_connection.InternetConnection;
-import com.example.hospital_one.intenet_connection.LoginBackMessage;
-import com.example.hospital_one.intenet_connection.LoginConnection;
-import com.example.hospital_one.intenet_connection.UserInformationConnection;
-import okhttp3.*;
+import com.example.hospital_one.connection.InternetConnection;
+import com.example.hospital_one.connection.LoginBackMessage;
+import com.example.hospital_one.connection.UserInformationConnection;
 
-import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -251,18 +248,18 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
 
         // Check for a valid password, if the user entered one.
         if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
+            mPasswordView.setError("请输入6到20位密码");
             focusView = mPasswordView;
             cancel = true;
         }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
+            mEmailView.setError("请输入账号");
             focusView = mEmailView;
             cancel = true;
         } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
+            mEmailView.setError("账号格式不正确");
             focusView = mEmailView;
             cancel = true;
         }
@@ -282,12 +279,15 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
 
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
-        return email.length()>3 && !email.contains(" ");
+        for(int i = 0;i < email.length();i++){
+            if(!Character.isDigit(email.charAt(i)))return false;
+        }
+        return email.length()==11;
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() >= 6 && password.length() <= 20;
     }
 
     /**
@@ -447,52 +447,6 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             editorStartFileFail.putBoolean("status",false);
             editorStartFileFail.apply();
             return false;
-//            for(int i = 0;i < DUMMY_CREDENTIALS.length;i++){
-//                String string = DUMMY_CREDENTIALS[i];
-//                String[] data = string.split(":");
-//                if(data[0].equals(mEmail) && data[1].equals(mPassword)) {
-//                    if (mPasswordCheckBox.isChecked()) {
-//                        //保存密码
-//                        SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
-//                        editor.putString(this.mEmail, this.mPassword);
-//                        editor.apply();
-//
-//                        //将登录的账号密码写入startfile文件，以便下次启动时自动登录
-//                        SharedPreferences.Editor editor1 = getSharedPreferences("start_file", MODE_PRIVATE).edit();
-//                        editor1.putString("account", this.mEmail);
-//                        editor1.putString("password", this.mPassword);
-//                        editor1.apply();
-//                    } else {
-//
-//                        //将登录账号数据清空
-//                        SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
-//                        editor.remove(this.mEmail);
-//                        editor.apply();
-//
-//                        //将start_file文件中的数据清空，保护用户信息
-//                        SharedPreferences.Editor editor1 = getSharedPreferences("start_file", MODE_PRIVATE).edit();
-//                        editor1.putString("account", "");
-//                        editor1.putString("password", "");
-//                        editor1.apply();
-//
-//                    }
-//
-//                    SharedPreferences.Editor editorStartFile =
-//                            getSharedPreferences("start_file", MODE_PRIVATE).edit();
-//                    editorStartFile.putBoolean("status", true);
-//                    editorStartFile.apply();
-//                    message = 0;
-//                    return true;
-//                }else{
-//                    SharedPreferences.Editor editorStartFileFail =
-//                            getSharedPreferences("start_file",MODE_PRIVATE).edit();
-//                    editorStartFileFail.putBoolean("status",false);
-//                    editorStartFileFail.apply();
-//                }
-//            }
-//            return false;
-            // TODO: register the new account here.
-//            return false;
         }
 
         @Override
@@ -505,6 +459,7 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                     Toast.makeText(LoginHospitalActivity
                             .this,"网络连接错误",Toast.LENGTH_LONG);
                 }else if(message == 2){
+                    mEmailView.setError("暂不存在此用户");
                     Toast.makeText(LoginHospitalActivity
                             .this,"暂不存在此用户",Toast.LENGTH_LONG);
                 }else if(message == 0) {
@@ -531,7 +486,7 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                             .this,"未知错误",Toast.LENGTH_LONG);
                 }
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
+                mPasswordView.setError("账号或密码不正确");
                 mPasswordView.requestFocus();
             }
         }

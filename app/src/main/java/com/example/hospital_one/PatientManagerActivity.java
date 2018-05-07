@@ -9,13 +9,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import com.example.hospital_one.intenet_connection.InternetConnection;
-import com.example.hospital_one.intenet_connection.LoginBackMessage;
-import com.example.hospital_one.intenet_connection.PatientConnection;
-import com.example.hospital_one.part_hospital.OnButtonClickListener;
-import com.example.hospital_one.part_hospital.PatientAdapter;
+import com.example.hospital_one.connection.InternetConnection;
+import com.example.hospital_one.connection.LoginBackMessage;
+import com.example.hospital_one.connection.PatientConnection;
+import com.example.hospital_one.adapter.OnButtonClickListener;
+import com.example.hospital_one.adapter.PatientAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,42 +55,82 @@ public class PatientManagerActivity extends AppCompatActivity {
 
     public void showAddPatientDialog(){
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        View view = View.inflate(this,R.layout.patient_add_layout,null);
+        final View view = View.inflate(this,R.layout.patient_add_layout,null);
         builder.setView(view);
-        final Spinner spinner = (Spinner)findViewById(R.id.PatientRelationSpinner);
-        ArrayAdapter<String> spinnerAdapter = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item,PatientConnection.relationName);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
-        final EditText patientNameEditText = (EditText)findViewById(R.id.PatientNameEditText);
-        final EditText patientIdCardEditText = (EditText)findViewById(R.id.PatientIdCardEditText);
+        builder.setTitle("添加就诊人");
+        final RadioGroup radioGroup = (RadioGroup)view.findViewById(R.id.RealtionGroup);
+//        final RadioGroup anoRadioGroup = (RadioGroup)view.findViewById(R.id.AnoRealtionGroup);
+
+//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                Log.e("radioGroup" , "onCheckedChanged: " + checkedId + "  " + radioGroup.getCheckedRadioButtonId());
+//                if(checkedId != -1 && checkedId != radioGroup.getCheckedRadioButtonId()) {
+//                    radioButtonNum = checkedId;
+//                    if(anoRadioGroup.getCheckedRadioButtonId() != -1)
+//                        anoRadioGroup.check(-1);
+//                }
+//            }
+//        });
+//        anoRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(RadioGroup group, int checkedId) {
+//                Log.e("anoRadioGroup" , "onCheckedChanged: " + checkedId+ "  " + anoRadioGroup.getCheckedRadioButtonId());
+//                if(checkedId != -1 && checkedId != anoRadioGroup.getCheckedRadioButtonId()) {
+//                    radioButtonNum = checkedId;
+//                    if(radioGroup.getCheckedRadioButtonId() != -1)
+//                        radioGroup.check(-1);
+//                }
+//            }
+//        });
+        final EditText patientNameEditText = view.findViewById(R.id.PatientNameEditText);
+        final EditText patientIdCardEditText = (EditText)view.findViewById(R.id.PatientIdCardEditText);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
-                if(spinner.isSelected() && !patientIdCardEditText.
-                        getText().toString().equals("") && !patientNameEditText.getText().toString().equals("")
-                        && !patientIdCardEditText.getText().toString().contains(" ") && !patientNameEditText.getText().toString().contains(" ")){
-                    patientAddTask = new PatientTask(0,"{\n" +
-                            "      \"patientName\": \""+ patientNameEditText.getText().toString() +"\",\n" +
-                            "      \"idCard\": \""+ patientIdCardEditText.getText().toString() +"\",\n" +
-                            "      \"userId\": \"" + reader.getString("account","") + "\",\n" +
-                            "      \"relation\": \"" + spinner.getSelectedItemPosition() +"\"\n" +
-                            "    }");
-                    patientAddTask.execute((Void)null);
-                    dialog.dismiss();
-                }else if(!spinner.isSelected()){
-                    spinner.requestFocus();
-                }else if(patientIdCardEditText.
-                        getText().toString().equals("") || patientIdCardEditText.getText().toString().contains(" ")){
-                    patientIdCardEditText.requestFocus();
-                }else if(patientNameEditText.getText().toString().equals("") ||
-                        patientNameEditText.getText().toString().contains(" ")){
-                    patientNameEditText.requestFocus();
+                if (patientNameEditText.getText().toString().equals("") ||
+                        patientNameEditText.getText().toString().split(" ") == null
+                        || patientNameEditText.getText().toString().length() < 3) {
+                    showMessageDialog("请检查就诊人姓名信息是否正确");
+                    return;
+                } else if (patientIdCardEditText.getText().equals("") ||
+                        patientIdCardEditText.getText().toString().split(" ") == null ||
+                        patientIdCardEditText.getText().toString().length() != 18) {
+                    showMessageDialog("请检查身份证号信息是否正确");
+                    return;
+                } else {
+                    SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
+                    int theRelation;
+                    if(radioGroup.getCheckedRadioButtonId() != -1) {
+                        RadioButton radioButton = (RadioButton) view.findViewById(radioGroup.getCheckedRadioButtonId());
+                        switch (radioButton.getText().toString()){
+                            case "本人":theRelation = 0;break;
+                            case "父母":theRelation = 1;break;
+                            case "夫妻":theRelation = 2;break;
+                            case "子女":theRelation = 3;break;
+                            case "亲戚":theRelation = 4;break;
+                            case "其他":theRelation = 5;break;
+                            default: theRelation = 6;
+                        }
+                    }else{
+                        theRelation = -1;
+                    }
+                    Log.e("theRelation", "onClick: " + theRelation );
+                    if (theRelation == -1) {
+                        patientAddTask = new PatientTask(0, "{\"patientName\": \"" + patientNameEditText.getText().toString() + "\","
+                                +"\"userId\": \"" + reader.getString("account","") + "\","
+                                +"\"idCard\": \"" + patientIdCardEditText.getText().toString() + "\"}");
+                        patientAddTask.execute((Void)null);
+                    } else if (theRelation <= 5 && theRelation >= 0) {
+                        patientAddTask = new PatientTask(0, "{\"patientName\": \"" + patientNameEditText.getText().toString() + "\","
+                                +"\"userId\": \""+ reader.getString("account","") + "\","
+                                + "\"idCard\": \"" + patientIdCardEditText.getText().toString() + "\","
+                                + "\"relation\": \"" + theRelation + "\"}");
+                        patientAddTask.execute((Void)null);
+                    }
                 }
             }
         });
-
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -177,16 +218,17 @@ public class PatientManagerActivity extends AppCompatActivity {
             if(cursor == 0){
                 String url2 = ip +
                         reader.getString("patientAdd","");
-                String respone = InternetConnection.ForInternetConnection(url2,jsonData);
-                result = PatientConnection.parseJsonData(respone);
-                if (result == null) {
+                PatientConnection.PatientAddMessageHead resultAdd;
+                String response = InternetConnection.ForInternetConnection(url2,jsonData);
+                SharedPreferences.Editor editor = getSharedPreferences("error_file",MODE_PRIVATE).edit();
+                editor.putString("addPatient",response);
+                editor.apply();
+                Log.e("response", "doInBackground: " + response );
+                resultAdd = PatientConnection.parsePatientAddMessageHead(response);
+                if (resultAdd == null) {
                     this.message = 1;
-                } else if(result.message.equals("success")){
-                    if (result.total == 0) {
-                        this.message = 2;
-                    } else if (result.data.size() != 0) {
-//                            listResult.addAll(result.data);
-                    }
+                } else if(resultAdd.message.equals("success")){
+                    return true;
                 }else{
                     return false;
                 }
@@ -250,18 +292,22 @@ public class PatientManagerActivity extends AppCompatActivity {
                             .this,"网络连接错误",Toast.LENGTH_LONG).show();
                 }else if(message == 2){
                     Toast.makeText(PatientManagerActivity
-                            .this,"查找不到此就诊人",Toast.LENGTH_LONG).show();
+                            .this,"您的就诊人列表为空，请添加就诊人",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
                     if(this.cursor == 0){
                         showMessageDialog("添加成功！");
+                        SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
+                        patientSelectTask = new PatientTask(2,reader.getString("account",""));
+                        patientSelectTask.execute((Void)null);
                     }else if(this.cursor == 1){
                         view.setVisibility(View.GONE);
                         showMessageDialog("删除成功！");
+                        SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
+                        patientSelectTask = new PatientTask(2,reader.getString("account",""));
+                        patientSelectTask.execute((Void)null);
                     }else if(this.cursor == 2){
                         setRecyclerView(patientMessageList);
                     }
-//                    task = null;
-//                    finish();
                 }else{
                     Toast.makeText(PatientManagerActivity
                             .this,"未知错误",Toast.LENGTH_LONG).show();

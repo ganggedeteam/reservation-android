@@ -2,17 +2,10 @@ package com.example.hospital_one;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.view.View;
 import android.widget.*;
-import com.example.hospital_one.intenet_connection.AddressConnection;
-import com.example.hospital_one.intenet_connection.InternetConnection;
-import com.example.hospital_one.intenet_connection.UserInformationConnection;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AcitivityBase {
 
@@ -71,6 +64,9 @@ public class MainActivity extends AcitivityBase {
         editor.putString("userUpdate","/user/update");
         editor.putString("changePwd","/user/changepwd");
         editor.putString("hospitalDepartment","/hospital/department/pagelist");
+        editor.putString("reservationAdd","/reservation/add");
+        editor.putString("reservationList","/reservation/list");
+        editor.putString("calendarList","/hospital/calendar/list");
         editor.apply();
 
     }

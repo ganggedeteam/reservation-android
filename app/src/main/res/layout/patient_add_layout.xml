@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
               android:layout_width="match_parent"
               android:layout_height="wrap_content">
 
@@ -54,7 +55,88 @@
                     android:layout_height="match_parent"
                     android:id="@+id/PatientRelationSpinner"
                     android:dropDownWidth="match_parent"
-                    android:layout_weight="1"/>
+                    android:layout_weight="1"
+                    android:visibility="gone"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            <RadioGroup
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RealtionGroup"
+                    android:gravity="center_horizontal"
+                    android:visibility="visible">
+
+                <RadioButton
+                        android:text="本人"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_horizontal"/>
+
+                <RadioButton
+                        android:text="父母"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton2"
+                        android:layout_weight="1"
+                        android:textSize="20sp"/>
+
+                <RadioButton
+                        android:text="夫妻"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton3"
+                        android:layout_weight="1"
+                        android:textSize="20sp"/>
+
+                <RadioButton
+                        android:text="子女"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/radioButton4"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_horizontal"/>
+
+                <RadioButton
+                        android:text="亲戚"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/radioButton5"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_horizontal"/>
+
+                <RadioButton
+                        android:text="其他"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:id="@+id/radioButton6"
+                        android:textSize="20sp"
+                        android:layout_gravity="center_horizontal"/>
+
+            </RadioGroup>
+
+            <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:id="@+id/AnoRealtionGroup"
+                    android:visibility="gone">
+
+            </RadioGroup>
+
         </LinearLayout>
 
     </LinearLayout>

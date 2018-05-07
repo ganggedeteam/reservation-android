@@ -13,8 +13,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.*;
-import com.example.hospital_one.intenet_connection.InternetConnection;
-import com.example.hospital_one.intenet_connection.LoginBackMessage;
+import com.example.hospital_one.connection.InternetConnection;
+import com.example.hospital_one.connection.LoginBackMessage;
 
 public class ChangePasswordActivity extends AppCompatActivity {
 
@@ -41,14 +41,20 @@ public class ChangePasswordActivity extends AppCompatActivity {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!judgeOldPwd()){
+                oldPassword.setError(null);
+                newPassword.setError(null);
+                ensureNewPassword.setError(null);
+                if(!(judgeOldPwd() && judgePassword(oldPassword.getText().toString()))){
                     oldPassword.requestFocus();
+                    oldPassword.setError("请输入6到20位密码");
                 }else{
-                    if(!judgeNewPwd()){
+                    if(!(judgeNewPwd() && judgePassword(newPassword.getText().toString()))){
                         newPassword.requestFocus();
+                        newPassword.setError("请输入6到20位密码");
                     }else{
                         if(!judgeEnsureNewpwd()){
                             ensureNewPassword.requestFocus();
+                            ensureNewPassword.setError("请输入6到20位密码");
                         }else{
                             showProgress(false);
                             task = new ChangePasswordTask(oldPassword.
@@ -97,6 +103,10 @@ public class ChangePasswordActivity extends AppCompatActivity {
             progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
             messagePane.setVisibility(show ? View.GONE : View.VISIBLE);
         }
+    }
+
+    private boolean judgePassword(String password){
+        return password.length() <= 20 && password.length() >= 6;
     }
 
     private boolean judgeOldPwd(){
@@ -182,6 +192,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                             .this,"网络连接错误",Toast.LENGTH_LONG).show();
                 }else if(message == 2){
                     showMessageDialog("密码输入错误");
+                    oldPassword.setError("密码不正确，请重新输入");
                 }else if(message == 3){
                     showMessageDialog("json数据解析错误");
                 }else if(message == 4){

@@ -9,12 +9,12 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Toast;
-import com.example.hospital_one.intenet_connection.DepartmentConnection;
-import com.example.hospital_one.intenet_connection.DoctorConnection;
-import com.example.hospital_one.intenet_connection.HospitalConnection;
-import com.example.hospital_one.intenet_connection.InternetConnection;
-import com.example.hospital_one.part_hospital.OnItemClickListener;
-import com.example.hospital_one.part_hospital.DoctorAdapter;
+import com.example.hospital_one.connection.DepartmentConnection;
+import com.example.hospital_one.connection.DoctorConnection;
+import com.example.hospital_one.connection.HospitalConnection;
+import com.example.hospital_one.connection.InternetConnection;
+import com.example.hospital_one.adapter.OnItemClickListener;
+import com.example.hospital_one.adapter.DoctorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;

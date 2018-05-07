@@ -1,22 +1,23 @@
 package com.example.hospital_one;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.*;
-import com.example.hospital_one.intenet_connection.DoctorConnection;
-import com.example.hospital_one.intenet_connection.HospitalConnection;
-import com.example.hospital_one.intenet_connection.InternetConnection;
-import com.example.hospital_one.part_hospital.HospitalAdapter;
-import com.example.hospital_one.part_hospital.OnItemClickListener;
-import com.example.hospital_one.searchresult.Doctor;
-import com.example.hospital_one.part_hospital.DoctorAdapter;
+import com.example.hospital_one.connection.DoctorConnection;
+import com.example.hospital_one.connection.HospitalConnection;
+import com.example.hospital_one.connection.InternetConnection;
+import com.example.hospital_one.adapter.HospitalAdapter;
+import com.example.hospital_one.adapter.OnItemClickListener;
+import com.example.hospital_one.adapter.DoctorAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -102,6 +103,7 @@ public class SearchActivity extends AcitivityBase {
     }
 
     private void setAllList(){
+        if(editSearchText.getText().toString().length()>10)showMessageDialog("字符串过长");
         searchHospitalTask = new SearchTask(0,
                 "\"hospitalName\":\"" + editSearchText.getText().toString() +"\"");
         searchHospitalTask.execute((Void)null);
@@ -223,6 +225,21 @@ public class SearchActivity extends AcitivityBase {
         hospitalRecycler.setAdapter(hospitalAdapter);
     }
 
+    public void showMessageDialog(String message){
+        AlertDialog.Builder builder = new
+                AlertDialog.Builder(SearchActivity.this);
+        builder.setTitle("提示信息");
+        builder.setMessage(message);
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.setCancelable(true);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 
     public class SearchTask extends AsyncTask<Void, Void, Boolean> {
 
