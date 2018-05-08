@@ -1,6 +1,11 @@
 package com.example.hospital_one.adapter;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +14,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.example.hospital_one.R;
 
+import java.io.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.List;
 
 public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAdapter.ViewHolder> {
@@ -71,6 +79,11 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
         holder.doctorName.setText(doctor.doctorName);
         holder.doctorTitle.setText(doctor.doctorTitle);
         holder.skill.setText(doctor.skill);
+//        holder.doctorPhoto.setImageURI(Uri.fromFile(new File("/storage/emulated/0/hospitalPicture/doctor.png")));
+//        holder.doctorPhoto.setImageBitmap(decodeBitmap("/storage/emulated/0/hospitalPicture/doctor.png"));
+//        holder.doctorPhoto.setImageURI(Uri.);
+        holder.doctorPhoto.setImageResource(R.drawable.doctor);
+//        holder.doctorPhoto.setImageBitmap(decodeBitmap("/storage/emulated/0/hospitalPicture/doctor.jpg"));
         holder.admissionPeriod.setText(doctor.admissionPeriod.equals("0")?"上午8:00~12：00":"下午2:00~5:30");
         holder.admissionNum.setText("" + doctor.admissionNum);
         holder.remainingNum.setText("" + doctor.remainingNum);
@@ -100,5 +113,93 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
         mOnItemClickListener = onItemClickListener;
     }
 
+    public Bitmap getPicture(String pictureName){
+        String picturePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hospitalPicture";
+        Log.e("11111111111111PicturePath:", "getPicture: " +  picturePath);
+        File fileDir = new File(picturePath);
+        if(!fileDir.exists()){
+            fileDir.mkdir();
+        }
+        File filePicture = new File(picturePath + "/" + pictureName);
+        if(!filePicture.exists()){
+//            try{
+//                filePicture.createNewFile();
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+        }
+        Log.e("22222222222222PicturePath:", "getPicture: " + filePicture.exists()+ "    " +  filePicture.getAbsolutePath());
+//        picture.setImageURI(Uri.fromFile(filePicture));
+        Bitmap bitmap = getLoacalBitmap(filePicture.getAbsolutePath());
+        return bitmap;
+    }
+
+    public static Bitmap getLoacalBitmap(String url) {
+        try {
+            FileInputStream fis = new FileInputStream(url);
+            return BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
+
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+    public static Bitmap getHttpBitmap(String url){
+        URL myFileURL;
+        Bitmap bitmap=null;
+        try{
+            myFileURL = new URL(url);
+            //获得连接
+            HttpURLConnection conn=(HttpURLConnection)myFileURL.openConnection();
+            //设置超时时间为6000毫秒，conn.setConnectionTiem(0);表示没有时间限制
+            conn.setConnectTimeout(6000);
+            //连接设置获得数据流
+            conn.setDoInput(true);
+            //不使用缓存
+            conn.setUseCaches(false);
+            //这句可有可无，没有影响
+            //conn.connect();
+            //得到数据流
+            InputStream is = conn.getInputStream();
+            //解析得到图片
+            bitmap = BitmapFactory.decodeStream(is);
+            //关闭数据流
+            is.close();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
+        return bitmap;
+
+    }
+
+    public static final float DISPLAY_WIDTH = 200;
+    public static final float DISPLAY_HEIGHT = 200;
+    /**
+     * 从path中获取图片信息
+     * @param path
+     * @return
+     */
+    public static Bitmap decodeBitmap(String path){
+        BitmapFactory.Options op = new BitmapFactory.Options();
+        //inJustDecodeBounds
+        //If set to true, the decoder will return null (no bitmap), but the out…
+        op.inJustDecodeBounds = true;
+        Bitmap bmp = BitmapFactory.decodeFile(path, op); //获取尺寸信息
+        //获取比例大小
+        int wRatio = (int)Math.ceil(op.outWidth/DISPLAY_WIDTH);
+        int hRatio = (int)Math.ceil(op.outHeight/DISPLAY_HEIGHT);
+        //如果超出指定大小，则缩小相应的比例
+        if(wRatio > 1 && hRatio > 1){
+            if(wRatio > hRatio){
+                op.inSampleSize = wRatio;
+            }else{
+                op.inSampleSize = hRatio;
+            }
+        }
+        op.inJustDecodeBounds = false;
+        return bmp;
+    }
 
 }

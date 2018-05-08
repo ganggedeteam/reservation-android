@@ -90,4 +90,17 @@ public class ReservationConnection {
             return 2;
         }
     }
+
+    public static int parseReservationCanecl(String jsonData){
+        try {
+            JSONObject jsonObject = new JSONObject(jsonData);
+            if(jsonObject.getBoolean("status"))return 0;
+            else{
+                return 3;
+            }
+        } catch (JSONException e) {
+//            e.printStackTrace();
+            return 2;
+        }
+    }
 }

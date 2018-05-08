@@ -22,6 +22,8 @@ import com.example.hospital_one.adapter.DoctorAdapter;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.hospital_one.connection.DoctorConnection.DoctorLeverl;
+
 public class SearchActivity extends AcitivityBase {
 
     private SearchTask searchDoctorTask = null;
@@ -346,6 +348,11 @@ public class SearchActivity extends AcitivityBase {
                         setHospitalAdapter(hospitalResult);
                         setHospitalInAllAdapter(hospitalResult);
                     }else if(this.cursor == 1){
+                        for(DoctorConnection.DoctorMessage message : doctorResult){
+                            String doctorTitle = message.doctorTitle;
+                            message.doctorTitle = doctorTitle == null||doctorTitle.equals("")?
+                                    "暂无":DoctorLeverl[Character.digit(doctorTitle.charAt(0),10)] ;
+                        }
                         setDoctorAdapter(doctorResult);
                         setDoctorInAllAdapter(doctorResult);
                     }else{

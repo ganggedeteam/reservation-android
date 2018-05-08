@@ -67,6 +67,7 @@ public class MainActivity extends AcitivityBase {
         editor.putString("userUpdate","/user/update");
         editor.putString("changePwd","/user/changepwd");
         editor.putString("hospitalDepartment","/hospital/department/pagelist");
+        editor.putString("reservationCancel","/reservation/cancel");
         editor.putString("reservationAdd","/reservation/add");
         editor.putString("reservationList","/reservation/list");
         editor.putString("calendarList","/hospital/calendar/list");
@@ -110,8 +111,9 @@ public class MainActivity extends AcitivityBase {
             public void onClick(View v) {
 
 
-//                Intent intent = new Intent(this,);
-//                startActivity(intent);
+                Intent intent = new Intent(MainActivity.this,
+                        RegisterDoctorNoteActivity.class);
+                startActivity(intent);
             }
         });
         final LinearLayout ChangePassWord = (LinearLayout)findViewById(R.id.ChangePassWord);

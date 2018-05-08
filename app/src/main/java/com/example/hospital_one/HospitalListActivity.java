@@ -18,6 +18,8 @@ import com.example.hospital_one.adapter.OnItemClickListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.hospital_one.connection.HospitalConnection.hospitalLevel;
+
 public class HospitalListActivity extends AppCompatActivity {
 
     RecyclerView hospitalRecycler;
@@ -157,6 +159,12 @@ public class HospitalListActivity extends AppCompatActivity {
                     Toast.makeText(HospitalListActivity
                             .this,"查找不到结果",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
+                    for(HospitalConnection.HospitalMes mes:connectResult){
+                        String hospitalGrade = mes.hospitalGrade;
+                        mes.hospitalGrade = hospitalGrade == null || hospitalGrade.equals("")?"暂无":
+                                hospitalLevel[(Character.digit(hospitalGrade.charAt(0),10))];
+                    }
+
                     showRecycle();
                     setRecyclerView(connectResult);
 //                    finish();

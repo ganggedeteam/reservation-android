@@ -19,6 +19,8 @@ import com.example.hospital_one.connection.*;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.hospital_one.connection.DoctorConnection.DoctorLeverl;
+
 public class DoctorCalendarActivity extends AppCompatActivity {
 
     CalendarMessageTask task = null;
@@ -229,14 +231,16 @@ public class DoctorCalendarActivity extends AppCompatActivity {
                                 new DoctorCalendarAdapter.DoctorCalendarView();
                         DoctorTask doctorTask = new DoctorTask(view,doctorCalendarMessage.doctorId);
                         doctorTask.execute((Void)null);
+                        view.doctorName = doctorCalendarMessage.doctorName;
                         view.admissionNum = doctorCalendarMessage.admissionNum;
                         view.admissionPeriod = doctorCalendarMessage.admissionPeriod;
                         view.remainingNum = doctorCalendarMessage.remainingNum;
                         view.admissionId = doctorCalendarMessage.admissionId;
+                        while(doctorTask.isCancelled()){}
                         list.add(view);
                     }
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(2000);
                     }catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -303,7 +307,13 @@ public class DoctorCalendarActivity extends AppCompatActivity {
                     if(result.total != 0) {
                         view.skill = result.data.get(0).skill;
                         view.doctorPhoto = result.data.get(0).doctorPhoto;
-                        view.doctorTitle = result.data.get(0).doctorTitle;
+                        String doctorTitle = result.data.get(0).doctorTitle;
+                        view.doctorTitle = doctorTitle == null||doctorTitle.equals("")?
+                                "暂无":DoctorLeverl[Character.digit(doctorTitle.charAt(0),10)] ;
+                    }else{
+                        view.skill = "暂无";
+                        view.doctorPhoto = "暂无";
+                        view.doctorTitle = "暂无";
                     }
                 }else if(this.message == 1){
                     Toast.makeText(DoctorCalendarActivity.this,

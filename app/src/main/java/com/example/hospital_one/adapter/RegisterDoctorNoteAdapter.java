@@ -24,14 +24,13 @@ public class RegisterDoctorNoteAdapter extends RecyclerView.Adapter<RegisterDoct
         public String noteNumber;
         public String noteTime;
         public String hospitalName;
-        public String admissionId;
+        public String reservationId;
 
         public RegisterNoteItemDetailMessage(){}
 
     }
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public TextView doctorName;
-        public TextView doctorGrade;
         public TextView departmentName;
         public TextView patientName;
         public TextView patientStatus;
@@ -40,11 +39,11 @@ public class RegisterDoctorNoteAdapter extends RecyclerView.Adapter<RegisterDoct
         public TextView hospitalName;
         public Button cancelButton;
         public Button detailMessage;
+        public Button hideButton;
         LinearLayout layout;
         public ViewHolder(View view){
             super(view);
-            this.doctorName = (TextView)view.findViewById(R.id.RegisterNoteDoctorName);
-            this.doctorGrade = (TextView)view.findViewById(R.id.RegisterNoteDoctorGrade);
+            this.doctorName = (TextView)view.findViewById(R.id.RegisterNoteDoctorGrade);
             this.departmentName = (TextView)view.findViewById(R.id.RegisterNoteDepartment);
             this.patientName = (TextView)view.findViewById(R.id.RegisterNotePatientName);
             this.patientStatus = (TextView)view.findViewById(R.id.RegisterNoteStatus);
@@ -54,6 +53,7 @@ public class RegisterDoctorNoteAdapter extends RecyclerView.Adapter<RegisterDoct
             this.cancelButton = (Button)view.findViewById(R.id.RegisterNoteCancel);
             this.detailMessage = (Button)view.findViewById(R.id.RegisterNoteDetailButton);
             this.layout = (LinearLayout)view.findViewById(R.id.RegisterNoteDetailMessage);
+            this.hideButton = (Button)view.findViewById(R.id.RegisterNoteHide);
         }
     }
 
@@ -74,10 +74,9 @@ public class RegisterDoctorNoteAdapter extends RecyclerView.Adapter<RegisterDoct
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        RegisterNoteItemDetailMessage message = list.get(position);
+        final RegisterNoteItemDetailMessage message = list.get(position);
 
         holder.doctorName.setText(message.doctorName);
-        holder.doctorGrade.setText(message.doctorLevel);
         holder.departmentName.setText(message.departmentName);
         holder.patientName.setText(message.patientName);
         holder.patientStatus.setText(ReservationConnection
@@ -94,10 +93,22 @@ public class RegisterDoctorNoteAdapter extends RecyclerView.Adapter<RegisterDoct
             }
         });
 
+        holder.noteTime.setText(message.noteTime);
+        holder.hospitalName.setText(message.hospitalName);
         holder.detailMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                detailButton.OnButtonClicked(holder,position);
+                holder.layout.setVisibility(View.VISIBLE);
+                holder.hideButton.setVisibility(View.VISIBLE);
+                holder.detailMessage.setVisibility(View.GONE);
+            }
+        });
+        holder.hideButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.layout.setVisibility(View.GONE);
+                holder.detailMessage.setVisibility(View.VISIBLE);
+                holder.hideButton.setVisibility(View.GONE);
             }
         });
     }
