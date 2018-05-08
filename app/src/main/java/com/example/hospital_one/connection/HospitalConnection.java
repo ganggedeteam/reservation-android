@@ -6,6 +6,8 @@ import java.util.List;
 
 public class HospitalConnection {
 
+    public static String[] hospitalLevel = {"三甲","三乙","三丙","三丁","二甲","二乙","二丙","一甲","一乙","一丙"};
+
     public class JsonHead {
         public int total;
         public List<HospitalMes> data;
@@ -49,7 +51,8 @@ public class HospitalConnection {
                 String provinceName,
                 String introduction,
                 String countyName){
-            this.hospitalGrade = hospitalGrade;
+            this.hospitalGrade = hospitalGrade == null || hospitalGrade.equals("")?"暂无":
+                    hospitalLevel[(Character.digit(hospitalGrade.charAt(0),10))];
             this.city = city;
             this.isValid = isValid;
             this.county = county;

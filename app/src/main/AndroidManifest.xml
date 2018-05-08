@@ -47,6 +47,8 @@
         </activity>
         <activity android:name=".DoctorCalendarActivity">
         </activity>
+        <activity android:name=".RegisterDoctorNoteActivity">
+        </activity>
     </application>
 
 </manifest>

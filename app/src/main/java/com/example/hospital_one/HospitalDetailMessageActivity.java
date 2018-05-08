@@ -93,6 +93,9 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                         showMessage("请登陆账号");
                     }else {
                         departmentId = list.get(position).getDepartmentId();
+//                        SharedPreferences.Editor editor = getSharedPreferences("error_file",MODE_PRIVATE).edit();
+//                        editor.putString("departmentId",departmentId);
+//                        editor.apply();
                         TimeServer timeServer = new TimeServer();
                         timeServer.execute((Void)null);
                     }
@@ -120,7 +123,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which) {
                 Intent intent = new Intent(
                         HospitalDetailMessageActivity.this, DoctorCalendarActivity.class);
-                String[] target = date[dateNum].split(" ");
+                String[] target = date[dateNum].split("-");
                 intent.putExtra("year",stringToInt(target[0]));
                 intent.putExtra("month",stringToInt(target[1]));
                 intent.putExtra("day",stringToInt(target[2]));
@@ -294,7 +297,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                 if(isLeapYear(year)){
                     if(day < 29){
                         day++;
-                        date[i] = "" + year + " " + month + " " + day;
+                        date[i] = "" + year + "-" + month + "-" + day;
                         continue;
                     }else{
                         month ++;
@@ -303,13 +306,13 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                             month = 1;
                         }
                         day = 1;
-                        date[i] = "" + year + " " + month + " " + day;
+                        date[i] = "" + year + "-" + month + "-" + day;
                         continue;
                     }
                 }else{
                     if(day < 28){
                         day++;
-                        date[i] = "" + year + " " + month + " " + day;
+                        date[i] = "" + year + "-" + month + "-" + day;
                         continue;
                     }else{
                         month ++;
@@ -318,7 +321,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                             month = 1;
                         }
                         day = 1;
-                        date[i] = "" + year + " " + month + " " + day;
+                        date[i] = "" + year + "-" + month + "-" + day;
                         continue;
                     }
                 }
@@ -326,7 +329,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
             if(!month31.contains(month)){
                 if(day < 30){
                     day++;
-                    date[i] = "" + year + " " + month + " " + day;
+                    date[i] = "" + year + "-" + month + "-" + day;
                     continue;
                 }else{
                     month ++;
@@ -335,7 +338,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                         month = 1;
                     }
                     day = 1;
-                    date[i] = "" + year + " " + month + " " + day;
+                    date[i] = "" + year + "-" + month + "-" + day;
                     continue;
                 }
             }
@@ -343,7 +346,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
 
                 if(day < 31){
                     day++;
-                    date[i] = "" + year + " " + month + " " + day;
+                    date[i] = "" + year + "-" + month + "-" + day;
                     continue;
                 }else{
                     month ++;
@@ -352,7 +355,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                         month = 1;
                     }
                     day = 1;
-                    date[i] = "" + year + " " + month + " " + day;
+                    date[i] = "" + year + "-" + month + "-" + day;
                     continue;
                 }
             }

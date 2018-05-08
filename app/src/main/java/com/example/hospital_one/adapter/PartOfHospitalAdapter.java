@@ -36,13 +36,12 @@ public class PartOfHospitalAdapter extends RecyclerView.Adapter<PartOfHospitalAd
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder,int position){
+    public void onBindViewHolder(final ViewHolder holder,final int position){
         DepartmentControllerConnection.DepartmentOfHos name = this.keshiList.get(position);
         holder.textView.setText(name.getDepartmentName());
         holder.partView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int position = holder.getLayoutPosition();
                 mOnItemClickListener.onItemClick(holder.itemView, position);
             }
         });

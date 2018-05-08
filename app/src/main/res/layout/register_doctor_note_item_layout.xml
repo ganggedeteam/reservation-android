@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+            <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/account"
+                    android:id="@+id/imageView9"
+                    android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+
+                <TextView
+                        android:text="医生名称"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:textSize="22sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center"
+                        android:id="@+id/RegisterNoteDoctorName"/>
+
+                <TextView
+                        android:text="等级"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/RegisterNoteDoctorGrade"
+                        android:layout_weight="1"
+                        android:textAlignment="center"/>
+            </LinearLayout>
+
+            <TextView
+                    android:text="医生所在科室"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RegisterNoteDepartment"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textAlignment="center"/>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                <TextView
+                        android:text="挂号人"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/RegisterNotePatientName"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:textAlignment="center"/>
+
+                <TextView
+                        android:text="就诊状态"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/RegisterNoteStatus"
+                        android:layout_weight="1"
+                        android:textAlignment="center"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                <TextView
+                        android:text="挂号单号："
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView73"
+                        android:layout_weight="1"
+                        android:textSize="20sp"
+                        android:textAlignment="center"/>
+
+                <TextView
+                        android:text="11111111111111111111"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/RegisterNoteNumber"
+                        android:layout_weight="1"
+                        android:textAlignment="center"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/RegisterNoteDetailMessage"
+            android:visibility="gone">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <TextView
+                    android:text="就诊时间："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView87"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textAlignment="center"/>
+
+            <TextView
+                    android:text="暂无"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RegisterNoteTime"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="18sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1">
+
+            <TextView
+                    android:text="医院名称："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView89"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textAlignment="center"/>
+
+            <TextView
+                    android:text="暂无"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RegisterNoteHospital"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textSize="18sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="16">
+
+                <Button
+                        android:text="取消预约"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/RegisterNoteCancel"
+                        android:layout_weight="1"
+                        android:background="@android:color/transparent"
+                        android:textSize="18sp"
+                        android:visibility="visible"
+                        android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/textView80"
+                        android:visibility="visible"
+                        android:text="                                                              "
+                        android:layout_weight="1"/>
+            </LinearLayout>
+
+            <Button
+                    android:text="详细信息"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RegisterNoteDetailButton"
+                    android:layout_weight="2"
+                    android:background="@android:color/transparent"
+                    android:textSize="18sp"
+                    android:textColor="?attr/actionModeSplitBackground"
+                    android:textAlignment="center"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>

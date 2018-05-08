@@ -5,10 +5,14 @@ import com.google.gson.Gson;
 import java.util.List;
 
 public class DoctorConnection {
+
+    public static String[] DoctorLeverl = {"主任医师","副主任医师","主治医师","住院医师","实习医师"};
+
     public class DoctorMessage{
         public String doctorName;
         public String doctorPhoto;
         public String doctorTitle;
+        public String loginId;
         public String doctorId;
         public String hospitalId;
         public String sex;
@@ -21,6 +25,7 @@ public class DoctorConnection {
                 String doctorName,
                 String doctorPhoto,
                 String doctorTitle,
+                String loginId,
                 String doctorId,
                 String hospitalId,
                 String sex,
@@ -31,7 +36,9 @@ public class DoctorConnection {
                 String introduction){
             this.doctorName = doctorName;
             this.doctorPhoto = doctorPhoto;
-            this.doctorTitle = doctorTitle;
+            this.doctorTitle = doctorTitle == null||doctorTitle.equals("")?
+                    "暂无":DoctorLeverl[Character.digit(doctorTitle.charAt(0),10)] ;
+            this.loginId = loginId;
             this.doctorId = doctorId;
             this.hospitalId = hospitalId;
             this.sex = sex;

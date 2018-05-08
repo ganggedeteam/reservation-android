@@ -9,7 +9,6 @@ import android.widget.*;
 
 public class MainActivity extends AcitivityBase {
 
-
     LinearLayout personCenter,personCenterElse;
     public static final String[] keshi_title = { "儿科","妇产科","泌尿外科、男科",
             "中医科","皮肤性病科","全科","心理科","普外科","骨科","心内科","普内科",
@@ -34,8 +33,12 @@ public class MainActivity extends AcitivityBase {
     @Override
     protected void onResume(){
         super.onResume();
+        SharedPreferences.Editor editor = getSharedPreferences("start_file",MODE_PRIVATE).edit();
+        editor.putBoolean("status",true);
+        editor.apply();
         SharedPreferences reader =
                 getSharedPreferences("start_file", MODE_PRIVATE);
+
         boolean status = reader.getBoolean("status", false);
         if (status) {
             showPerson();
@@ -71,7 +74,6 @@ public class MainActivity extends AcitivityBase {
 
     }
 
-
     private void initPersonCenter(){
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)actionBar.hide();
@@ -106,6 +108,8 @@ public class MainActivity extends AcitivityBase {
         RegisterNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
 //                Intent intent = new Intent(this,);
 //                startActivity(intent);
             }

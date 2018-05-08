@@ -125,7 +125,7 @@ public class PatientManagerActivity extends AppCompatActivity {
                         patientAddTask = new PatientTask(0, "{\"patientName\": \"" + patientNameEditText.getText().toString() + "\","
                                 +"\"userId\": \""+ reader.getString("account","") + "\","
                                 + "\"idCard\": \"" + patientIdCardEditText.getText().toString() + "\","
-                                + "\"relation\": \"" + theRelation + "\"}");
+                                + "\"relation\": \"" + theRelation + "\",\"cardType\":\"" + 0 + "\"}");
                         patientAddTask.execute((Void)null);
                     }
                 }
@@ -268,6 +268,7 @@ public class PatientManagerActivity extends AppCompatActivity {
                         this.message = 1;
                     } else {
                         if (i == 0) size = result.total;
+                        else size += result.total;
                         if (result.total == 0) {
                             this.message = 2;
                         } else if (result.data.size() != 0) {

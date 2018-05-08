@@ -11,6 +11,7 @@ public class PatientConnection {
         String gmtModified;
         String patientId;
         String idCard;
+        String cardType;
         String gmtCreate;
         String userId;
         String relation;
@@ -48,6 +49,7 @@ public class PatientConnection {
                 String gmtModified,
                 String patientId,
                 String idCard,
+                String cardType,
                 String userId,
                 String gmtCreate,
                 String relation){
@@ -55,11 +57,13 @@ public class PatientConnection {
             this.gmtModified = gmtModified;
             this.patientId = patientId;
             this.idCard = idCard;
+            this.cardType = cardType;
             this.userId = userId;
             this.gmtCreate = gmtCreate;
             this.relation = relation;
         }
     }
+
     public class JsonHead{
         public int total;
         public List<PatientMessage> data;
@@ -72,16 +76,19 @@ public class PatientConnection {
             this.status = status;
         }
     }
+
     public static JsonHead parseJsonData(String jsonData){
         Gson gson = new Gson();
         JsonHead list = gson.fromJson(jsonData, JsonHead.class);
         return list;
     }
+
     public static PatientAddMessageHead parsePatientAddMessageHead(String jsonData){
         Gson gson = new Gson();
         PatientAddMessageHead list = gson.fromJson(jsonData, PatientAddMessageHead.class);
         return list;
     }
+
     public class PatientAddMessage{
         public int total ;
         public String pageSize;

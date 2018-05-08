@@ -14,6 +14,7 @@ import java.util.List;
 public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAdapter.ViewHolder> {
 
     public static class DoctorCalendarView{
+        public String admissionId;
         public String doctorName;
         public int admissionNum;
         public int remainingNum;
@@ -32,6 +33,7 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
         ImageView doctorPhoto;
         TextView doctorTitle;
         TextView skill;
+        TextView calendarFill;
         Button register;
         View view;
         public ViewHolder(View view){
@@ -45,6 +47,7 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
             this.doctorTitle = (TextView)view.findViewById(R.id.DoctorCalendarTitle);
             this.skill = (TextView)view.findViewById(R.id.DoctorCalendarSkill);
             this.register = (Button)view.findViewById(R.id.DoctorCalendarRegisterButton);
+            this.calendarFill = (TextView)view.findViewById(R.id.CalendarFill);
         }
     }
 
@@ -69,8 +72,15 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
         holder.doctorTitle.setText(doctor.doctorTitle);
         holder.skill.setText(doctor.skill);
         holder.admissionPeriod.setText(doctor.admissionPeriod.equals("0")?"上午8:00~12：00":"下午2:00~5:30");
-        holder.admissionNum.setText(doctor.admissionNum);
-        holder.remainingNum.setText(doctor.remainingNum);
+        holder.admissionNum.setText("" + doctor.admissionNum);
+        holder.remainingNum.setText("" + doctor.remainingNum);
+        if(doctor.remainingNum == 0){
+            holder.calendarFill.setVisibility(View.VISIBLE);
+            holder.register.setVisibility(View.GONE);
+        }else{
+            holder.calendarFill.setVisibility(View.GONE);
+            holder.register.setVisibility(View.VISIBLE);
+        }
         holder.register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
