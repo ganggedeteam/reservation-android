@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 import com.example.hospital_one.adapter.DoctorCalendarAdapter;
 import com.example.hospital_one.adapter.OnCancelButton;
@@ -98,6 +99,7 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
                 this.message = 1;
                 return true;
             }
+            Log.e("5555555555555555555", "doInBackground: " + response);
 
             this.message = ReservationConnection.parseReservationCanecl(response);
 
@@ -142,7 +144,8 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
 
         private final String jsonData;
         private int message;
-        private List<ReservationConnection.ReservationMessage> reservationMessages;
+        private List<RegisterDoctorNoteAdapter
+                .RegisterNoteItemDetailMessage> reservationMessages;
 
         public RegisterGetNoteTask(){
             SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
@@ -173,13 +176,56 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
                 }else{
                     if(i == 0)reservationMessages = new ArrayList<>();
                     if (i == 0) size = result.data.size();
-//                    else size += result.data.size();
-                    this.message = 0;
-                    reservationMessages.addAll(result.data);
+                    else size += result.data.size();
+                    List<RegisterDoctorNoteAdapter
+                            .RegisterNoteItemDetailMessage> list = new ArrayList<>();
+                    for (ReservationConnection.ReservationMessage now : result.data) {
+                        RegisterDoctorNoteAdapter
+                                .RegisterNoteItemDetailMessage nowItem = new RegisterDoctorNoteAdapter
+                                .RegisterNoteItemDetailMessage();
+
+                        getCalendarMessage(nowItem,now.admissionId);
+                        nowItem.reservationId = now.reservationId;
+                        nowItem.patientName = now.patientName;
+                        nowItem.noteNumber = now.reservationId;
+                        nowItem.patientStatus = now.isAdmission;
+                        list.add(nowItem);
+                    }
+                    reservationMessages.addAll(list);
                 }
                 i++;
             }
             return true;
+        }
+
+        private void getCalendarMessage(RegisterDoctorNoteAdapter
+                                                .RegisterNoteItemDetailMessage item,String jsonData){
+            DoctorCalendarConnection.JsonHead result;
+            SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+            String url = reader.getString("ip", "") +
+                    reader.getString("calendarList", "");
+            String response = InternetConnection.ForInternetConnection(url, "{\"admissionId\": \"" + jsonData + "\"}");
+            result = DoctorCalendarConnection.parseJsonData(response);
+            if (result == null) {
+                showMessage("没有该挂号的医生信息");
+            }else if(!result.status){
+                showMessage("没有该挂号的医生信息");
+            } else {
+                if (result.data.size() == 0) {
+                    showMessage("没有该挂号的医生信息");
+                } else {
+                    DoctorCalendarConnection.
+                            DoctorCalendarMessage doctorMessage = result.data.get(0);
+                    item.doctorName = doctorMessage.doctorName;
+                    item.departmentName = doctorMessage.departmentName;
+                    item.hospitalName = doctorMessage.hospitalName;
+                    item.noteTime = doctorMessage.admissionDate + " "
+                            + (doctorMessage.admissionPeriod==null||
+                            doctorMessage.admissionPeriod.equals("")?"暂无":
+                            (Character.digit(doctorMessage.admissionPeriod.charAt(0),
+                                    10) == 0 ?"上午8:00~12:00":"下午2:00~5：30"));
+                }
+            }
         }
 
         @Override
@@ -190,34 +236,8 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
                     if(reservationMessages.size() == 0){
                         showMessage("挂号记录为空");
                     }else {
-                        List<RegisterDoctorNoteAdapter
-                                .RegisterNoteItemDetailMessage> list = new ArrayList<>();
-                        for (ReservationConnection.ReservationMessage now : reservationMessages) {
-                            RegisterDoctorNoteAdapter
-                                    .RegisterNoteItemDetailMessage nowItem = new RegisterDoctorNoteAdapter
-                                    .RegisterNoteItemDetailMessage();
-
-                            CalendarMessageTask calendarMessageTask =
-                                    new CalendarMessageTask(nowItem, now.admissionId);
-                            calendarMessageTask.execute((Void) null);
-
-                            nowItem.reservationId = now.reservationId;
-                            nowItem.patientName = now.patientName;
-                            nowItem.noteNumber = now.reservationId;
-                            nowItem.patientStatus = now.isAdmission;
-                            while(calendarMessageTask.isCancelled()){}
-                            list.add(nowItem);
-                        }
-
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        setAdapter(list);
+                        setAdapter(reservationMessages);
                     }
-
-
                 }else if(this.message == 1){
                     Toast.makeText(RegisterDoctorNoteActivity.this,
                             "网络连接错误！",Toast.LENGTH_LONG).show();
@@ -240,90 +260,4 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
             task = null;
         }
     }
-
-    public class CalendarMessageTask extends AsyncTask<Void, Void, Boolean> {
-        private int message;
-        private final String jsonData;
-        private final RegisterDoctorNoteAdapter
-                .RegisterNoteItemDetailMessage item;
-        public CalendarMessageTask(RegisterDoctorNoteAdapter
-                                           .RegisterNoteItemDetailMessage item,String jsonData){
-            this.item = item;
-            this.jsonData = "{\"admissionId\": \"" + jsonData + "\",\"pageNo\":\"";
-        }
-
-        DoctorCalendarConnection.JsonHead result;
-        List<DoctorCalendarConnection.DoctorCalendarMessage> doctorCalendarMessage;
-
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-            int i = 0,size = 0;
-            while(i < 1 || i < size/10 + 1) {
-                SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
-                String url = reader.getString("ip", "") +
-                        reader.getString("calendarList", "");
-                String response = InternetConnection.ForInternetConnection(url, jsonData + (i + 1) + "\"}");
-                result = DoctorCalendarConnection.parseJsonData(response);
-                if(i==0)doctorCalendarMessage = new ArrayList<>();
-                if (result == null) {
-                    this.message = 1;
-                }else if(!result.status){
-                    this.message = 3;
-                } else {
-                    if (result.data.size() == 0 && i == 0) {
-                        this.message = 2;
-                        return true;
-                    } else {
-                        doctorCalendarMessage.addAll(result.data);
-                        this.message = 0;
-                    }
-                }
-                i++;
-            }
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            if (success) {
-                if(this.message == 0){
-                    //成功进行的操作
-                    if(doctorCalendarMessage.size() != 0) {
-                        DoctorCalendarConnection.
-                                DoctorCalendarMessage doctorMessage = doctorCalendarMessage.get(0);
-                        item.doctorName = doctorMessage.doctorName;
-                        item.departmentName = doctorMessage.departmentName;
-                        item.hospitalName = doctorMessage.hospitalName;
-                        item.noteTime = doctorMessage.admissionDate + " "
-                                + (doctorMessage.admissionPeriod==null||
-                                doctorMessage.admissionPeriod.equals("")?"暂无":
-                                (Character.digit(doctorMessage.admissionPeriod.charAt(0),
-                                        10) == 0 ?"上午8:00~12:00":"下午2:00~5：30"));
-                    }else{
-                        showMessage("没有该挂号的医生信息");
-                    }
-
-                }else if(this.message == 1){
-                    Toast.makeText(RegisterDoctorNoteActivity.this,
-                            "网络连接错误",Toast.LENGTH_LONG).show();
-                }else if(this.message == 2){
-                    Toast.makeText(RegisterDoctorNoteActivity.this,
-                            "查找不到相关的信息！",Toast.LENGTH_LONG).show();
-                }else if(this.message == 3){
-                    Toast.makeText(RegisterDoctorNoteActivity.this,
-                            "Json信息错误!",Toast.LENGTH_LONG).show();
-                }else{
-                    Toast.makeText(RegisterDoctorNoteActivity.this,
-                            "未知错误，请与开发者联系!",Toast.LENGTH_LONG).show();
-                }
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-
-        }
-
-    }
-
 }

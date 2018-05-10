@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -58,11 +59,11 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         detailAddress = (TextView)findViewById(R.id.HospitalDetailAddress);
 
         hospitalDetailName.setText(hospitalName);
-        hospitalDetailGrade.setText(hospitalGrade);
+        hospitalDetailGrade.setText(hospitalGrade+ "级医院");
         hospitalDetailPhone.setText(hospitalPhone);
-        hospitalDetailManager.setText(hospitalManager);
+        hospitalDetailManager.setText("院长：" + hospitalManager);
         detailIntroduction.setText(introduction);
-        detailAddress.setText(address);
+        detailAddress.setText("详细地址：" + address);
 
         task = new DepartmentTask("\"hospitalId\": \"" + hospitalId + "\"");
         task.execute((Void)null);

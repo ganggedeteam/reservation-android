@@ -85,7 +85,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:id="@+id/textView62"
-                                    android:textAlignment="viewStart"/>
+                                    android:textAlignment="viewStart"
+                                    android:visibility="invisible"/>
 
                             <TextView
                                     android:text="                院长名字"
@@ -183,7 +184,8 @@
                     <LinearLayout
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent">
+                            android:layout_height="match_parent"
+                            android:visibility="gone">
 
                         <TextView
                                 android:text="详细地址"
@@ -191,7 +193,8 @@
                                 android:layout_height="wrap_content"
                                 android:id="@+id/textView77"
                                 android:layout_weight="1"
-                                android:textAlignment="center"/>
+                                android:textAlignment="center"
+                                android:visibility="visible"/>
 
                         <TextView
                                 android:text="                                                       "

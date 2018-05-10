@@ -78,12 +78,9 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
         DoctorCalendarView doctor = this.list.get(position);
         holder.doctorName.setText(doctor.doctorName);
         holder.doctorTitle.setText(doctor.doctorTitle);
-        holder.skill.setText(doctor.skill);
-//        holder.doctorPhoto.setImageURI(Uri.fromFile(new File("/storage/emulated/0/hospitalPicture/doctor.png")));
-//        holder.doctorPhoto.setImageBitmap(decodeBitmap("/storage/emulated/0/hospitalPicture/doctor.png"));
-//        holder.doctorPhoto.setImageURI(Uri.);
-        holder.doctorPhoto.setImageResource(R.drawable.doctor);
-//        holder.doctorPhoto.setImageBitmap(decodeBitmap("/storage/emulated/0/hospitalPicture/doctor.jpg"));
+        holder.skill.setText("主治：" + doctor.skill);
+        holder.doctorPhoto.setImageBitmap(decodeBitmap("/storage/emulated/0/hospitalPicture/doctor.png",
+                holder.doctorPhoto.getMaxWidth(),holder.doctorPhoto.getMaxHeight()));
         holder.admissionPeriod.setText(doctor.admissionPeriod.equals("0")?"上午8:00~12：00":"下午2:00~5:30");
         holder.admissionNum.setText("" + doctor.admissionNum);
         holder.remainingNum.setText("" + doctor.remainingNum);
@@ -174,22 +171,15 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
 
     }
 
-    public static final float DISPLAY_WIDTH = 200;
-    public static final float DISPLAY_HEIGHT = 200;
-    /**
-     * 从path中获取图片信息
-     * @param path
-     * @return
-     */
-    public static Bitmap decodeBitmap(String path){
+    private Bitmap decodeBitmap(String path,int width,int height){
         BitmapFactory.Options op = new BitmapFactory.Options();
         //inJustDecodeBounds
         //If set to true, the decoder will return null (no bitmap), but the out…
         op.inJustDecodeBounds = true;
         Bitmap bmp = BitmapFactory.decodeFile(path, op); //获取尺寸信息
         //获取比例大小
-        int wRatio = (int)Math.ceil(op.outWidth/DISPLAY_WIDTH);
-        int hRatio = (int)Math.ceil(op.outHeight/DISPLAY_HEIGHT);
+        int wRatio = (int)Math.ceil(op.outWidth/width);
+        int hRatio = (int)Math.ceil(op.outHeight/height);
         //如果超出指定大小，则缩小相应的比例
         if(wRatio > 1 && hRatio > 1){
             if(wRatio > hRatio){
@@ -199,6 +189,7 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
             }
         }
         op.inJustDecodeBounds = false;
+        bmp = BitmapFactory.decodeFile(path, op);
         return bmp;
     }
 
