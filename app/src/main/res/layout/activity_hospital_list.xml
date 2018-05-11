@@ -8,128 +8,63 @@
         tools:context="com.example.hospital_one.HospitalListActivity">
 
     <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/background">
+            android:layout_height="match_parent">
 
-        <LinearLayout
-                android:background="@color/colorPrimary"
-                android:orientation="vertical"
+        <TabHost
+                android:id="@+id/tabHost1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView29"
-                    android:layout_weight="1"
-                    android:textSize="12sp"/>
+                android:layout_height="match_parent">
 
             <LinearLayout
-                    android:orientation="horizontal"
-                    android:background="#3f51b5"
-                    android:layout_width="match_parent"
-                    android:id="@+id/head"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1">
 
-                <ImageButton
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        app:srcCompat="@android:drawable/ic_menu_revert"
-                        android:id="@+id/HospitalBack"
-                        android:layout_weight="1"
-                        android:background="@color/colorPrimary"
-                        android:contentDescription="TODO"/>
-
-                <LinearLayout
-                        android:orientation="horizontal"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="4">
-
-                    <Space
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-
-                    <SearchView
-                            android:background="@drawable/searchbox"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="17"
-                            android:id="@+id/searchHospitalTarget"/>
-
-                    <Space
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"/>
-
-                </LinearLayout>
-
-                <TextView
-                        android:background="@color/colorPrimary"
-                        android:text="@string/SEARCH"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="2"
-                        android:textSize="30sp"
-                        android:textColor="@android:color/background_light"
-                        android:textAlignment="center"
-                        android:id="@+id/searchHospitalResult"/>
-
-            </LinearLayout>
-
-            <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView25"
-                    android:layout_weight="1"
-                    android:textSize="12sp"
-                    android:background="@android:color/transparent"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-                android:paddingBottom="@dimen/activity_vertical_margin"
-                android:paddingLeft="@dimen/activity_horizontal_margin"
-                android:paddingRight="@dimen/activity_horizontal_margin"
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:id="@+id/HospitalListView"
-                android:visibility="gone"
-                android:background="@android:color/transparent">
-
-            <android.support.v7.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scrollbars="vertical"
-                    tools:listitem="@layout/hospital_item"
-                    android:id="@+id/HospitalRecycler"
-                    android:background="@android:color/transparent"/>
-        </LinearLayout>
+                    android:orientation="vertical">
 
-        <LinearLayout
-                android:orientation="vertical"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:visibility="visible"
-                android:id="@+id/HospitalResult"
-                android:gravity="center">
 
-            <TextView
-                    android:layout_gravity="center"
-                    android:text="æš‚æ— ç»“æžœ"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/textView30"
-                    android:textStyle="bold"
-                    android:textSize="20sp"
-                    android:textAlignment="center"/>
-        </LinearLayout>
+                <FrameLayout
+                        android:layout_weight="9"
+                        android:id="@android:id/tabcontent"
+                        android:layout_width="match_parent"
+                        android:layout_height="0pt">
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:id="@+id/tab4"
+                            android:background="#eff2f4"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:visibility="visible">
+
+                        <include
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                layout="@layout/hospital_list_layout"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:orientation="vertical"
+                            android:id="@+id/tab5"
+                            android:background="#da8200"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        <include
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                layout="@layout/person_center"/>
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <TabWidget
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@android:id/tabs"/>
+            </LinearLayout>
+        </TabHost>
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

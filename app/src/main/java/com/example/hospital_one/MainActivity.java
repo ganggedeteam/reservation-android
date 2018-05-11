@@ -203,16 +203,12 @@ public class MainActivity extends AcitivityBase {
         tabHost.setup();
         TabHost.TabSpec tabSpec1 = tabHost.newTabSpec("home");
         tabSpec1.setIndicator("Home",getDrawable(R.drawable.home));
-        tabSpec1.setContent(R.id.tab1);
+        tabSpec1.setContent(R.id.tab4);
         tabHost.addTab(tabSpec1);
         TabHost.TabSpec tabSpec2 = tabHost.newTabSpec("message");
         tabSpec2.setIndicator("Message",getDrawable(R.drawable.email));
-        tabSpec2.setContent(R.id.tab2);
+        tabSpec2.setContent(R.id.tab5);
         tabHost.addTab(tabSpec2);
-        TabHost.TabSpec tabSpec3 = tabHost.newTabSpec("person");
-        tabSpec3.setIndicator("Person",getDrawable(R.drawable.account));
-        tabSpec3.setContent(R.id.tab3);
-        tabHost.addTab(tabSpec3);
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {

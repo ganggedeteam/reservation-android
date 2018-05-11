@@ -16,10 +16,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="898a337f-c08e-4cbe-8647-b812b0ca5453" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/HospitalPictureAdapter.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/connection/PictureTask.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/background.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/hospital_picture_layout.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/drawable/backgroundspecial.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/main/res/layout/hospital_list_layout.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/fileHashes/fileHashes.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/javaCompile/classAnalysis.bin" afterDir="false" />
@@ -28,36 +26,13 @@
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/4.4/taskHistory/taskHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/buildOutputCleanup.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/buildOutputCleanup/outputFiles.bin" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Hospital_one.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/app.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/app.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/ChangePasswordActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/ChangePasswordActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/DoctorActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/DoctorActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/DoctorCalendarActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/DoctorCalendarActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalDetailMessageActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalDetailMessageActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/LoginHospitalActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/LoginHospitalActivity.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/RegisterDoctorNoteActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/RegisterDoctorNoteActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/DoctorAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/DoctorAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/DoctorCalendarAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/DoctorCalendarAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/RegisterDoctorNoteAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/RegisterDoctorNoteAdapter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/connection/HospitalConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/connection/HospitalConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/connection/InternetConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/connection/InternetConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/connection/LoginConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/connection/LoginConnection.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_change_password.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_change_password.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_detail_message.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_detail_message.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_hospital.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_login_hospital.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_patient_manager.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_patient_manager.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_doctor_note.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_register_doctor_note.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/person_center.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/person_center.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/register_doctor_note_item_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/register_doctor_note_item_layout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/src/main/res/layout/patient_layout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/src/main/res/layout/patient_layout.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -90,22 +65,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MainActivity.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="87" column="50" selection-start-line="87" selection-start-column="50" selection-end-line="87" selection-end-column="50" />
+            <state relative-caret-position="168">
+              <caret line="205" column="39" selection-start-line="205" selection-start-column="39" selection-end-line="205" selection-end-column="39" />
+              <folding>
+                <element signature="method#onResume#0;class#MainActivity#0" />
+                <element signature="method#setHostFile#0;class#MainActivity#0" />
+                <element signature="method#initPersonCenter#0;class#MainActivity#0" />
+                <element signature="method#onActivityResult#0;class#MainActivity#0" />
+                <element signature="method#showPerson#0;class#MainActivity#0" />
+                <element signature="method#closePerson#0;class#MainActivity#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="UserInformationActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java">
+      <file leaf-file-name="activity_login_hospital.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_hospital.xml">
+          <provider editor-type-id="text-editor" />
+          <provider selected="true" editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file leaf-file-name="person_center.xml" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/person_center.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="12700">
-              <caret line="543" selection-start-line="543" selection-end-line="543" />
+            <state relative-caret-position="875">
+              <caret line="138" column="49" selection-start-line="138" selection-start-column="49" selection-end-line="138" selection-end-column="49" />
+              <folding>
+                <element signature="e#2032#2065#0" expanded="true" />
+                <element signature="e#2102#2137#0" expanded="true" />
+                <element signature="e#2175#2210#0" expanded="true" />
+              </folding>
             </state>
           </provider>
+          <provider editor-type-id="android-designer2" />
+        </entry>
+      </file>
+      <file leaf-file-name="HospitalListActivity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="172">
+              <caret line="213" column="42" selection-start-line="213" selection-start-column="42" selection-end-line="213" selection-end-column="42" />
+              <folding>
+                <element signature="method#onResume#0;class#HospitalListActivity#0" />
+                <element signature="method#initPersonCenter#0;class#HospitalListActivity#0" />
+                <element signature="method#showPerson#0;class#HospitalListActivity#0" />
+                <element signature="method#closePerson#0;class#HospitalListActivity#0" />
+                <element signature="method#setHostFile#0;class#HospitalListActivity#0" />
+                <element signature="method#showRecycle#0;class#HospitalListActivity#0" />
+                <element signature="method#showSearchResult#0;class#HospitalListActivity#0" />
+                <element signature="method#setRecyclerView#0;class#HospitalListActivity#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="activity_hospital_list.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml">
+          <provider editor-type-id="text-editor">
+            <state relative-caret-position="325">
+              <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
+            </state>
+          </provider>
+          <provider selected="true" editor-type-id="android-designer2" />
         </entry>
       </file>
     </leaf>
@@ -2176,11 +2200,9 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/UserInformationConnection.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/LoginBackMessage.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/InternetConnection.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/part_hospital/PatientAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/patient_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_user_information.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/intenet_connection/Doctor.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/time/GetServerTime.java" />
@@ -2203,12 +2225,10 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/OnRegisterNoteAdaterButtonClicked.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/OnCancelButton.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/connection/ReservationConnection.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/SearchActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/RegisterDoctorNoteAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/OnGetPictureFile.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/DoctorAdapter.java" />
-        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/doctor_duty_message_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/DoctorCalendarAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalDetailMessageActivity.java" />
@@ -2220,12 +2240,16 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/adapter/HospitalPictureAdapter.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/register_doctor_note_item_layout.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_detail_message.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_patient_manager.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_register_doctor_note.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_change_password.xml" />
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/person_center.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_login_hospital.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/hospital_list_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_patient_manager.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/patient_layout.xml" />
+        <option value="$PROJECT_DIR$/app/src/main/res/layout/person_center.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml" />
       </list>
     </option>
@@ -2236,9 +2260,8 @@
       <select />
     </treeState>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="217" />
-    <option name="y" value="32" />
+  <component name="ProjectFrameBounds" extendedState="7">
+    <option name="y" value="57" />
     <option name="width" value="1099" />
     <option name="height" value="620" />
   </component>
@@ -2253,38 +2276,38 @@
         <subPane>
           <expand>
             <path>
-              <item name="Hospital_one" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital_one" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="reservation-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reservation-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
-              <item name="Hospital_one" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital_one" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="reservation-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reservation-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
             </path>
             <path>
-              <item name="Hospital_one" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital_one" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="reservation-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reservation-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Hospital_one" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital_one" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="reservation-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reservation-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Hospital_one" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital_one" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="reservation-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reservation-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="res" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="Hospital_one" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Hospital_one" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
+              <item name="reservation-android" type="b2602c69:ProjectViewProjectNode" />
+              <item name="reservation-android" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="app" type="8a07ba80:GradleTreeStructureProvider$GradleModuleDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
@@ -2301,6 +2324,11 @@
             <path>
               <item name="reservation-android" type="1abcf292:AndroidViewProjectNode" />
               <item name="app" type="feadf853:AndroidModuleNode" />
+            </path>
+            <path>
+              <item name="reservation-android" type="1abcf292:AndroidViewProjectNode" />
+              <item name="app" type="feadf853:AndroidModuleNode" />
+              <item name="manifests" type="f94875db:AndroidManifestsGroupNode" />
             </path>
             <path>
               <item name="reservation-android" type="1abcf292:AndroidViewProjectNode" />
@@ -2354,6 +2382,7 @@
       <recent name="com.example.hospital_one.MainActivity" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="E:\VScode\GitHub\reservation-android\app\src\main\res\drawable" />
       <recent name="E:\VScode\GitHub\reservation-android\app\src\main\res\layout" />
       <recent name="E:\Intellij\Hospital_one\app\src\main\res\drawable" />
       <recent name="E:\Intellij\Hospital_one\app\src\main\res\layout" />
@@ -2414,7 +2443,7 @@
       <option name="ACTIVITY_CLASS" value="" />
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1525999830788" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1526003916320" />
       </method>
     </configuration>
     <configuration name="app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
@@ -2460,7 +2489,7 @@
       </Profilers>
       <method>
         <option name="Android.Gradle.BeforeRunTask" enabled="true" />
-        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1525999830789" />
+        <option name="com.android.instantApps.provision.BeforeRunTask" enabled="true" clearCache="false" clearProvisionedDevices="false" myTimestamp="1526003916321" />
       </method>
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -2593,7 +2622,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="217" y="32" width="1099" height="620" extended-state="0" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info anchor="right" id="Palette" order="5" />
@@ -2604,7 +2633,7 @@
       <window_info anchor="bottom" id="Logcat" order="2" weight="0.43822077" />
       <window_info id="Capture Tool" order="1" />
       <window_info id="Designer" order="2" />
-      <window_info anchor="bottom" id="Build" order="3" sideWeight="0.49848714" weight="0.32091096" />
+      <window_info anchor="bottom" id="Build" order="3" sideWeight="0.49848714" weight="0.3196046" />
       <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Ant Build" order="8" weight="0.24962178" />
       <window_info id="UI Designer" order="0" />
@@ -2614,22 +2643,57 @@
       <window_info anchor="right" id="Palette&#9;" order="0" />
       <window_info id="Image Layers" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="right" id="Preview" order="2" weight="0.32980332" />
       <window_info anchor="bottom" id="Run" order="9" />
       <window_info anchor="bottom" id="Version Control" order="4" weight="0.35584843" />
       <window_info anchor="bottom" id="Terminal" order="5" />
       <window_info id="Captures" order="4" weight="0.32980332" />
-      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.3541867" />
+      <window_info content_ui="combo" id="Project" order="7" weight="0.27836612" />
       <window_info anchor="right" id="Gradle" order="3" weight="0.32980332" />
       <window_info anchor="right" id="Theme Preview" order="4" />
       <window_info id="Favorites" order="5" side_tool="true" />
       <window_info anchor="right" id="Commander" order="6" weight="0.4" />
-      <window_info anchor="right" id="Preview" order="2" weight="0.32980332" />
       <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="6" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
       <window_info anchor="bottom" id="Find" order="7" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="bottom" id="Build" order="3" sideWeight="0.49848714" weight="0.3196046" />
+      <window_info id="Designer" order="2" />
+      <window_info anchor="right" id="Palette" order="5" />
+      <window_info anchor="bottom" id="Run" order="9" />
+      <window_info id="Build Variants" order="6" side_tool="true" />
+      <window_info id="Image Layers" order="3" />
+      <window_info anchor="right" id="Commander" order="6" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="8" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="8" weight="0.24962178" />
+      <window_info id="UI Designer" order="0" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info id="Captures" order="4" weight="0.32980332" />
+      <window_info id="Capture Tool" order="1" />
+      <window_info anchor="right" id="Capture Analysis" order="1" />
+      <window_info anchor="bottom" id="Android Profiler" order="0" />
+      <window_info anchor="bottom" id="Event Log" order="1" sideWeight="0.5015129" side_tool="true" weight="0.22570017" />
+      <window_info anchor="right" id="Preview" order="2" weight="0.32980332" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="7" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="7" />
+      <window_info anchor="right" id="Device File Explorer" order="10" side_tool="true" weight="0.36611196" />
+      <window_info anchor="bottom" id="Logcat" order="2" weight="0.43822077" />
+      <window_info anchor="bottom" id="Version Control" order="4" weight="0.35584843" />
+      <window_info anchor="right" id="Maven Projects" order="9" weight="0.32980332" />
+      <window_info anchor="bottom" id="Terminal" order="5" />
+      <window_info anchor="right" id="Gradle" order="3" weight="0.32980332" />
+      <window_info active="true" content_ui="combo" id="Project" order="7" visible="true" weight="0.27836612" />
+      <window_info anchor="bottom" id="Message" order="6" />
+      <window_info anchor="bottom" id="TODO" order="12" />
+      <window_info anchor="right" id="Palette&#9;" order="0" />
+      <window_info anchor="right" id="Theme Preview" order="4" />
+      <window_info id="Structure" order="8" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="11" weight="0.4" />
+      <window_info anchor="bottom" id="Debug" order="10" weight="0.4" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -2645,12 +2709,65 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="method#onResume#0;class#MainActivity#0" />
+            <element signature="method#setHostFile#0;class#MainActivity#0" />
+            <element signature="method#initPersonCenter#0;class#MainActivity#0" />
+            <element signature="method#onActivityResult#0;class#MainActivity#0" />
+            <element signature="method#showPerson#0;class#MainActivity#0" />
+            <element signature="method#closePerson#0;class#MainActivity#0" />
+          </folding>
+        </state>
+      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="13575">
           <caret line="543" selection-start-line="543" selection-end-line="543" />
+          <folding>
+            <element signature="e#3705#4956#0" expanded="true" />
+            <element signature="e#4955#4956#0" expanded="true" />
+            <element signature="e#5024#5179#0" expanded="true" />
+            <element signature="e#5178#5179#0" expanded="true" />
+            <element signature="e#5232#5720#0" expanded="true" />
+            <element signature="e#5719#5720#0" expanded="true" />
+            <element signature="e#5774#5935#0" expanded="true" />
+            <element signature="e#5934#5935#0" expanded="true" />
+            <element signature="e#6077#6311#0" expanded="true" />
+            <element signature="e#6310#6311#0" expanded="true" />
+            <element signature="e#6440#6860#0" expanded="true" />
+            <element signature="e#6859#6860#0" expanded="true" />
+            <element signature="e#6982#7410#0" expanded="true" />
+            <element signature="e#7409#7410#0" expanded="true" />
+            <element signature="e#7472#7627#0" expanded="true" />
+            <element signature="e#7626#7627#0" expanded="true" />
+            <element signature="e#7676#8148#0" expanded="true" />
+            <element signature="e#8147#8148#0" expanded="true" />
+            <element signature="method#showAddressData#0;class#UserInformationActivity#0" />
+            <element signature="method#showProgress#0;class#UserInformationActivity#0" />
+            <element signature="e#9555#9789#0" expanded="true" />
+            <element signature="e#9788#9789#0" expanded="true" />
+            <element signature="e#9979#10213#0" expanded="true" />
+            <element signature="e#10212#10213#0" expanded="true" />
+            <element signature="method#setDeatilAdress#0;class#UserInformationActivity#0" />
+            <element signature="method#setUserNameText#0;class#UserInformationActivity#0" />
+            <element signature="method#mesToList#0;class#UserInformationActivity#0" />
+            <element signature="method#showErrorMessage#0;class#UserInformationActivity#0" />
+            <element signature="method#showSingleChoiceDialog#0;class#UserInformationActivity#0" />
+            <element signature="method#showSexSingleChoiceDialog#0;class#UserInformationActivity#0" />
+            <element signature="e#15101#15289#0" expanded="true" />
+            <element signature="e#15288#15289#0" expanded="true" />
+            <element signature="e#15860#16081#0" expanded="true" />
+            <element signature="e#16080#16081#0" expanded="true" />
+            <element signature="method#setData#0;class#UserInformationActivity#0" />
+            <element signature="class#UserInformationTask#0;class#UserInformationActivity#0" />
+            <element signature="method#doInBackground#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
+            <element signature="method#onPostExecute#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
+            <element signature="e#21080#21348#0" expanded="true" />
+            <element signature="e#21347#21348#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2776,13 +2893,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="409">
-          <caret line="164" column="93" selection-start-line="164" selection-start-column="93" selection-end-line="164" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/SearchActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="793">
@@ -2881,26 +2991,154 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="66" selection-start-line="66" selection-end-line="66" />
+        <state relative-caret-position="433">
+          <caret line="29" column="58" selection-start-line="29" selection-start-column="58" selection-end-line="29" selection-end-column="58" />
+          <folding>
+            <element signature="n#activity#0;n#application#0;n#manifest#0;n#!!top" />
+            <element signature="n#activity#8;n#application#0;n#manifest#0;n#!!top" />
+          </folding>
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="87" column="50" selection-start-line="87" selection-start-column="50" selection-end-line="87" selection-end-column="50" />
-        </state>
-      </provider>
+      <provider editor-type-id="android-manifest" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/UserInformationActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="12700">
-          <caret line="543" selection-start-line="543" selection-end-line="543" />
+        <state relative-caret-position="752">
+          <caret line="452" column="76" selection-start-line="452" selection-start-column="76" selection-end-line="452" selection-end-column="76" />
+          <folding>
+            <element signature="e#3705#4956#0" expanded="true" />
+            <element signature="e#4955#4956#0" expanded="true" />
+            <element signature="e#5024#5179#0" expanded="true" />
+            <element signature="e#5178#5179#0" expanded="true" />
+            <element signature="e#5232#5720#0" expanded="true" />
+            <element signature="e#5719#5720#0" expanded="true" />
+            <element signature="e#5774#5935#0" expanded="true" />
+            <element signature="e#5934#5935#0" expanded="true" />
+            <element signature="e#6077#6311#0" expanded="true" />
+            <element signature="e#6310#6311#0" expanded="true" />
+            <element signature="e#6440#6860#0" expanded="true" />
+            <element signature="e#6859#6860#0" expanded="true" />
+            <element signature="e#6982#7410#0" expanded="true" />
+            <element signature="e#7409#7410#0" expanded="true" />
+            <element signature="e#7472#7627#0" expanded="true" />
+            <element signature="e#7626#7627#0" expanded="true" />
+            <element signature="e#7676#8148#0" expanded="true" />
+            <element signature="e#8147#8148#0" expanded="true" />
+            <element signature="method#showAddressData#0;class#UserInformationActivity#0" />
+            <element signature="method#showProgress#0;class#UserInformationActivity#0" />
+            <element signature="e#9555#9789#0" expanded="true" />
+            <element signature="e#9788#9789#0" expanded="true" />
+            <element signature="e#9979#10213#0" expanded="true" />
+            <element signature="e#10212#10213#0" expanded="true" />
+            <element signature="method#setDeatilAdress#0;class#UserInformationActivity#0" />
+            <element signature="method#setUserNameText#0;class#UserInformationActivity#0" />
+            <element signature="method#mesToList#0;class#UserInformationActivity#0" />
+            <element signature="method#showErrorMessage#0;class#UserInformationActivity#0" />
+            <element signature="method#showSingleChoiceDialog#0;class#UserInformationActivity#0" />
+            <element signature="method#showSexSingleChoiceDialog#0;class#UserInformationActivity#0" />
+            <element signature="e#15101#15289#0" expanded="true" />
+            <element signature="e#15288#15289#0" expanded="true" />
+            <element signature="e#15860#16081#0" expanded="true" />
+            <element signature="e#16080#16081#0" expanded="true" />
+            <element signature="method#setData#0;class#UserInformationActivity#0" />
+            <element signature="class#UserInformationTask#0;class#UserInformationActivity#0" />
+            <element signature="method#doInBackground#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
+            <element signature="method#onPostExecute#0;class#UserInformationTask#0;class#UserInformationActivity#0" />
+            <element signature="e#21080#21348#0" expanded="true" />
+            <element signature="e#21347#21348#0" expanded="true" />
+          </folding>
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/hospital_list_layout.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="18" column="55" selection-start-line="18" selection-start-column="55" selection-end-line="18" selection-end-column="55" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/PatientManagerActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="97">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_detail_message.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/patient_layout.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_patient_manager.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_main.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/MainActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="205" column="39" selection-start-line="205" selection-start-column="39" selection-end-line="205" selection-end-column="39" />
+          <folding>
+            <element signature="method#onResume#0;class#MainActivity#0" />
+            <element signature="method#setHostFile#0;class#MainActivity#0" />
+            <element signature="method#initPersonCenter#0;class#MainActivity#0" />
+            <element signature="method#onActivityResult#0;class#MainActivity#0" />
+            <element signature="method#showPerson#0;class#MainActivity#0" />
+            <element signature="method#closePerson#0;class#MainActivity#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_login_hospital.xml">
+      <provider editor-type-id="text-editor" />
+      <provider selected="true" editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/person_center.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="875">
+          <caret line="138" column="49" selection-start-line="138" selection-start-column="49" selection-end-line="138" selection-end-column="49" />
+          <folding>
+            <element signature="e#2032#2065#0" expanded="true" />
+            <element signature="e#2102#2137#0" expanded="true" />
+            <element signature="e#2175#2210#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+      <provider editor-type-id="android-designer2" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/hospital_one/HospitalListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="172">
+          <caret line="213" column="42" selection-start-line="213" selection-start-column="42" selection-end-line="213" selection-end-column="42" />
+          <folding>
+            <element signature="method#onResume#0;class#HospitalListActivity#0" />
+            <element signature="method#initPersonCenter#0;class#HospitalListActivity#0" />
+            <element signature="method#showPerson#0;class#HospitalListActivity#0" />
+            <element signature="method#closePerson#0;class#HospitalListActivity#0" />
+            <element signature="method#setHostFile#0;class#HospitalListActivity#0" />
+            <element signature="method#showRecycle#0;class#HospitalListActivity#0" />
+            <element signature="method#showSearchResult#0;class#HospitalListActivity#0" />
+            <element signature="method#setRecyclerView#0;class#HospitalListActivity#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_hospital_list.xml">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="android-designer2" />
     </entry>
   </component>
   <component name="masterDetails">

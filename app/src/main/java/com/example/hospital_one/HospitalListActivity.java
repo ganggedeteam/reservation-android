@@ -27,6 +27,7 @@ public class HospitalListActivity extends AppCompatActivity {
     private EditText editText;
     private TextView searchResult;
     private HospitalTask task = null;
+    LinearLayout personCenter,personCenterElse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,8 @@ public class HospitalListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_hospital_list);
         hospitalRecycler = (RecyclerView) findViewById(R.id.HospitalRecycler);
         searchView = (SearchView) findViewById(R.id.searchHospitalTarget);
+        personCenter = (LinearLayout)findViewById(R.id.PersonCenter);
+        personCenterElse = (LinearLayout)findViewById(R.id.PersonCenterElse);
         editText = (EditText)searchView.findViewById(searchView.getContext()
                 .getResources().getIdentifier("android:id/search_src_text", null, null));
         ImageView hospitalBack = (ImageView)findViewById(R.id.HospitalBack);
@@ -52,11 +55,181 @@ public class HospitalListActivity extends AppCompatActivity {
             }
         });
         initHospitalListActivity();
+        initPersonCenter();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        SharedPreferences reader =
+                getSharedPreferences("start_file", MODE_PRIVATE);
+
+        boolean status = reader.getBoolean("status", false);
+        if (status) {
+            showPerson();
+        } else {
+            closePerson();
+        }
+    }
+    private void initPersonCenter(){
+        ActionBar actionBar = getSupportActionBar();
+        if(actionBar != null)actionBar.hide();
+        LinearLayout personInformation = (LinearLayout)findViewById(R.id.personInformation);
+        personInformation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(this,);
+//                startActivity(intent);
+            }
+        });
+
+        Button paientManger = (Button)findViewById(R.id.paientManger);
+        paientManger.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(HospitalListActivity.this,PatientManagerActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button MyDoctor = (Button)findViewById(R.id.MyDoctor);
+        MyDoctor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Intent intent = new Intent(this,);
+//                startActivity(intent);
+            }
+        });
+
+        LinearLayout RegisterNote = (LinearLayout)findViewById(R.id.RegisterNote);
+        RegisterNote.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                Intent intent = new Intent(HospitalListActivity.this,
+                        RegisterDoctorNoteActivity.class);
+                startActivity(intent);
+            }
+        });
+        final LinearLayout ChangePassWord = (LinearLayout)findViewById(R.id.ChangePassWord);
+        ChangePassWord.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        HospitalListActivity.this,ChangePasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        Button DownAccount = (Button)findViewById(R.id.DownAccount);
+        DownAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SharedPreferences.Editor editorStartFileFail =
+                        getSharedPreferences("start_file",MODE_PRIVATE).edit();
+                editorStartFileFail.putBoolean("status",false);
+                editorStartFileFail.putString("key",null);
+                editorStartFileFail.putString("token",null);
+                editorStartFileFail.apply();
+                closePerson();
+            }
+        });
+
+        Button PlaeaseLogin = (Button)findViewById(R.id.PlaeaseLogin);
+        PlaeaseLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        HospitalListActivity.this,LoginHospitalActivity.class);
+                startActivityForResult(intent,1);
+            }
+        });
+
+        LinearLayout personInformation1 = (LinearLayout)findViewById(R.id.personInformation);
+        personInformation1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(
+                        HospitalListActivity.this,UserInformationActivity.class);
+                startActivity(intent);
+
+            }
+        });
+
+    }
+
+    void showPerson(){
+        SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
+        TextView userName = (TextView)findViewById(R.id.userAccount);
+        userName.setText(reader.getString("userName",""));
+        personCenter.setVisibility(View.VISIBLE);
+        personCenterElse.setVisibility(View.GONE);
+    }
+    void closePerson(){
+        personCenter.setVisibility(View.GONE);
+        personCenterElse.setVisibility(View.VISIBLE);
+    }
+    public void setHostFile(){
+        SharedPreferences.Editor editor = getSharedPreferences("host",MODE_PRIVATE).edit();
+        editor.putString("ip","http://10.236.233.7:8080");
+        editor.putString("pictureDownloadIp","http://10.236.207.109:9999");
+        editor.putString("pictureUploadIP","http://10.236.207.109:8888");
+        editor.putString("menuAdd","/system/menu/add");
+        editor.putString("departmentPage","/code/departmenttype/pagelist");
+        editor.putString("hospitalPage","/hospital/hospital/pagelist");
+        editor.putString("addressPage","/code/address/pagelist");
+        editor.putString("loginBuser","/login/buser");
+        editor.putString("register","/user/register");
+        editor.putString("login","/user/login");
+        editor.putString("doctorPage","/hospital/doctor/pagelist");
+        editor.putString("buserPage","/system//buser/pagelist");
+        editor.putString("patientAdd","/patient/add");
+        editor.putString("patientDelete","/patient/delete");
+        editor.putString("patientPage","/patient/pagelist");
+        editor.putString("userAdd","/user/add");
+        editor.putString("userPage","/user/pagelist");
+        editor.putString("userUpdate","/user/update");
+        editor.putString("changePwd","/user/changepwd");
+        editor.putString("hospitalDepartment","/hospital/department/pagelist");
+        editor.putString("reservationCancel","/reservation/cancel");
+        editor.putString("reservationAdd","/reservation/add");
+        editor.putString("reservationList","/reservation/list");
+        editor.putString("calendarList","/hospital/calendar/list");
+        editor.apply();
     }
 
     public void initHospitalListActivity(){
+        setHostFile();
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)actionBar.hide();
+
+        TabHost tabHost = (TabHost) findViewById(R.id.tabHost1);
+        tabHost.setup();
+        TabHost.TabSpec tabSpec1 = tabHost.newTabSpec("home");
+        tabSpec1.setIndicator("预约中心",getDrawable(R.drawable.home));
+        tabSpec1.setContent(R.id.tab4);
+        tabHost.addTab(tabSpec1);
+        TabHost.TabSpec tabSpec2 = tabHost.newTabSpec("message");
+        tabSpec2.setIndicator("个人中心",getDrawable(R.drawable.email));
+        tabSpec2.setContent(R.id.tab5);
+        tabHost.addTab(tabSpec2);
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            @Override
+            public void onTabChanged(String tabId) {
+                if(tabId.equals("Person")) {
+                    SharedPreferences reader =
+                            getSharedPreferences("start_file", MODE_PRIVATE);
+                    boolean status = reader.getBoolean("status", true);
+                    if (status) {
+                        showPerson();
+                    } else {
+                        closePerson();
+                    }
+                }
+            }
+        });
+
         task = new HospitalTask("");
         task.execute((Void) null);
     }
