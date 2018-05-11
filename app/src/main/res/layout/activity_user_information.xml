@@ -136,7 +136,7 @@
                             android:textStyle="bold"/>
 
                     <TextView
-                            android:text="Mr Wu"
+                            android:text="无"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/InformationUserNameText"
@@ -183,7 +183,7 @@
                             android:textStyle="bold"/>
 
                     <TextView
-                            android:text="111111111"
+                            android:text="无"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/InformationTelephoneText"
@@ -215,7 +215,7 @@
                             android:textStyle="bold"/>
 
                     <TextView
-                            android:text="男"
+                            android:text="无"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/InformationSexText"
@@ -376,7 +376,7 @@
                             android:textStyle="bold"/>
 
                     <TextView
-                            android:text="哈尔滨工业大学"
+                            android:text="无"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:id="@+id/InformationAddrText"

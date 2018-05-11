@@ -263,6 +263,7 @@ public class UserInformationActivity extends AppCompatActivity {
     //设置详细地址的显示与编辑交替
     void setDeatilAdress(boolean cursor){
         if(cursor){
+            saveInformation.setVisibility(View.VISIBLE);
             addrText.setVisibility(View.GONE);
             addrEditText.setVisibility(View.VISIBLE);
             addrEditText.requestFocus();
@@ -276,6 +277,7 @@ public class UserInformationActivity extends AppCompatActivity {
     //设置用户名的显示与编辑交替
     void setUserNameText(boolean cursor){
         if(cursor){
+            saveInformation.setVisibility(View.VISIBLE);
             userNameText.setVisibility(View.GONE);
             userNameEditText.setVisibility(View.VISIBLE);
             userNameEditText.requestFocus();
