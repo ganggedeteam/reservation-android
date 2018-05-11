@@ -5,9 +5,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import com.example.hospital_one.R;
+import com.example.hospital_one.connection.PictureTask;
 import com.example.hospital_one.connection.ReservationConnection;
 
 import java.util.List;
@@ -40,6 +42,7 @@ public class RegisterDoctorNoteAdapter extends RecyclerView.Adapter<RegisterDoct
         public Button cancelButton;
         public Button detailMessage;
         public Button hideButton;
+        public ImageView doctorImage;
         LinearLayout layout;
         public ViewHolder(View view){
             super(view);
@@ -54,6 +57,7 @@ public class RegisterDoctorNoteAdapter extends RecyclerView.Adapter<RegisterDoct
             this.detailMessage = (Button)view.findViewById(R.id.RegisterNoteDetailButton);
             this.layout = (LinearLayout)view.findViewById(R.id.RegisterNoteDetailMessage);
             this.hideButton = (Button)view.findViewById(R.id.RegisterNoteHide);
+            this.doctorImage = (ImageView)view.findViewById(R.id.RegisterDoctorImage);
         }
     }
 
@@ -84,6 +88,10 @@ public class RegisterDoctorNoteAdapter extends RecyclerView.Adapter<RegisterDoct
         holder.noteNumber.setText(message.noteNumber);
         holder.cancelButton.setVisibility(Character.
                 digit(message.patientStatus.charAt(0),10) == 0?View.VISIBLE:View.GONE);
+
+//        PictureTask doctorTask = new PictureTask(holder.doctorImage,);
+//        doctorTask.execute((Void)null);
+
         holder.cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

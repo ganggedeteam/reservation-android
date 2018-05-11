@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import com.example.hospital_one.adapter.DoctorCalendarAdapter;
@@ -37,11 +38,11 @@ public class DoctorCalendarActivity extends AppCompatActivity {
         int day = intent.getIntExtra("day",0);
         String hospitalId = intent.getStringExtra("hospitalId");
         String departmentId = intent.getStringExtra("departmentId");
-        SharedPreferences.Editor editor = getSharedPreferences("error_file",MODE_PRIVATE).edit();
-        editor.putString("theJSonData","{\"hospitalId\": \"" + hospitalId + "\"," +
-                "\"admissionDate\": \""+ year + "-" + (month < 10?"0" + month:"" + month) + "-" + (day < 10?"0" + day: "" + day) +"\"," +
-                "\"departmentId\": \"" + departmentId + "\"}");
-        editor.apply();
+//        SharedPreferences.Editor editor = getSharedPreferences("error_file",MODE_PRIVATE).edit();
+//        editor.putString("theJSonData","{\"hospitalId\": \"" + hospitalId + "\"," +
+//                "\"admissionDate\": \""+ year + "-" + (month < 10?"0" + month:"" + month) + "-" + (day < 10?"0" + day: "" + day) +"\"," +
+//                "\"departmentId\": \"" + departmentId + "\"}");
+//        editor.apply();
 
         task = new CalendarMessageTask("{\"hospitalId\": \"" + hospitalId + "\"," +
                 "\"admissionDate\": \""+ year + "-" + (month < 10?"0" + month:"" + month) + "-" + (day < 10?"0" + day: "" + day) +"\"," +
@@ -137,7 +138,10 @@ public class DoctorCalendarActivity extends AppCompatActivity {
             SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
             String url = reader.getString("ip","")
                     + reader.getString("reservationAdd","");
-            String response = InternetConnection.ForInternetConnection(url,jsonData);
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
+            String response = InternetConnection.ForInternetHeaderConnection(url,key,token,jsonData);
             if(response == null || response.equals("")){
                 this.message = 1;
             }else{
@@ -188,14 +192,15 @@ public class DoctorCalendarActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... voids) {
             int i = 0,size = 0;
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
             while(i < 1 || i < size/10 + 1) {
                 SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
                 String url = reader.getString("ip", "") +
                         reader.getString("calendarList", "");
-                String response = InternetConnection.ForInternetConnection(url, jsonData + (i + 1) + "\"}");
-                SharedPreferences.Editor editor = getSharedPreferences("error_file",MODE_PRIVATE).edit();
-                editor.putString("response",response);
-                editor.apply();
+                String response = InternetConnection.ForInternetHeaderConnection(url,key,token, jsonData + (i + 1) + "\"}");
+                Log.e("777777777777777:", "doInBackground: " + response );
                 result = DoctorCalendarConnection.parseJsonData(response);
                 if(i==0)doctorCalendarMessage = new ArrayList<>();
                 if (result == null) {
@@ -231,11 +236,15 @@ public class DoctorCalendarActivity extends AppCompatActivity {
 
         public void getDoctorMessage(DoctorCalendarAdapter.DoctorCalendarView view,String jsonData){
             DoctorConnection.JsonHead result;
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
             SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
             String url = reader.getString("ip","")
                     + reader.getString("doctorPage","");
-            String response = InternetConnection.ForInternetConnection
-                    (url,"{ \"doctorId\":\"" + jsonData + "\"}");
+            String response = InternetConnection.ForInternetHeaderConnection
+                    (url,key,token,"{ \"doctorId\":\"" + jsonData + "\"}");
+            Log.e("555555555555:", "getDoctorMessage: " + response );
             result = DoctorConnection.parseJsonData(response);
             if(result == null){
                 view.skill = "暂无";
@@ -247,8 +256,11 @@ public class DoctorCalendarActivity extends AppCompatActivity {
                     view.doctorPhoto = "暂无";
                     view.doctorTitle = "暂无";
                 }else {
+                    SharedPreferences readerPictureUrl = getSharedPreferences("host",MODE_PRIVATE);
                     view.skill = result.data.get(0).skill;
-                    view.doctorPhoto = result.data.get(0).doctorPhoto;
+                    String doctorPhoto = result.data.get(0).doctorPhoto;
+                    view.doctorPhoto = doctorPhoto == null || doctorPhoto.equals("") ? "暂无" : readerPictureUrl.getString(
+                            "pictureDownloadIp","") + doctorPhoto;
                     String doctorTitle = result.data.get(0).doctorTitle;
                     view.doctorTitle = doctorTitle == null||doctorTitle.equals("")?
                             "暂无":DoctorLeverl[Character.digit(doctorTitle.charAt(0),10)] ;
@@ -305,13 +317,16 @@ public class DoctorCalendarActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
             SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
             int i = 0;
             int size = 0;
             while (i < 1 || i < size / 10 + 1) {
                 String url = reader.getString("ip","")
                         + reader.getString("patientPage", "");
-                String response = InternetConnection.ForInternetConnection(url, jsonData + (i + 1) + "\"}");
+                String response = InternetConnection.ForInternetHeaderConnection(url,key,token, jsonData + (i + 1) + "\"}");
                 result = PatientConnection.parseJsonData(response);
                 if(i == 0)patientMessageList = new ArrayList<>();
                 if (result == null) {

@@ -1,26 +1,15 @@
 package com.example.hospital_one.adapter;
 
-import android.content.SharedPreferences;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-import com.example.hospital_one.DoctorCalendarActivity;
 import com.example.hospital_one.R;
-import com.example.hospital_one.connection.DoctorCalendarConnection;
 import com.example.hospital_one.connection.DoctorConnection;
-import com.example.hospital_one.connection.InternetConnection;
+import com.example.hospital_one.connection.PictureTask;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder> {
@@ -63,7 +52,8 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
         holder.doctorKeshi.setText(doctor.typeName);
         holder.doctorZhicheng.setText(doctor.doctorTitle);
         holder.doctorSpecial.setText(doctor.skill);
-        getPicture(holder.doctorImage,"doctor.jpg");
+        PictureTask doctorTask = new PictureTask(holder.doctorImage,doctor.doctorPhoto);
+        doctorTask.execute((Void)null);
     }
 
     @Override
@@ -76,56 +66,4 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.ViewHolder
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
     }
-
-    public void getPicture(ImageView picture,String pictureName){
-        String picturePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hospitalPicture";
-        File fileDir = new File(picturePath);
-        if(fileDir.isDirectory() && !fileDir.exists()){
-            fileDir.mkdir();
-        }
-
-        File filePicture = new File(picturePath + "/" + pictureName);
-
-        if(!filePicture.exists()){
-            try{
-                filePicture.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        picture.setImageURI(Uri.fromFile(filePicture));
-
-    }
-
-    public class GetPictureTask extends AsyncTask<Void, Void, Boolean> {
-
-        final String url;
-        final File pictureFile;
-
-        public GetPictureTask(String url,File pictureFile){
-            this.url = url;
-            this.pictureFile = pictureFile;
-        }
-
-        @Override
-        protected Boolean doInBackground(Void... voids) {
-
-            return true;
-        }
-
-        @Override
-        protected void onPostExecute(final Boolean success) {
-            if (success) {
-
-            }
-        }
-
-        @Override
-        protected void onCancelled() {
-        }
-
-    }
-
-
 }

@@ -147,17 +147,25 @@ public class PatientManagerActivity extends AppCompatActivity {
     }
 
     public void setRecyclerView(final List<PatientConnection.PatientMessage> list){
-        LinearLayoutManager layoutManager = new LinearLayoutManager(PatientManagerActivity.this);
-        recyclerView.setLayoutManager(layoutManager);
-        PatientAdapter patientAdapter = new PatientAdapter(list);
-        patientAdapter.setOnButtonClickListener(new OnButtonClickListener(){
-            @Override
-            public void onButtonClick(View view,String patientId){
-                patientDeleteTask = new PatientTask(1,patientId,view);
-                patientDeleteTask.execute((Void)null);
-            }
-        });
-        recyclerView.setAdapter(patientAdapter);
+        LinearLayout patientNumberNULL = (LinearLayout)findViewById(R.id.PatientNumberNULL);
+        if(list == null || list.size() == 0){
+            patientNumberNULL.setVisibility(View.VISIBLE);
+            recyclerView.setVisibility(View.GONE);
+        }else{
+            patientNumberNULL.setVisibility(View.GONE);
+            recyclerView.setVisibility(View.VISIBLE);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(PatientManagerActivity.this);
+            recyclerView.setLayoutManager(layoutManager);
+            PatientAdapter patientAdapter = new PatientAdapter(list);
+            patientAdapter.setOnButtonClickListener(new OnButtonClickListener(){
+                @Override
+                public void onButtonClick(View view,String patientId){
+                    patientDeleteTask = new PatientTask(1,patientId,view);
+                    patientDeleteTask.execute((Void)null);
+                }
+            });
+            recyclerView.setAdapter(patientAdapter);
+        }
     }
 
     public void showMessageDialog(String message){
@@ -215,11 +223,14 @@ public class PatientManagerActivity extends AppCompatActivity {
             SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
             String ip = reader.
                     getString("ip", "");
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
             if(cursor == 0){
                 String url2 = ip +
                         reader.getString("patientAdd","");
                 PatientConnection.PatientAddMessageHead resultAdd;
-                String response = InternetConnection.ForInternetConnection(url2,jsonData);
+                String response = InternetConnection.ForInternetHeaderConnection(url2,key,token,jsonData);
                 SharedPreferences.Editor editor = getSharedPreferences("error_file",MODE_PRIVATE).edit();
                 editor.putString("addPatient",response);
                 editor.apply();
@@ -235,8 +246,9 @@ public class PatientManagerActivity extends AppCompatActivity {
 
             }else if(cursor == 1){
                 String url1 = ip + reader.getString("patientPage","");
+
                 result = PatientConnection.parseJsonData(
-                        InternetConnection.ForInternetConnection(url1,jsonData));
+                        InternetConnection.ForInternetHeaderConnection(url1,key,token,jsonData));
                 if(result == null){
                     this.message = 1;
                     return true;
@@ -248,7 +260,7 @@ public class PatientManagerActivity extends AppCompatActivity {
                 }
                 String url2  = ip +
                         reader.getString("patientDelete","");
-                String respone = InternetConnection.ForInternetConnection(url2,jsonData);
+                String respone = InternetConnection.ForInternetHeaderConnection(url2,key,token,jsonData);
                 if (respone == null) {
                     this.message = 1;
                 }
@@ -260,7 +272,7 @@ public class PatientManagerActivity extends AppCompatActivity {
                 while (i < 1 || i < size / 10 + 1) {
                     String url = ip
                             + reader.getString("patientPage", "");
-                    String response = InternetConnection.ForInternetConnection(url, jsonData + (i + 1) + "\"}");
+                    String response = InternetConnection.ForInternetHeaderConnection(url, key,token,jsonData + (i + 1) + "\"}");
                     result = PatientConnection.parseJsonData(response);
                     if(i == 0)patientMessageList = new ArrayList<>();
 
@@ -269,11 +281,7 @@ public class PatientManagerActivity extends AppCompatActivity {
                     } else {
                         if (i == 0) size = result.total;
                         else size += result.total;
-                        if (result.total == 0) {
-                            this.message = 2;
-                        } else if (result.data.size() != 0) {
-                            patientMessageList.addAll(result.data);
-                        }
+                        patientMessageList.addAll(result.data);
                     }
                     i++;
                 }
@@ -293,7 +301,7 @@ public class PatientManagerActivity extends AppCompatActivity {
                             .this,"网络连接错误",Toast.LENGTH_LONG).show();
                 }else if(message == 2){
                     Toast.makeText(PatientManagerActivity
-                            .this,"您的就诊人列表为空，请添加就诊人",Toast.LENGTH_LONG).show();
+                            .this,"删除失败",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
                     if(this.cursor == 0){
                         showMessageDialog("添加成功！");

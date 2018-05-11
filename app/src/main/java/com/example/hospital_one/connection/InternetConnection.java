@@ -8,6 +8,28 @@ import java.io.IOException;
 
 public class InternetConnection {
 
+
+    public static String ForInternetHeaderConnection(String url,String key,String token,String jsonData){
+        String result = null;
+        try{
+            MediaType JSON = MediaType.parse("application/json;charset=utf-8");
+            OkHttpClient client = new OkHttpClient();
+            RequestBody body = RequestBody.create
+                    (JSON, jsonData);
+            Request request = new Request.Builder()
+                    .url(url)
+                    .addHeader("userKey",key)
+                    .addHeader("userToken",token)
+                    .post(body)
+                    .build();
+            Response response = client.newCall(request).execute();
+            result = response.body().string();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
     public static String ForInternetConnection(String url,String jsonData){
         String result = null;
         try {

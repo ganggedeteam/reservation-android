@@ -42,18 +42,45 @@ public class LoginConnection {
     }
 
     public class BuserInfoData{
-        public String loginId,userName,roleId,loginPwd;
+        public String userPhone,userName;
         public BuserInfoData(String loginId, String
-                userName,String roleId,String loginPwd){
-            this.loginId = loginId;
+                userName){
+            this.userPhone = loginId;
             this.userName = userName;
-            this.roleId = roleId;
-            this.loginPwd = loginPwd;
         }
     }
+
     public static JsonHead parseJsonData(String jsonData){
         Gson gson = new Gson();
         JsonHead list = gson.fromJson(jsonData, JsonHead.class);
         return list;
+    }
+
+    public class LoginJsonHead{
+        public UserMessage data;
+        public String message;
+        public boolean status;
+        public LoginJsonHead(UserMessage data,String message,boolean status){
+
+            this.data = data;
+            this.message = message;
+            this.status = status;
+
+        }
+    }
+
+    public static LoginJsonHead parseLoginJsonData(String jsonData){
+        Gson gson = new Gson();
+        LoginJsonHead list = gson.fromJson(jsonData, LoginJsonHead.class);
+        return list;
+    }
+
+    public class UserMessage{
+        public String key,token;
+        public UserMessage(String key, String
+                token){
+            this.key = key;
+            this.token = token;
+        }
     }
 }

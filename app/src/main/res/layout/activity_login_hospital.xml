@@ -6,7 +6,7 @@
               android:gravity="center_horizontal"
               android:orientation="vertical"
               tools:context="com.example.hospital_one.LoginHospitalActivity"
-        >
+              android:background="@drawable/background">
 
     <!-- Login progress -->
     <LinearLayout
@@ -32,7 +32,8 @@
                     android:id="@+id/backLoginButton"
                     android:layout_weight="1"
                     android:background="@color/colorPrimary"
-                    android:contentDescription="@string/todo"/>
+                    android:contentDescription="@string/todo"
+                    android:visibility="gone"/>
 
             <TextView
                     android:text="@string/title_activity_login_hospital"
@@ -141,7 +142,8 @@
                         android:background="@android:color/background_light"
                         android:textStyle="bold"
                         android:textColor="@color/colorPrimaryDark"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center"
+                        android:visibility="gone"/>
 
             </LinearLayout>
 
@@ -172,7 +174,7 @@
                         android:layout_height="match_parent"
                         android:id="@+id/RegisterButton"
                         android:layout_weight="2"
-                        android:background="@android:color/background_light"
+                        android:background="@android:color/transparent"
                         android:text="还没有账号？ 快去注册"
                         android:textColor="@color/colorPrimaryDark"
                         android:textStyle="bold"

@@ -33,9 +33,6 @@ public class MainActivity extends AcitivityBase {
     @Override
     protected void onResume(){
         super.onResume();
-        SharedPreferences.Editor editor = getSharedPreferences("start_file",MODE_PRIVATE).edit();
-        editor.putBoolean("status",true);
-        editor.apply();
         SharedPreferences reader =
                 getSharedPreferences("start_file", MODE_PRIVATE);
 
@@ -49,7 +46,9 @@ public class MainActivity extends AcitivityBase {
 
     public void setHostFile(){
         SharedPreferences.Editor editor = getSharedPreferences("host",MODE_PRIVATE).edit();
-        editor.putString("ip","http://192.168.191.1:8080");
+        editor.putString("ip","http://10.236.233.7:8080");
+        editor.putString("pictureDownloadIp","http://10.236.207.109:9999");
+        editor.putString("pictureUploadIP","http://10.236.207.109:8888");
         editor.putString("menuAdd","/system/menu/add");
         editor.putString("departmentPage","/code/departmenttype/pagelist");
         editor.putString("hospitalPage","/hospital/hospital/pagelist");
@@ -72,7 +71,6 @@ public class MainActivity extends AcitivityBase {
         editor.putString("reservationList","/reservation/list");
         editor.putString("calendarList","/hospital/calendar/list");
         editor.apply();
-
     }
 
     private void initPersonCenter(){
@@ -133,6 +131,8 @@ public class MainActivity extends AcitivityBase {
                 SharedPreferences.Editor editorStartFileFail =
                         getSharedPreferences("start_file",MODE_PRIVATE).edit();
                 editorStartFileFail.putBoolean("status",false);
+                editorStartFileFail.putString("key",null);
+                editorStartFileFail.putString("token",null);
                 editorStartFileFail.apply();
                 closePerson();
             }

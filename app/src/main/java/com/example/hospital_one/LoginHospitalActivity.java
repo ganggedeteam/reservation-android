@@ -24,6 +24,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -31,6 +32,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import com.example.hospital_one.connection.InternetConnection;
 import com.example.hospital_one.connection.LoginBackMessage;
+import com.example.hospital_one.connection.LoginConnection;
 import com.example.hospital_one.connection.UserInformationConnection;
 
 import java.util.ArrayList;
@@ -403,12 +405,14 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             String response = InternetConnection.ForInternetConnection
                     (ip + last,"{ \"userPhone\": \"" + mEmail + "\",\n" +
                             "\"userPwd\": \"" + mPassword + "\"}");
+            Log.e("999999999999999:", "doInBackground: " + response);
             if(response == null || response.equals("")){
                 this.message = 1;
                 return true;
             }
             this.message = LoginBackMessage.parseJson(response);
             if(this.message == 0){
+                LoginConnection.LoginJsonHead result = LoginConnection.parseLoginJsonData(response);
                 if(mPasswordCheckBox.isChecked()) {
                     //保存密码
                     SharedPreferences.Editor editor = getSharedPreferences("user_file", MODE_PRIVATE).edit();
@@ -437,6 +441,8 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                         getSharedPreferences("start_file",MODE_PRIVATE).edit();
                 editorStartFile.putBoolean("status",true);
                 editorStartFile.putString("account",this.mEmail);
+                editorStartFile.putString("key",result.data.key);
+                editorStartFile.putString("token",result.data.token);
 //                editorStartFile.putString("userName",result.data.get(0).userName);
                 editorStartFile.apply();
                 return true;
@@ -512,11 +518,17 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
             String url = reader.
                     getString("ip", "") + reader.getString("userPage","");
-            String response = InternetConnection.ForInternetConnection(url, jsonData);
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
+            if(key == null || token == null || key.equals("") || token.equals(""))return false;
+            String response = InternetConnection.ForInternetHeaderConnection(url,key,token,jsonData);
             result = UserInformationConnection.parseJsonData(response);
+            Log.e("44444444444444444:", "doInBackground: " + response);
             if (result == null) {
                 this.message = 1;
             } else {
+                if(result.data == null)return false;
                 if (result.data.size() == 0) {
                     this.message = 2;
                 }
@@ -546,6 +558,8 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                     Toast.makeText(LoginHospitalActivity
                             .this,"未知错误",Toast.LENGTH_LONG).show();
                 }
+            }else{
+
             }
         }
 

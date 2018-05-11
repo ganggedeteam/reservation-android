@@ -131,16 +131,16 @@ public class HospitalListActivity extends AppCompatActivity {
                     this.message = 1;
                     return true;
                 }
-                if (result.message.equals("success")) {
+//                if (result.message.equals("success")) {
                     size = result.total;
                     if (result.total == 0) {
                         message = 2;
                     } else if(result.data.size() != 0){
                         connectResult.addAll(result.data);
                     }
-                } else {
-                    message = 3;
-                }
+//                } else {
+//                    message = 3;
+//                }
                 i++;
             }
 

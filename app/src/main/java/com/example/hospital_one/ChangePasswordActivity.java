@@ -162,12 +162,16 @@ public class ChangePasswordActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
 
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
+
             //读取本地文件的服务器地址
             SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
             String url = reader.
                     getString("ip", "") + reader.getString("changePwd","");
             //与服务器连接并传回的信息
-            String response = InternetConnection.ForInternetConnection(url+urlLast,jsonData);
+            String response = InternetConnection.ForInternetHeaderConnection(url+urlLast,key,token,jsonData);
             //将json数据转化为类
             if(response == null || response.equals("")){
                 this.message = 1;

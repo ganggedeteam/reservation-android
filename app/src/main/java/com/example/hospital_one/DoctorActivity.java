@@ -216,6 +216,11 @@ public class DoctorActivity extends AcitivityBase {
                         Toast.makeText(DoctorActivity
                                 .this,"标识代码错误",Toast.LENGTH_LONG).show();
                     }else{
+                        SharedPreferences readerPicUrl = getSharedPreferences("host",MODE_PRIVATE);
+                        String picUrl = readerPicUrl.getString("pictureDownloadIp","");
+                        for(DoctorConnection.DoctorMessage message : doctorResult){
+                            message.doctorPhoto = picUrl + message.doctorPhoto;
+                        }
                         setAdapter(doctorResult);
                     }
                 }else{

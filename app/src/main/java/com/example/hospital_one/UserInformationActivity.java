@@ -11,6 +11,7 @@ import android.os.Build;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.example.hospital_one.connection.AddressConnection;
@@ -472,8 +473,14 @@ public class UserInformationActivity extends AppCompatActivity {
                 SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
                 String url = reader.
                         getString("ip", "") + reader.getString("userPage","");
+
+                SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+                String key = readerHeader.getString("key","");
+                String token = readerHeader.getString("token","");
+                if(key == null || token == null || key.equals("") || token.equals(""))return false;
                 //与服务器连接并传回的信息
-                String response = InternetConnection.ForInternetConnection(url, jsonData);
+                String response = InternetConnection.ForInternetHeaderConnection(url,key,token,jsonData);
+                Log.e("000000000000:", "doInBackground: " + response + "   " + key + "   " + token );
                 //将json数据转化为类
                 result = UserInformationConnection.parseJsonData(response);
                 if (result == null) {
@@ -488,8 +495,11 @@ public class UserInformationActivity extends AppCompatActivity {
                 SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
                 String url = reader.
                         getString("ip", "") + reader.getString("userUpdate","");
+                SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+                String key = readerHeader.getString("key","");
+                String token = readerHeader.getString("token","");
                 //与服务器连接并传回的信息
-                String response = InternetConnection.ForInternetConnection(url, jsonData);
+                String response = InternetConnection.ForInternetHeaderConnection(url,key,token,jsonData);
                 //将json数据转化为类
                 updateResult = UserInformationConnection.parseUpdateMessageJsonData(response);
                 if (updateResult == null) {
@@ -533,6 +543,8 @@ public class UserInformationActivity extends AppCompatActivity {
                     Toast.makeText(UserInformationActivity
                             .this,"未知错误",Toast.LENGTH_LONG).show();
                 }
+            }else{
+                showErrorMessage("请登陆账号");
             }
         }
 

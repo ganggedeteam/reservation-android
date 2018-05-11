@@ -36,6 +36,7 @@ public class HospitalConnection {
         public String provinceName;
         public String introduction;
         public String countyName;
+        public String hospitalPicture;
         public HospitalMes(
                 String hospitalGrade,
                 int city,
@@ -50,7 +51,8 @@ public class HospitalConnection {
                 String hospitalManager,
                 String provinceName,
                 String introduction,
-                String countyName){
+                String countyName,
+                String hospitalPicture){
             this.hospitalGrade = hospitalGrade == null || hospitalGrade.equals("")?"暂无":
                     hospitalLevel[(Character.digit(hospitalGrade.charAt(0),10))];
             this.city = city;
@@ -66,6 +68,7 @@ public class HospitalConnection {
             this.provinceName = provinceName;
             this.introduction = introduction;
             this.countyName = countyName;
+            this.hospitalPicture = hospitalPicture;
         }
 
     }

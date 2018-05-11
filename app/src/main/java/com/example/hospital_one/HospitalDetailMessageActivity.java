@@ -15,13 +15,18 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.example.hospital_one.adapter.HospitalPictureAdapter;
 import com.example.hospital_one.connection.DepartmentControllerConnection;
+import com.example.hospital_one.connection.HospitalConnection;
 import com.example.hospital_one.connection.InternetConnection;
 import com.example.hospital_one.connection.ReservationConnection;
 import com.example.hospital_one.adapter.OnItemClickListener;
 import com.example.hospital_one.adapter.PartOfHospitalAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
+
+import static com.example.hospital_one.connection.HospitalConnection.hospitalLevel;
 
 public class HospitalDetailMessageActivity extends AppCompatActivity {
 
@@ -32,6 +37,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
     private TextView detailIntroduction;
     private TextView detailAddress;
     private DepartmentTask task = null;
+    private HospitalPictureTask pictureTask;
 
     String hospitalId;
     @Override
@@ -61,12 +67,15 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         hospitalDetailName.setText(hospitalName);
         hospitalDetailGrade.setText(hospitalGrade+ "级医院");
         hospitalDetailPhone.setText(hospitalPhone);
-        hospitalDetailManager.setText("院长：" + hospitalManager);
+        hospitalDetailManager.setText("管理员：" + hospitalManager);
         detailIntroduction.setText(introduction);
         detailAddress.setText("详细地址：" + address);
 
         task = new DepartmentTask("\"hospitalId\": \"" + hospitalId + "\"");
         task.execute((Void)null);
+
+        pictureTask = new HospitalPictureTask(hospitalId);
+        pictureTask.execute((Void)null);
     }
 
     private void setAdapter(final List<DepartmentControllerConnection.DepartmentOfHos> list){
@@ -97,13 +106,45 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
 //                        SharedPreferences.Editor editor = getSharedPreferences("error_file",MODE_PRIVATE).edit();
 //                        editor.putString("departmentId",departmentId);
 //                        editor.apply();
-                        TimeServer timeServer = new TimeServer();
-                        timeServer.execute((Void)null);
+//                        TimeServer timeServer = new TimeServer();
+//                        timeServer.execute((Void)null);
+//                        Date
+                        Date d = new Date();
+                        System.out.println(d);
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String dateNowStr = sdf.format(d);
+
+                        String time = dateNowStr.substring(0,10);
+                        String[] dateDetail = time.split("-");
+                        int year,month,day;
+                        year = stringToInt(dateDetail[0]);
+                        month = stringToInt(dateDetail[1]);
+                        day = stringToInt(dateDetail[2]);
+                        showDateDialog(getDate(year,month,day));
+
                     }
 
                 }
             });
             departmentListView.setAdapter(partOfHospitalAdapter);
+        }
+    }
+
+    private void setHospitalPicture(List<String> url){
+        TextView textView = (TextView)findViewById(R.id.HospitalPictureNull);
+        RecyclerView hospitalPicRecyclerView = (RecyclerView)findViewById(R.id.HospitalPictureRecyclerView);
+        if(url.size() == 0) {
+            textView.setVisibility(View.VISIBLE);
+            hospitalPicRecyclerView.setVisibility(View.GONE);
+        }
+        else{
+            textView.setVisibility(View.GONE);
+            hospitalPicRecyclerView.setVisibility(View.VISIBLE);
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+            linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+            hospitalPicRecyclerView.setLayoutManager(linearLayoutManager);
+            HospitalPictureAdapter adapter = new HospitalPictureAdapter(url);
+            hospitalPicRecyclerView.setAdapter(adapter);
         }
     }
 
@@ -147,7 +188,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("提示信息");
         builder.setMessage(message);
-        builder.setPositiveButton("", new DialogInterface.OnClickListener() {
+        builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 dialog.dismiss();
@@ -155,6 +196,91 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         });
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+
+
+
+
+    public class HospitalPictureTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String jsonData;
+        private int message = 0;
+
+        HospitalPictureTask(String jsonData) {
+            this.jsonData = "{\"hospitalId\": \"" + jsonData + "\"}";
+        }
+        String pictureUrls;
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            HospitalConnection.JsonHead result;
+            SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+            String ip = reader.getString("ip", "");
+            String last = reader.getString("hospitalPage", "");
+            String response = InternetConnection.ForInternetConnection(ip + last, jsonData);
+            result = HospitalConnection.parseJsonData(response);
+//            Log.e("99999999999999", "doInBackground: " + response);
+            if (result == null) {
+                this.message = 1;
+                return true;
+            }
+            if (result.message.equals("success")) {
+//                Log.e("99999999999999", "doInBackground: " + result.data.size());
+                if (result.total == 0) {
+                    message = 2;
+                } else if(result.data.size() != 0){
+                    pictureUrls = result.data.get(0).hospitalPicture;
+                }
+            } else {
+                message = 3;
+            }
+            // TODO: register the new account here.
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            if (success) {
+                if(message == 1){
+                    Toast.makeText(HospitalDetailMessageActivity
+                            .this,"网络连接错误",Toast.LENGTH_LONG).show();
+                }else if(message == 2){
+                    Toast.makeText(HospitalDetailMessageActivity
+                            .this,"查找不到结果",Toast.LENGTH_LONG).show();
+                }else if(message == 0) {
+//                    Log.e("888888888888888888:", "onPostExecute: " + pictureUrls );
+                    if(pictureUrls == null || pictureUrls.equals("")){
+//                        showMessage("暂无图片");
+                    }
+                    else {
+                        setHospitalPicture(getUrlList(pictureUrls));
+                    }
+                }
+                else{
+                    Toast.makeText(HospitalDetailMessageActivity
+                            .this,"未知错误",Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+
+        }
+
+
+        private List<String> getUrlList(String urls){
+            List<String> list = new ArrayList<>();
+            String[] url = urls.split(";");
+            SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
+            String ip = reader.getString("pictureDownloadIp","");
+            for(String picUrl : url){
+                list.add(ip + picUrl);
+            }
+            return list;
+        }
+
     }
 
     public class DepartmentTask extends AsyncTask<Void, Void, Boolean> {
@@ -235,9 +361,10 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
             SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
 
             String url = reader.getString("ip","") +
-                    reader.getString("reservationList","");
+                    reader.getString("hospitalDepartment","");
 
             String response = InternetConnection.ForInternetConnection(url,"{,}");
+            Log.e("0000000000000: ", "doInBackground: " + response);
             result = ReservationConnection.parseTimeMessage(response);
             if(result == null){
                 this.message = 1;

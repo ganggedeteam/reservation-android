@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 import com.example.hospital_one.adapter.DoctorCalendarAdapter;
 import com.example.hospital_one.adapter.OnCancelButton;
@@ -55,25 +57,33 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
     }
     private void setAdapter(final List<RegisterDoctorNoteAdapter
             .RegisterNoteItemDetailMessage> registerNoteItemDetailMessageList){
+        LinearLayout registerNoteNULL = (LinearLayout)findViewById(R.id.RegisterNoteNULL);
+        LinearLayout registerNoteSome = (LinearLayout)findViewById(R.id.RegisterNoteSome);
+        if(registerNoteItemDetailMessageList == null || registerNoteItemDetailMessageList.size() == 0){
+            registerNoteNULL.setVisibility(View.VISIBLE);
+            registerNoteSome.setVisibility(View.GONE);
+        }else{
+            registerNoteNULL.setVisibility(View.GONE);
+            registerNoteSome.setVisibility(View.VISIBLE);
+            RecyclerView recyclerView = (RecyclerView)findViewById(R.id.RegisterNoteRecyclerView);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+            recyclerView.setLayoutManager(layoutManager);
+            RegisterDoctorNoteAdapter registerDoctorNoteAdapter=
+                    new RegisterDoctorNoteAdapter(registerNoteItemDetailMessageList);
+            registerDoctorNoteAdapter.setOnCancelButton(new OnCancelButton() {
+                @Override
+                public void OnCancelButtonClicked(int position) {
 
-        RecyclerView recyclerView = (RecyclerView)findViewById(R.id.RegisterNoteRecyclerView);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerView.setLayoutManager(layoutManager);
-        RegisterDoctorNoteAdapter registerDoctorNoteAdapter=
-                new RegisterDoctorNoteAdapter(registerNoteItemDetailMessageList);
-        registerDoctorNoteAdapter.setOnCancelButton(new OnCancelButton() {
-            @Override
-            public void OnCancelButtonClicked(int position) {
+                    RegisterCancelNoteTask cancelNoteTask = new RegisterCancelNoteTask(
+                            registerNoteItemDetailMessageList.get(position).reservationId);
+                    cancelNoteTask.execute((Void)null);
+                    //取消挂号
 
-                RegisterCancelNoteTask cancelNoteTask = new RegisterCancelNoteTask(
-                        registerNoteItemDetailMessageList.get(position).reservationId);
-                cancelNoteTask.execute((Void)null);
-                //取消挂号
+                }
+            });
 
-            }
-        });
-
-        recyclerView.setAdapter(registerDoctorNoteAdapter);
+            recyclerView.setAdapter(registerDoctorNoteAdapter);
+        }
     }
 
 
@@ -91,10 +101,14 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
         @Override
         protected Boolean doInBackground(Void... voids) {
 
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
+
             SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
             String url = reader.getString("ip","")
                     + reader.getString("reservationCancel","");
-            String response = InternetConnection.ForInternetConnection(url,jsonData);
+            String response = InternetConnection.ForInternetHeaderConnection(url,key,token,jsonData);
             if(response == null || response.equals("")){
                 this.message = 1;
                 return true;
@@ -159,11 +173,14 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
             SharedPreferences reader = getSharedPreferences("host",MODE_PRIVATE);
             String url = reader.getString("ip","")
                     + reader.getString("reservationList","");
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
 
             int i = 0,size = 0;
             while(i < 1 || i < size / 10 + 1){
                 ReservationConnection.JsonHead result;
-                String response = InternetConnection.ForInternetConnection(url,jsonData + (i+1)+"\"}");
+                String response = InternetConnection.ForInternetHeaderConnection(url,key,token,jsonData + (i+1)+"\"}");
                 if(response == null || response.equals(""))return false;
                 if(ReservationConnection.parseAddReservationJson(response) == 3
                         || ReservationConnection.parseAddReservationJson(response) == 2 ){
@@ -204,7 +221,10 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
             SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
             String url = reader.getString("ip", "") +
                     reader.getString("calendarList", "");
-            String response = InternetConnection.ForInternetConnection(url, "{\"admissionId\": \"" + jsonData + "\"}");
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
+            String response = InternetConnection.ForInternetHeaderConnection(url,key,token, "{\"admissionId\": \"" + jsonData + "\"}");
             result = DoctorCalendarConnection.parseJsonData(response);
             if (result == null) {
                 showMessage("没有该挂号的医生信息");
@@ -233,11 +253,7 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
             if(success){
                 if(this.message == 0){
                     //成功的操作
-                    if(reservationMessages.size() == 0){
-                        showMessage("挂号记录为空");
-                    }else {
-                        setAdapter(reservationMessages);
-                    }
+                    setAdapter(reservationMessages);
                 }else if(this.message == 1){
                     Toast.makeText(RegisterDoctorNoteActivity.this,
                             "网络连接错误！",Toast.LENGTH_LONG).show();

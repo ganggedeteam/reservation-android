@@ -12,7 +12,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.example.hospital_one.DoctorCalendarActivity;
 import com.example.hospital_one.R;
+import com.example.hospital_one.connection.PictureTask;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -79,8 +81,8 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
         holder.doctorName.setText(doctor.doctorName);
         holder.doctorTitle.setText(doctor.doctorTitle);
         holder.skill.setText("主治：" + doctor.skill);
-        holder.doctorPhoto.setImageBitmap(decodeBitmap("/storage/emulated/0/hospitalPicture/doctor.png",
-                holder.doctorPhoto.getMaxWidth(),holder.doctorPhoto.getMaxHeight()));
+//        holder.doctorPhoto.setImageBitmap(decodeBitmap("/storage/emulated/0/hospitalPicture/doctor.png",
+//                holder.doctorPhoto.getMaxWidth(),holder.doctorPhoto.getMaxHeight()));
         holder.admissionPeriod.setText(doctor.admissionPeriod.equals("0")?"上午8:00~12：00":"下午2:00~5:30");
         holder.admissionNum.setText("" + doctor.admissionNum);
         holder.remainingNum.setText("" + doctor.remainingNum);
@@ -97,6 +99,11 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
                 mOnItemClickListener.onItemClick(holder.view,position);
             }
         });
+        if(doctor.doctorPhoto == null || doctor.doctorPhoto.equals("") || doctor.doctorPhoto.equals("暂无")){}
+        else {
+            PictureTask doctorTask = new PictureTask(holder.doctorPhoto, doctor.doctorPhoto);
+            doctorTask.execute((Void) null);
+        }
     }
 
     @Override
@@ -108,67 +115,6 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
 
     public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
         mOnItemClickListener = onItemClickListener;
-    }
-
-    public Bitmap getPicture(String pictureName){
-        String picturePath = Environment.getExternalStorageDirectory().getAbsolutePath() + "/hospitalPicture";
-        Log.e("11111111111111PicturePath:", "getPicture: " +  picturePath);
-        File fileDir = new File(picturePath);
-        if(!fileDir.exists()){
-            fileDir.mkdir();
-        }
-        File filePicture = new File(picturePath + "/" + pictureName);
-        if(!filePicture.exists()){
-//            try{
-//                filePicture.createNewFile();
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
-        }
-        Log.e("22222222222222PicturePath:", "getPicture: " + filePicture.exists()+ "    " +  filePicture.getAbsolutePath());
-//        picture.setImageURI(Uri.fromFile(filePicture));
-        Bitmap bitmap = getLoacalBitmap(filePicture.getAbsolutePath());
-        return bitmap;
-    }
-
-    public static Bitmap getLoacalBitmap(String url) {
-        try {
-            FileInputStream fis = new FileInputStream(url);
-            return BitmapFactory.decodeStream(fis);  ///把流转化为Bitmap图片
-
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-            return null;
-        }
-
-    }
-    public static Bitmap getHttpBitmap(String url){
-        URL myFileURL;
-        Bitmap bitmap=null;
-        try{
-            myFileURL = new URL(url);
-            //获得连接
-            HttpURLConnection conn=(HttpURLConnection)myFileURL.openConnection();
-            //设置超时时间为6000毫秒，conn.setConnectionTiem(0);表示没有时间限制
-            conn.setConnectTimeout(6000);
-            //连接设置获得数据流
-            conn.setDoInput(true);
-            //不使用缓存
-            conn.setUseCaches(false);
-            //这句可有可无，没有影响
-            //conn.connect();
-            //得到数据流
-            InputStream is = conn.getInputStream();
-            //解析得到图片
-            bitmap = BitmapFactory.decodeStream(is);
-            //关闭数据流
-            is.close();
-        }catch(Exception e){
-            e.printStackTrace();
-        }
-
-        return bitmap;
-
     }
 
     private Bitmap decodeBitmap(String path,int width,int height){
