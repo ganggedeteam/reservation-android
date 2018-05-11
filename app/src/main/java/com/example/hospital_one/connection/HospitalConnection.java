@@ -6,7 +6,7 @@ import java.util.List;
 
 public class HospitalConnection {
 
-    public static String[] hospitalLevel = {"三甲","三乙","三丙","三丁","二甲","二乙","二丙","一甲","一乙","一丙"};
+    public static String[] hospitalLevel = {"三级特等","三级甲等","三级乙等","三级丙等","二级甲等","二级乙等","二级丙等","一级甲等","一级乙等","一级丙等"};
 
     public class JsonHead {
         public int total;
@@ -24,7 +24,7 @@ public class HospitalConnection {
     public class HospitalMes{
         public String hospitalGrade;
         public int city;
-        public String isValid;
+        public boolean isValid;
         public int county;
         public String hospitalName;
         public String hospitalPhone;
@@ -40,7 +40,7 @@ public class HospitalConnection {
         public HospitalMes(
                 String hospitalGrade,
                 int city,
-                String isValid,
+                boolean isValid,
                 int county,
                 String hospitalName,
                 String hospitalPhone,

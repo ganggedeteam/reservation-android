@@ -124,7 +124,7 @@
                                 android:id="@+id/HospitalDetailGrade"
                                 android:layout_weight="1"
                                 android:textSize="24sp"
-                                android:textAlignment="viewEnd"
+                                android:textAlignment="center"
                                 android:textColor="@android:color/black"
                                 android:background="@android:color/transparent"/>
 
@@ -260,7 +260,8 @@
                 <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/textView98"/>
+                        android:id="@+id/textView98"
+                        android:visibility="gone"/>
 
                 <LinearLayout
                         android:orientation="horizontal"
@@ -297,7 +298,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:gravity="center"
-                            android:background="@android:color/transparent">
+                            android:background="@android:color/transparent"
+                            android:id="@+id/HospitalPictureNull">
 
                         <TextView
                                 android:layout_width="wrap_content"
@@ -310,7 +312,6 @@
                                 android:text="暂无"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:id="@+id/HospitalPictureNull"
                                 android:textSize="25sp"
                                 android:textAlignment="center"
                                 android:layout_weight="1"
@@ -339,7 +340,7 @@
                 <LinearLayout
                         android:orientation="vertical"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
                         android:visibility="visible"
                         android:id="@+id/hospital_detail_message"
                         android:background="@android:color/transparent">
@@ -378,11 +379,54 @@
                             android:textSize="8sp"
                             android:textColor="@android:color/transparent"/>
 
-                    <android.support.v7.widget.RecyclerView
+                    <LinearLayout
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/TestHospitalView"
+                                android:layout_weight="1">
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                                android:orientation="vertical"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:id="@+id/HospitalDetailDep"
+                                android:layout_weight="1">
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                            android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            tools:listitem="@layout/keshi_name"
-                            android:id="@+id/HospitalDetailDepartmentList"/>
+                            android:visibility="gone">
+
+                        <android.support.v7.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:listitem="@layout/keshi_name"
+                                android:id="@+id/HospitalDetailDepartmentList"
+                                android:layout_weight="1">
+
+                        </android.support.v7.widget.RecyclerView>
+
+                        <android.support.v7.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                tools:listitem="@layout/keshi_name"
+                                android:layout_weight="1"
+                                android:id="@+id/HospitalDetailDepartmentName"/>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
@@ -406,5 +450,7 @@
 
             </LinearLayout>
         </ScrollView>
+
     </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

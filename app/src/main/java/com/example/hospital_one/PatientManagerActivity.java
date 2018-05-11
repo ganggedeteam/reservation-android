@@ -299,6 +299,7 @@ public class PatientManagerActivity extends AppCompatActivity {
                 if(message == 1){
                     Toast.makeText(PatientManagerActivity
                             .this,"网络连接错误",Toast.LENGTH_LONG).show();
+                    finish();
                 }else if(message == 2){
                     Toast.makeText(PatientManagerActivity
                             .this,"删除失败",Toast.LENGTH_LONG).show();

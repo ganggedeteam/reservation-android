@@ -61,6 +61,8 @@ public class HospitalListActivity extends AppCompatActivity {
     @Override
     protected void onResume(){
         super.onResume();
+        task = new HospitalTask("");
+        task.execute((Void) null);
         SharedPreferences reader =
                 getSharedPreferences("start_file", MODE_PRIVATE);
 
@@ -83,7 +85,7 @@ public class HospitalListActivity extends AppCompatActivity {
             }
         });
 
-        Button paientManger = (Button)findViewById(R.id.paientManger);
+        LinearLayout paientManger = (LinearLayout)findViewById(R.id.paientManger);
         paientManger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,12 +174,14 @@ public class HospitalListActivity extends AppCompatActivity {
     }
     public void setHostFile(){
         SharedPreferences.Editor editor = getSharedPreferences("host",MODE_PRIVATE).edit();
-        editor.putString("ip","http://10.236.233.7:8080");
-        editor.putString("pictureDownloadIp","http://10.236.207.109:9999");
-        editor.putString("pictureUploadIP","http://10.236.207.109:8888");
+        editor.putString("ip","http://172.20.10.2:8080");
+        editor.putString("pictureDownloadIp","http://172.20.10.10:9999");
+        editor.putString("pictureUploadIP","http://172.20.10.2:8888");
         editor.putString("menuAdd","/system/menu/add");
         editor.putString("departmentPage","/code/departmenttype/pagelist");
+        editor.putString("departmentDetailPage","/hospital/department/list");
         editor.putString("hospitalPage","/hospital/hospital/pagelist");
+        editor.putString("hospitalDepType","/hospital/hospital/depttype");
         editor.putString("addressPage","/code/address/pagelist");
         editor.putString("loginBuser","/login/buser");
         editor.putString("register","/user/register");
@@ -217,7 +221,7 @@ public class HospitalListActivity extends AppCompatActivity {
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
             @Override
             public void onTabChanged(String tabId) {
-                if(tabId.equals("Person")) {
+                if(tabId.equals("个人中心")) {
                     SharedPreferences reader =
                             getSharedPreferences("start_file", MODE_PRIVATE);
                     boolean status = reader.getBoolean("status", true);
@@ -226,12 +230,14 @@ public class HospitalListActivity extends AppCompatActivity {
                     } else {
                         closePerson();
                     }
+                }else if(tabId.equals("预约中心")){
+                    task = new HospitalTask("");
+                    task.execute((Void) null);
                 }
             }
         });
 
-        task = new HospitalTask("");
-        task.execute((Void) null);
+
     }
 
     List<HospitalConnection.HospitalMes> connectResult = null;
@@ -333,6 +339,10 @@ public class HospitalListActivity extends AppCompatActivity {
                             .this,"查找不到结果",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
                     for(HospitalConnection.HospitalMes mes:connectResult){
+                        if(!mes.isValid){
+                            connectResult.remove(mes);
+                            continue;
+                        }
                         String hospitalGrade = mes.hospitalGrade;
                         mes.hospitalGrade = hospitalGrade == null || hospitalGrade.equals("")?"暂无":
                                 hospitalLevel[(Character.digit(hospitalGrade.charAt(0),10))];

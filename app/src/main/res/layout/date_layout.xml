@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content">
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView115"
+            android:layout_weight="1"
+            android:text="      "/>
+
+    <TextView
+            android:text="05-17"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/DateNumber"
+            android:layout_weight="1"
+            android:textSize="24sp"
+            android:background="@android:color/background_light"
+            android:textStyle="bold"/>
+
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView120"
+            android:layout_weight="1"
+            android:text="      "/>
+
+</LinearLayout>

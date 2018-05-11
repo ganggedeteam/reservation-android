@@ -9,14 +9,129 @@
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1">
+
+        <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView109"
+                android:layout_weight="0.5"/>
+
+        <GridLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="10"
+                android:columnCount="2"
+                android:rowCount="3">
+
+            <TextView
+                    android:text="医生姓名:"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    />
+
+            <TextView
+                    android:text="姓名实体"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RegisterNoteDoctorGrade"
+                    android:layout_weight="1"
+                    android:textAlignment="viewStart"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/background_dark"/>
+
+            <TextView
+                    android:text="科室："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView69"
+                    android:layout_weight="1"
+                    android:textSize="18sp"
+                    android:textAlignment="center"/>
+
+            <TextView
+                    android:text="医生所在科室"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RegisterNoteDepartment"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textAlignment="viewStart"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/background_dark"/>
+
+            <TextView
+                    android:text="挂号人姓名"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView110"
+                    android:textSize="20sp"/>
+
+            <TextView
+                    android:text="挂号人"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RegisterNotePatientName"
+                    android:layout_weight="1"
+                    android:textSize="20sp"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/background_dark"/>
+
+            <TextView
+                    android:text="就诊状态：                                    "
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView112"/>
+
+            <TextView
+                    android:text="就诊状态"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RegisterNoteStatus"
+                    android:layout_weight="1"
+                    android:textAlignment="textStart"
+                    android:textColor="@android:color/background_dark"
+                    android:textStyle="bold"/>
+
+            <TextView
+                    android:text="挂号单号："
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/textView73"
+                    android:layout_weight="1"
+                    android:textSize="14sp"
+                    android:textAlignment="center"/>
+
+            <TextView
+                    android:text="11111111111111111111"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/RegisterNoteNumber"
+                    android:layout_weight="1"
+                    android:textAlignment="center"
+                    android:textStyle="bold"
+                    android:textColor="@android:color/background_dark"/>
+        </GridLayout>
+    </LinearLayout>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:visibility="gone">
 
         <LinearLayout
                 android:orientation="horizontal"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:visibility="gone">
 
             <ImageView
                     android:layout_width="wrap_content"
@@ -38,25 +153,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                <TextView
-                        android:text="医生姓名："
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
-                        android:textAlignment="center"
-                        android:id="@+id/RegisterNoteDoctorName"/>
-
-                <TextView
-                        android:text="姓名实体"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/RegisterNoteDoctorGrade"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textSize="22sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/background_dark"/>
             </LinearLayout>
 
             <LinearLayout
@@ -65,25 +161,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1">
 
-                <TextView
-                        android:text="科室："
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView69"
-                        android:layout_weight="1"
-                        android:textSize="18sp"
-                        android:textAlignment="center"/>
-
-                <TextView
-                        android:text="医生所在科室"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/RegisterNoteDepartment"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/background_dark"/>
             </LinearLayout>
 
             <LinearLayout
@@ -93,25 +170,11 @@
                     android:layout_weight="1">
 
                 <TextView
-                        android:text="挂号人"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:id="@+id/RegisterNotePatientName"
-                        android:layout_weight="1"
-                        android:textSize="20sp"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/background_dark"/>
+                        android:id="@+id/textView102"
+                        android:layout_weight="0.1"/>
 
-                <TextView
-                        android:text="就诊状态"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/RegisterNoteStatus"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textColor="@android:color/background_dark"
-                        android:textStyle="bold"/>
             </LinearLayout>
 
             <LinearLayout
@@ -120,24 +183,6 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1">
 
-                <TextView
-                        android:text="挂号单号："
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/textView73"
-                        android:layout_weight="1"
-                        android:textSize="14sp"
-                        android:textAlignment="center"/>
-
-                <TextView
-                        android:text="11111111111111111111"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/RegisterNoteNumber"
-                        android:layout_weight="1"
-                        android:textAlignment="center"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/background_dark"/>
             </LinearLayout>
         </LinearLayout>
     </LinearLayout>

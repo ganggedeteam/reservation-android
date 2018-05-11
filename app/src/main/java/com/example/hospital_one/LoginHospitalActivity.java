@@ -463,11 +463,11 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
             if (success) {
                 if(message == 1){
                     Toast.makeText(LoginHospitalActivity
-                            .this,"网络连接错误",Toast.LENGTH_LONG);
+                            .this,"网络连接错误",Toast.LENGTH_LONG).show();
                 }else if(message == 2){
                     mEmailView.setError("暂不存在此用户");
                     Toast.makeText(LoginHospitalActivity
-                            .this,"暂不存在此用户",Toast.LENGTH_LONG);
+                            .this,"暂不存在此用户",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
 
                     SharedPreferences reader =
@@ -489,7 +489,7 @@ public class LoginHospitalActivity extends AppCompatActivity implements LoaderCa
                 }
                 else{
                     Toast.makeText(LoginHospitalActivity
-                            .this,"未知错误",Toast.LENGTH_LONG);
+                            .this,"未知错误",Toast.LENGTH_LONG).show();
                 }
             } else {
                 mPasswordView.setError("账号或密码不正确");

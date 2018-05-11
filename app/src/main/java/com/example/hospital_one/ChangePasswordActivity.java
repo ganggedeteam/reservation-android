@@ -194,6 +194,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
                 if(message == 1){
                     Toast.makeText(ChangePasswordActivity
                             .this,"网络连接错误",Toast.LENGTH_LONG).show();
+                    finish();
                 }else if(message == 2){
                     showMessageDialog("密码输入错误");
                     oldPassword.setError("密码不正确，请重新输入");

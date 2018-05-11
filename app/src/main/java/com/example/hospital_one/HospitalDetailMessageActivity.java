@@ -3,6 +3,7 @@ package com.example.hospital_one;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
@@ -16,10 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.example.hospital_one.adapter.HospitalPictureAdapter;
-import com.example.hospital_one.connection.DepartmentControllerConnection;
-import com.example.hospital_one.connection.HospitalConnection;
-import com.example.hospital_one.connection.InternetConnection;
-import com.example.hospital_one.connection.ReservationConnection;
+import com.example.hospital_one.connection.*;
 import com.example.hospital_one.adapter.OnItemClickListener;
 import com.example.hospital_one.adapter.PartOfHospitalAdapter;
 
@@ -39,6 +37,10 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
     private DepartmentTask task = null;
     private HospitalPictureTask pictureTask;
 
+    @Override
+    protected void onResume(){
+        super.onResume();
+    }
     String hospitalId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         detailAddress = (TextView)findViewById(R.id.HospitalDetailAddress);
 
         hospitalDetailName.setText(hospitalName);
-        hospitalDetailGrade.setText(hospitalGrade+ "级医院");
+        hospitalDetailGrade.setText(hospitalGrade);
         hospitalDetailPhone.setText(hospitalPhone);
         hospitalDetailManager.setText("管理员：" + hospitalManager);
         detailIntroduction.setText(introduction);
@@ -78,9 +80,10 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         pictureTask.execute((Void)null);
     }
 
-    private void setAdapter(final List<DepartmentControllerConnection.DepartmentOfHos> list){
+    private void setKindsAdapter(final List<DepartmentControllerConnection.DepartmentOfHos> list){
         LinearLayout result = (LinearLayout)findViewById(R.id.hospital_detail_message);
         LinearLayout noResult = (LinearLayout)findViewById(R.id.hospital_detail_message_noResult);
+        Log.e("6666666666666666666: ", "setKindsAdapter: " + list.size() );
         if(list.size() == 0){
             result.setVisibility(View.GONE);
             noResult.setVisibility(View.VISIBLE);
@@ -103,12 +106,6 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                         showMessage("请登陆账号");
                     }else {
                         departmentId = list.get(position).getDepartmentId();
-//                        SharedPreferences.Editor editor = getSharedPreferences("error_file",MODE_PRIVATE).edit();
-//                        editor.putString("departmentId",departmentId);
-//                        editor.apply();
-//                        TimeServer timeServer = new TimeServer();
-//                        timeServer.execute((Void)null);
-//                        Date
                         Date d = new Date();
                         System.out.println(d);
                         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -121,7 +118,6 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                         month = stringToInt(dateDetail[1]);
                         day = stringToInt(dateDetail[2]);
                         showDateDialog(getDate(year,month,day));
-
                     }
 
                 }
@@ -130,15 +126,127 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         }
     }
 
+    private void setHospitalAdapter(List<DepartmentControllerConnection.DepartmentOfHos> list){
+       RecyclerView departmentListView = (RecyclerView) findViewById(R.id.HospitalDetailDepartmentName);
+       LinearLayoutManager layoutManager = new LinearLayoutManager(this);
+       departmentListView.setLayoutManager(layoutManager);
+       PartOfHospitalAdapter partOfHospitalAdapter = new PartOfHospitalAdapter(list);
+       partOfHospitalAdapter.setOnItemClickListener(new OnItemClickListener() {
+           @Override
+           public void onItemClick(View view, int position) {
+
+               /*SharedPreferences reader
+                       = getSharedPreferences("start_file",MODE_PRIVATE);
+               boolean status = reader.getBoolean("status", false);
+               if(!status){
+                   showMessage("请登陆账号");
+               }else {
+                   departmentId = list.get(position).getDepartmentId();
+                   Date d = new Date();
+                   System.out.println(d);
+                   SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                   String dateNowStr = sdf.format(d);
+
+                   String time = dateNowStr.substring(0,10);
+                   String[] dateDetail = time.split("-");
+                   int year,month,day;
+                   year = stringToInt(dateDetail[0]);
+                   month = stringToInt(dateDetail[1]);
+                   day = stringToInt(dateDetail[2]);
+                   showDateDialog(getDate(year,month,day));
+               }*/
+
+           }
+       });
+       departmentListView.setAdapter(partOfHospitalAdapter);
+    }
+
+
+    private void setList(List<HospitalDepartmentTypeConnection.HospitalDepartmentType> list){
+        LinearLayout linearLayout = (LinearLayout)findViewById(R.id.TestHospitalView);
+        LinearLayout result = (LinearLayout)findViewById(R.id.hospital_detail_message);
+        LinearLayout noResult = (LinearLayout)findViewById(R.id.hospital_detail_message_noResult);
+        if(list.size() == 0){
+            result.setVisibility(View.GONE);
+            noResult.setVisibility(View.VISIBLE);
+        } else {
+            result.setVisibility(View.VISIBLE);
+            noResult.setVisibility(View.GONE);
+        }
+        for(HospitalDepartmentTypeConnection.HospitalDepartmentType mes : list) {
+            TextView textView = new TextView(this);
+            textView.setTextSize(24);
+            textView.setText(mes.name);
+            textView.setTextColor(Color.BLACK);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            final HospitalDepartmentTypeConnection.HospitalDepartmentType now = mes;
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    DepartmentKindTask departmentKindTask = new DepartmentKindTask("\"hospitalId\": \""
+                            + hospitalId + "\",\"typeId\":\"" + now.id + "\"");
+                    departmentKindTask.execute((Void)null);
+                }
+            });
+            linearLayout.addView(textView);
+        }
+
+    }
+    private void setDetailList(List<HospitalDepartmentTypeConnection.HospitalDetailDepartment> list){
+        LinearLayout hospitalDetailDep = (LinearLayout)findViewById(R.id.HospitalDetailDep);
+        hospitalDetailDep.removeAllViews();
+        if(list.size() == 0){
+            TextView textView = new TextView(this);
+            textView.setText("暂无");
+            textView.setTextColor(Color.BLACK);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            hospitalDetailDep.addView(textView);
+        }
+        for(HospitalDepartmentTypeConnection.
+                    HospitalDetailDepartment mes : list){
+            TextView textView = new TextView(this);
+            textView.setText(mes.departmentName);
+            textView.setTextColor(Color.BLACK);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            final HospitalDepartmentTypeConnection.
+                    HospitalDetailDepartment now = mes;
+            textView.setTextSize(24);
+            textView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreferences reader
+                            = getSharedPreferences("start_file",MODE_PRIVATE);
+                    boolean status = reader.getBoolean("status", false);
+                    if(!status){
+                        showMessage("请登陆账号");
+                    }else {
+                        Date d = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                        String dateNowStr = sdf.format(d);
+                        String time = dateNowStr.substring(0,10);
+                        Intent intent = new Intent(
+                                HospitalDetailMessageActivity.this, DoctorCalendarActivity.class);
+                        intent.putExtra("date",time);
+                        intent.putExtra("hospitalId",hospitalId);
+                        intent.putExtra("departmentId",now.departmentId);
+                        startActivity(intent);
+
+                    }
+                }
+            });
+            hospitalDetailDep.addView(textView);
+        }
+    }
+
     private void setHospitalPicture(List<String> url){
-        TextView textView = (TextView)findViewById(R.id.HospitalPictureNull);
+        LinearLayout NullView = (LinearLayout)findViewById(R.id.HospitalPictureNull);
         RecyclerView hospitalPicRecyclerView = (RecyclerView)findViewById(R.id.HospitalPictureRecyclerView);
         if(url.size() == 0) {
-            textView.setVisibility(View.VISIBLE);
+            NullView.setVisibility(View.VISIBLE);
             hospitalPicRecyclerView.setVisibility(View.GONE);
         }
         else{
-            textView.setVisibility(View.GONE);
+            NullView.setVisibility(View.GONE);
             hospitalPicRecyclerView.setVisibility(View.VISIBLE);
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
             linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -197,8 +305,6 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         AlertDialog dialog = builder.create();
         dialog.show();
     }
-
-
 
 
     public class HospitalPictureTask extends AsyncTask<Void, Void, Boolean> {
@@ -287,7 +393,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
 
         private final String jsonData;
         private int message = 0;
-        private List<DepartmentControllerConnection.DepartmentOfHos> connectResult = null;
+        private List<HospitalDepartmentTypeConnection.HospitalDepartmentType> connectResult = null;
 
         DepartmentTask(String jsonData) {
             this.jsonData = "{" + jsonData + ",\"pageNo\":\"";
@@ -297,21 +403,26 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
             int i = 0,size = 0;
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
+            if(key == null || token == null || key.equals("") || token.equals(""))return false;
+            SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+            String ip = reader.getString("ip", "");
+            String last = reader.getString("hospitalDepType", "");
             while(i < 1 || i < size/10 + 1) {
-                DepartmentControllerConnection.JsonHead result;
-                SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
-                String ip = reader.getString("ip", "");
-                String last = reader.getString("hospitalDepartment", "");
-                result = DepartmentControllerConnection.parseJsonData(
-                        InternetConnection.ForInternetConnection(ip + last, jsonData + (i + 1) + "\"}"));
+                HospitalDepartmentTypeConnection.JsonHead result;
+                String response = InternetConnection.ForInternetHeaderConnection(ip + last,key,token, jsonData + (i + 1) + "\"}");
+                Log.e("66666666666666666: ", "doInBackground: " + response );
+                result = HospitalDepartmentTypeConnection.parseJsonData(response);
                 if(i==0)connectResult = new ArrayList<>();
                 if (result == null) {
                     this.message = 1;
                     return true;
                 }
                 if (result.message.equals("success")) {
-                    size = result.total;
-                    if (result.total == 0) {
+                    size = result.data.size();
+                    if (result.data.size() == 0 && i == 0) {
                         message = 2;
                     } else if(result.data.size() != 0){
                         connectResult.addAll(result.data);
@@ -334,13 +445,88 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
                 }else if(message == 2){
 //                    showSearchResult();
                     Toast.makeText(HospitalDetailMessageActivity
-                            .this,"查找不到结果",Toast.LENGTH_LONG).show();
+                            .this,"科室信息暂时查找不到结果",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
-                    setAdapter(connectResult);
+                    setList(connectResult);
                 }else{
                     Toast.makeText(HospitalDetailMessageActivity
                             .this,"未知错误",Toast.LENGTH_LONG).show();
                 }
+            }else{
+                showMessage("请登录账号");
+            }
+        }
+
+        @Override
+        protected void onCancelled() {
+            task = null;
+        }
+    }
+
+    public class DepartmentKindTask extends AsyncTask<Void, Void, Boolean> {
+
+        private final String jsonData;
+        private int message = 0;
+        private List<HospitalDepartmentTypeConnection.HospitalDetailDepartment> connectResult = null;
+
+        DepartmentKindTask(String jsonData) {
+            this.jsonData = "{" + jsonData + ",\"pageNo\":\"";
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... params) {
+            // TODO: attempt authentication against a network service.
+            int i = 0,size = 0;
+            SharedPreferences readerHeader = getSharedPreferences("start_file",MODE_PRIVATE);
+            String key = readerHeader.getString("key","");
+            String token = readerHeader.getString("token","");
+            if(key == null || token == null || key.equals("") || token.equals(""))return false;
+            SharedPreferences reader = getSharedPreferences("host", MODE_PRIVATE);
+            String ip = reader.getString("ip", "");
+            String last = reader.getString("departmentDetailPage", "");
+            while(i < 1 || i < size/10 + 1) {
+                HospitalDepartmentTypeConnection.DetailJsonHead result;
+                String response = InternetConnection.ForInternetHeaderConnection(ip + last, key,token,jsonData + (i + 1) + "\"}");
+                Log.e("sdfjsadfjsaalfjsaldfjsakaldjfaskldfjsaalkdfjslkf:", "doInBackground: " + response );
+                result = HospitalDepartmentTypeConnection.parseJsonHead(response);
+                if(i==0)connectResult = new ArrayList<>();
+                if (result == null) {
+                    this.message = 1;
+                    return true;
+                }
+                if (result.message.equals("success")) {
+                    size = result.data.size();
+                    if (result.data.size() == 0) {
+                        message = 2;
+                    } else if(result.data.size() != 0){
+                        connectResult.addAll(result.data);
+                    }
+                } else {
+                    message = 3;
+                }
+                i++;
+            }
+            // TODO: register the new account here.
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(final Boolean success) {
+            if (success) {
+                if(message == 1){
+                    Toast.makeText(HospitalDetailMessageActivity
+                            .this,"网络连接错误",Toast.LENGTH_LONG).show();
+                }else if(message == 2){
+                    Toast.makeText(HospitalDetailMessageActivity
+                            .this,"查找不到结果",Toast.LENGTH_LONG).show();
+                }else if(message == 0) {
+                    setDetailList(connectResult);
+                }else{
+                    Toast.makeText(HospitalDetailMessageActivity
+                            .this,"未知错误",Toast.LENGTH_LONG).show();
+                }
+            }else{
+                showMessage("请登录账号");
             }
         }
 

@@ -8,7 +8,7 @@
         tools:context="com.example.hospital_one.UserInformationActivity">
 
     <LinearLayout
-            android:background="#eff2f4"
+            android:background="@drawable/background"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -61,7 +61,6 @@
                     android:layout_height="wrap_content">
 
                 <LinearLayout
-                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -119,26 +118,27 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
-                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:visibility="visible"
-                        android:id="@+id/InformationUserName">
+                        android:id="@+id/InformationUserName"
+                        android:gravity="center">
 
                     <TextView
                             android:text="用户名"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/textView38"
                             android:layout_weight="1.5"
-                            android:textSize="24sp"/>
+                            android:textSize="26sp"
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:text="Mr Wu"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/InformationUserNameText"
                             android:layout_weight="4.5"
                             android:textAlignment="viewEnd"
@@ -166,12 +166,12 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
-                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/InformationTelephone">
+                        android:id="@+id/InformationTelephone"
+                        android:gravity="center">
 
                     <TextView
                             android:text="电话"
@@ -179,12 +179,13 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView45"
                             android:layout_weight="1.5"
-                            android:textSize="24sp"/>
+                            android:textSize="26sp"
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:text="111111111"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/InformationTelephoneText"
                             android:layout_weight="3.5"
                             android:textAlignment="viewEnd"
@@ -198,7 +199,6 @@
                         android:id="@+id/textView40"/>
 
                 <LinearLayout
-                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -211,12 +211,13 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView48"
                             android:layout_weight="1.5"
-                            android:textSize="24sp"/>
+                            android:textSize="26sp"
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:text="男"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/InformationSexText"
                             android:layout_weight="3.5"
                             android:textAlignment="textEnd"
@@ -237,20 +238,21 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
-                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/InformationProvince">
+                        android:id="@+id/InformationProvince"
+                        android:gravity="center">
 
                     <TextView
                             android:text="省（直辖市）"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/textView50"
                             android:layout_weight="3"
-                            android:textSize="24sp"/>
+                            android:textSize="26sp"
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:text="无"
@@ -276,12 +278,12 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
-                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:id="@+id/InformationCity">
+                        android:id="@+id/InformationCity"
+                        android:gravity="center">
 
                     <TextView
                             android:text="市"
@@ -289,7 +291,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView52"
                             android:layout_weight="1.5"
-                            android:textSize="24sp"/>
+                            android:textSize="26sp"
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:text=" 无"
@@ -316,12 +319,12 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
-                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:id="@+id/InformationQu">
+                        android:id="@+id/InformationQu"
+                        android:gravity="center">
 
                     <TextView
                             android:text="区（县）"
@@ -329,7 +332,8 @@
                             android:layout_height="wrap_content"
                             android:id="@+id/textView56"
                             android:layout_weight="2"
-                            android:textSize="24sp"/>
+                            android:textSize="26sp"
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:text="无"
@@ -356,11 +360,11 @@
                         android:textSize="12sp"/>
 
                 <LinearLayout
-                        android:background="@android:color/background_light"
                         android:orientation="horizontal"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1">
+                        android:layout_weight="1"
+                        android:gravity="center">
 
                     <TextView
                             android:text="详细地址"
@@ -368,12 +372,13 @@
                             android:layout_height="match_parent"
                             android:id="@+id/textView58"
                             android:layout_weight="1.5"
-                            android:textSize="24sp"/>
+                            android:textSize="26sp"
+                            android:textStyle="bold"/>
 
                     <TextView
                             android:text="哈尔滨工业大学"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:id="@+id/InformationAddrText"
                             android:layout_weight="3"
                             android:textSize="20sp"
@@ -382,7 +387,7 @@
 
                     <EditText
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:inputType="text|textLongMessage"
                             android:ems="10"
                             android:id="@+id/InformationAddrEditText"
@@ -428,7 +433,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="gone"
-                android:id="@+id/UserInformationProgressBar">
+                android:id="@+id/UserInformationProgressBar"
+                android:gravity="center">
 
             <ProgressBar
                     android:layout_gravity="center"

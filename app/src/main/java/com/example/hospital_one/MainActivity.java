@@ -85,7 +85,7 @@ public class MainActivity extends AcitivityBase {
             }
         });
 
-        Button paientManger = (Button)findViewById(R.id.paientManger);
+        LinearLayout paientManger = (LinearLayout)findViewById(R.id.paientManger);
         paientManger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

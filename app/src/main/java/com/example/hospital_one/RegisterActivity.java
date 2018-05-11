@@ -225,8 +225,8 @@ public class RegisterActivity extends AppCompatActivity implements LoaderCallbac
             makeToast("请不要以空格开头");
             return false;
         }
-        if(userName.length() < 7 || userName.length() > 15){
-            makeToast("用户名长度不要小于7或者大于15");
+        if(userName.length() < 2 || userName.length() > 15){
+            makeToast("用户名长度不要小于2或者大于15");
             return false;
         }
         return true;

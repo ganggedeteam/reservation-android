@@ -257,12 +257,15 @@ public class RegisterDoctorNoteActivity extends AppCompatActivity {
                 }else if(this.message == 1){
                     Toast.makeText(RegisterDoctorNoteActivity.this,
                             "网络连接错误！",Toast.LENGTH_LONG).show();
+                    finish();
                 }else if(this.message == 2){
                     Toast.makeText(RegisterDoctorNoteActivity.this,
                             "JSon数据解析错误！",Toast.LENGTH_LONG).show();
+                    finish();
                 }else{
                     Toast.makeText(RegisterDoctorNoteActivity.this,
                             "未知错误，请与开发者联系！",Toast.LENGTH_LONG).show();
+                    finish();
                 }
 
             }else{

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,19 +13,124 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 import com.example.hospital_one.adapter.DoctorCalendarAdapter;
 import com.example.hospital_one.adapter.OnItemClickListener;
+import com.example.hospital_one.adapter.SpecialDateAdapter;
 import com.example.hospital_one.connection.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.example.hospital_one.connection.DoctorConnection.DoctorLeverl;
 
 public class DoctorCalendarActivity extends AppCompatActivity {
 
     CalendarMessageTask task = null;
+
+    public int stringToInt(String target){
+        int sum = 0;
+        for(int i = 0; i < target.length();i++){
+            if(Character.isDigit(target.charAt(i))){
+                sum = sum *10 + Character.digit(target.charAt(i),10);
+            }else break;
+        }
+        return sum;
+    }
+
+    public String[] getDate(int year,int month,int day){
+        String[] date = new String[7];
+        Set<Integer> month31 = new HashSet<>();
+        month31.add(1);
+        month31.add(3);
+        month31.add(5);
+        month31.add(7);
+        month31.add(8);
+        month31.add(10);
+        month31.add(12);
+        for(int i = 0;i < 7; i++){
+            if(month == 2){
+                if(isLeapYear(year)){
+                    if(day < 29){
+                        day++;
+                        date[i] = "" + year + "-" + month + "-" + day;
+                        continue;
+                    }else{
+                        month ++;
+                        if(month == 13){
+                            year ++;
+                            month = 1;
+                        }
+                        day = 1;
+                        date[i] = "" + year + "-" + month + "-" + day;
+                        continue;
+                    }
+                }else{
+                    if(day < 28){
+                        day++;
+                        date[i] = "" + year + "-" + month + "-" + day;
+                        continue;
+                    }else{
+                        month ++;
+                        if(month == 13){
+                            year ++;
+                            month = 1;
+                        }
+                        day = 1;
+                        date[i] = "" + year + "-" + month + "-" + day;
+                        continue;
+                    }
+                }
+            }
+            if(!month31.contains(month)){
+                if(day < 30){
+                    day++;
+                    date[i] = "" + year + "-" + month + "-" + day;
+                    continue;
+                }else{
+                    month ++;
+                    if(month == 13){
+                        year ++;
+                        month = 1;
+                    }
+                    day = 1;
+                    date[i] = "" + year + "-" + month + "-" + day;
+                    continue;
+                }
+            }
+            if(month31.contains(month)){
+
+                if(day < 31){
+                    day++;
+                    date[i] = "" + year + "-" + month + "-" + day;
+                    continue;
+                }else{
+                    month ++;
+                    if(month == 13){
+                        year ++;
+                        month = 1;
+                    }
+                    day = 1;
+                    date[i] = "" + year + "-" + month + "-" + day;
+                    continue;
+                }
+            }
+        }
+        return date;
+    }
+
+    public boolean isLeapYear(int dateNum){
+        if(dateNum % 100 == 0){
+            if(dateNum%4 == 0)return true;
+        }else if(dateNum % 4 == 0){
+            return true;
+        }
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,22 +139,51 @@ public class DoctorCalendarActivity extends AppCompatActivity {
         ActionBar actionBar = getSupportActionBar();
         if(actionBar != null)actionBar.hide();
         Intent intent = getIntent();
-        int year = intent.getIntExtra("year",0);
-        int month = intent.getIntExtra("month",0);
-        int day = intent.getIntExtra("day",0);
-        String hospitalId = intent.getStringExtra("hospitalId");
-        String departmentId = intent.getStringExtra("departmentId");
-//        SharedPreferences.Editor editor = getSharedPreferences("error_file",MODE_PRIVATE).edit();
-//        editor.putString("theJSonData","{\"hospitalId\": \"" + hospitalId + "\"," +
-//                "\"admissionDate\": \""+ year + "-" + (month < 10?"0" + month:"" + month) + "-" + (day < 10?"0" + day: "" + day) +"\"," +
-//                "\"departmentId\": \"" + departmentId + "\"}");
-//        editor.apply();
-
+        int year;
+        int month;
+        int day;
+        String nowDate = intent.getStringExtra("date");
+        String[] dateDetail = nowDate.split("-");
+        year = stringToInt(dateDetail[0]);
+        month = stringToInt(dateDetail[1]);
+        day = stringToInt(dateDetail[2]);
+        String[] date = getDate(year,month,day);
+        dateDetail = date[0].split("-");
+        List<String> list = new ArrayList<>();
+        for(String string : date){
+            list.add(string);
+        }
+        setDate(list);
+        year = stringToInt(dateDetail[0]);
+        month = stringToInt(dateDetail[1]);
+        day = stringToInt(dateDetail[2]);
+        hospitalId = intent.getStringExtra("hospitalId");
+        departmentId = intent.getStringExtra("departmentId");
         task = new CalendarMessageTask("{\"hospitalId\": \"" + hospitalId + "\"," +
                 "\"admissionDate\": \""+ year + "-" + (month < 10?"0" + month:"" + month) + "-" + (day < 10?"0" + day: "" + day) +"\"," +
                 "\"departmentId\": \"" + departmentId + "\"");
         task.execute((Void)null);
+    }
 
+    String hospitalId;
+    String departmentId;
+
+    private void setDate(final List<String> date){
+        RecyclerView dateView = (RecyclerView)findViewById(R.id.DateView);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        dateView.setLayoutManager(linearLayoutManager);
+        SpecialDateAdapter adapter = new SpecialDateAdapter(date);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                task = new CalendarMessageTask("{\"hospitalId\": \"" + hospitalId + "\"," +
+                        "\"admissionDate\": \""+ date.get(position) +"\"," +
+                        "\"departmentId\": \"" + departmentId + "\"");
+                task.execute((Void)null);
+            }
+        });
+        dateView.setAdapter(adapter);
     }
 
     private void setAdapter(final List<DoctorCalendarAdapter.DoctorCalendarView> list){
@@ -142,6 +277,7 @@ public class DoctorCalendarActivity extends AppCompatActivity {
             String key = readerHeader.getString("key","");
             String token = readerHeader.getString("token","");
             String response = InternetConnection.ForInternetHeaderConnection(url,key,token,jsonData);
+            Log.e("fjfhwiuafhsaufhasjdfhsakjdfhsakjfdhsa:", "doInBackground: "+response );
             if(response == null || response.equals("")){
                 this.message = 1;
             }else{
@@ -278,8 +414,7 @@ public class DoctorCalendarActivity extends AppCompatActivity {
                     Toast.makeText(DoctorCalendarActivity.this,
                             "网络连接错误",Toast.LENGTH_LONG).show();
                 }else if(this.message == 2){
-                    Toast.makeText(DoctorCalendarActivity.this,
-                            "查找不到相关的信息！",Toast.LENGTH_LONG).show();
+                    ShowMessage("查找不到相关的信息！");
                 }else if(this.message == 3){
                     Toast.makeText(DoctorCalendarActivity.this,
                             "Json信息错误!",Toast.LENGTH_LONG).show();

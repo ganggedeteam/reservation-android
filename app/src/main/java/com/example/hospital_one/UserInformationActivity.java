@@ -518,6 +518,7 @@ public class UserInformationActivity extends AppCompatActivity {
                 if(message == 1){
                     Toast.makeText(UserInformationActivity
                             .this,"网络连接错误",Toast.LENGTH_LONG).show();
+                    finish();
                 }else if(message == 2){
                     Toast.makeText(UserInformationActivity
                             .this,"查找不到本用户",Toast.LENGTH_LONG).show();
