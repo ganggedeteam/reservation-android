@@ -80,7 +80,7 @@ public class DoctorCalendarAdapter extends RecyclerView.Adapter<DoctorCalendarAd
         DoctorCalendarView doctor = this.list.get(position);
         holder.doctorName.setText(doctor.doctorName);
         holder.doctorTitle.setText(doctor.doctorTitle);
-        holder.skill.setText("主治：" + doctor.skill);
+        holder.skill.setText("主治：" + (doctor.skill == null || doctor.skill.equals("")?"暂无":doctor.skill));
 //        holder.doctorPhoto.setImageBitmap(decodeBitmap("/storage/emulated/0/hospitalPicture/doctor.png",
 //                holder.doctorPhoto.getMaxWidth(),holder.doctorPhoto.getMaxHeight()));
         holder.admissionPeriod.setText(doctor.admissionPeriod.equals("0")?"上午8:00~12：00":"下午2:00~5:30");

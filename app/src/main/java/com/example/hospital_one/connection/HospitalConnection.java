@@ -24,7 +24,7 @@ public class HospitalConnection {
     public class HospitalMes{
         public String hospitalGrade;
         public int city;
-        public boolean isValid;
+        public String isValid;
         public int county;
         public String hospitalName;
         public String hospitalPhone;
@@ -40,7 +40,7 @@ public class HospitalConnection {
         public HospitalMes(
                 String hospitalGrade,
                 int city,
-                boolean isValid,
+                String isValid,
                 int county,
                 String hospitalName,
                 String hospitalPhone,

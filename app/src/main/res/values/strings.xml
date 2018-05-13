@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Hospital_one</string>
+    <string name="app_name">HIT医疗</string>
     <string name="title_activity_login_hospital">HIT医疗</string>
 
     <!-- Strings related to login -->

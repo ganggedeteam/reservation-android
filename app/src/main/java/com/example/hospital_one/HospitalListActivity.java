@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 import com.example.hospital_one.connection.HospitalConnection;
@@ -174,9 +175,9 @@ public class HospitalListActivity extends AppCompatActivity {
     }
     public void setHostFile(){
         SharedPreferences.Editor editor = getSharedPreferences("host",MODE_PRIVATE).edit();
-        editor.putString("ip","http://172.20.10.2:8080");
-        editor.putString("pictureDownloadIp","http://172.20.10.10:9999");
-        editor.putString("pictureUploadIP","http://172.20.10.2:8888");
+        editor.putString("ip","http://10.236.87.227:8080");
+        editor.putString("pictureDownloadIp","http://10.236.45.147:9999");
+        editor.putString("pictureUploadIP","http://10.236.87.227:8888");
         editor.putString("menuAdd","/system/menu/add");
         editor.putString("departmentPage","/code/departmenttype/pagelist");
         editor.putString("departmentDetailPage","/hospital/department/list");
@@ -236,11 +237,16 @@ public class HospitalListActivity extends AppCompatActivity {
                 }
             }
         });
-
-
+        TextView noResultNull = (TextView)findViewById(R.id.NORESULTNULL);
+        noResultNull.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                task = new HospitalTask("");
+                task.execute((Void) null);
+            }
+        });
     }
 
-    List<HospitalConnection.HospitalMes> connectResult = null;
 
     public void showRecycle(){
         LinearLayout recycler = (LinearLayout)findViewById(R.id.HospitalListView),
@@ -289,6 +295,7 @@ public class HospitalListActivity extends AppCompatActivity {
 
         private final String jsonData;
         private int message = 0;
+        List<HospitalConnection.HospitalMes> connectResult = null;
 
         HospitalTask(String jsonData) {
             this.jsonData = "{" + jsonData + "\"pageNo\":\"";
@@ -338,18 +345,26 @@ public class HospitalListActivity extends AppCompatActivity {
                     Toast.makeText(HospitalListActivity
                             .this,"查找不到结果",Toast.LENGTH_LONG).show();
                 }else if(message == 0) {
-                    for(HospitalConnection.HospitalMes mes:connectResult){
-                        if(!mes.isValid){
-                            connectResult.remove(mes);
+                    List<HospitalConnection.HospitalMes> list = new ArrayList<>();
+                    for(int i = 0;i < connectResult.size();i++){
+                        HospitalConnection.HospitalMes mes = connectResult.get(i);
+                        Log.e("dfhasjkdfhskjdfhsakjdfhkjsadfhskajfdhsdj:", "onPostExecute: " + mes.isValid);
+                        if(mes.isValid.equals("1")){
+                            String hospitalGrade = mes.hospitalGrade;
+                            mes.hospitalGrade = hospitalGrade == null || hospitalGrade.equals("")?"暂无":
+                                    hospitalLevel[(Character.digit(hospitalGrade.charAt(0),10))];
+                            list.add(mes);
+                        }else {
                             continue;
                         }
-                        String hospitalGrade = mes.hospitalGrade;
-                        mes.hospitalGrade = hospitalGrade == null || hospitalGrade.equals("")?"暂无":
-                                hospitalLevel[(Character.digit(hospitalGrade.charAt(0),10))];
                     }
 
-                    showRecycle();
-                    setRecyclerView(connectResult);
+                    if(list.size() == 0){
+                        showSearchResult();
+                    }else {
+                        showRecycle();
+                        setRecyclerView(list);
+                    }
 //                    finish();
                 }
                 else{

@@ -53,36 +53,108 @@ public class PatientManagerActivity extends AppCompatActivity {
         patientSelectTask.execute((Void)null);
     }
 
+    int checked = -1;
     public void showAddPatientDialog(){
+        checked = -1;
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         final View view = View.inflate(this,R.layout.patient_add_layout,null);
         builder.setView(view);
         builder.setTitle("添加就诊人");
         final RadioGroup radioGroup = (RadioGroup)view.findViewById(R.id.RealtionGroup);
-//        final RadioGroup anoRadioGroup = (RadioGroup)view.findViewById(R.id.AnoRealtionGroup);
+        final RadioGroup anoRadioGroup = (RadioGroup)view.findViewById(R.id.AnoRealtionGroup);
+        final RadioButton button1 = (RadioButton)view.findViewById(R.id.radioButton1);
+        final RadioButton button2 = (RadioButton)view.findViewById(R.id.radioButton2);
+        final RadioButton button3 = (RadioButton)view.findViewById(R.id.radioButton3);
+        final RadioButton button4 = (RadioButton)view.findViewById(R.id.radioButton4);
+        final RadioButton button5 = (RadioButton)view.findViewById(R.id.radioButton5);
+        final RadioButton button6 = (RadioButton)view.findViewById(R.id.radioButton6);
 
-//        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                Log.e("radioGroup" , "onCheckedChanged: " + checkedId + "  " + radioGroup.getCheckedRadioButtonId());
-//                if(checkedId != -1 && checkedId != radioGroup.getCheckedRadioButtonId()) {
-//                    radioButtonNum = checkedId;
-//                    if(anoRadioGroup.getCheckedRadioButtonId() != -1)
-//                        anoRadioGroup.check(-1);
-//                }
-//            }
-//        });
-//        anoRadioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                Log.e("anoRadioGroup" , "onCheckedChanged: " + checkedId+ "  " + anoRadioGroup.getCheckedRadioButtonId());
-//                if(checkedId != -1 && checkedId != anoRadioGroup.getCheckedRadioButtonId()) {
-//                    radioButtonNum = checkedId;
-//                    if(radioGroup.getCheckedRadioButtonId() != -1)
-//                        radioGroup.check(-1);
-//                }
-//            }
-//        });
+        button1.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch (buttonView.getId()) {
+                    case R.id.radioButton1: anoRadioGroup.clearCheck();checked = 1; break;
+                    case R.id.radioButton2: anoRadioGroup.clearCheck();checked = 2; break;
+                    case R.id.radioButton3: anoRadioGroup.clearCheck();checked = 3; break;
+                    case R.id.radioButton4: radioGroup.clearCheck();checked = 4; break;
+                    case R.id.radioButton5: radioGroup.clearCheck();checked = 5; break;
+                    case R.id.radioButton6: radioGroup.clearCheck();checked = 6; break;
+                    default: break; }
+
+            }
+        });
+        button2.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch (buttonView.getId()) {
+                    case R.id.radioButton1: anoRadioGroup.clearCheck();checked = 1; break;
+                    case R.id.radioButton2: anoRadioGroup.clearCheck();checked = 2; break;
+                    case R.id.radioButton3: anoRadioGroup.clearCheck();checked = 3; break;
+                    case R.id.radioButton4: radioGroup.clearCheck();checked = 4; break;
+                    case R.id.radioButton5: radioGroup.clearCheck();checked = 5; break;
+                    case R.id.radioButton6: radioGroup.clearCheck();checked = 6; break;
+                    default: break; }
+
+            }
+        });
+        button3.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch (buttonView.getId()) {
+                    case R.id.radioButton1: anoRadioGroup.clearCheck();checked = 1; break;
+                    case R.id.radioButton2: anoRadioGroup.clearCheck();checked = 2; break;
+                    case R.id.radioButton3: anoRadioGroup.clearCheck();checked = 3; break;
+                    case R.id.radioButton4: radioGroup.clearCheck();checked = 4; break;
+                    case R.id.radioButton5: radioGroup.clearCheck();checked = 5; break;
+                    case R.id.radioButton6: radioGroup.clearCheck();checked = 6; break;
+                    default: break; }
+
+            }
+        });
+        button4.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch (buttonView.getId()) {
+                    case R.id.radioButton1: anoRadioGroup.clearCheck();checked = 1; break;
+                    case R.id.radioButton2: anoRadioGroup.clearCheck();checked = 2; break;
+                    case R.id.radioButton3: anoRadioGroup.clearCheck();checked = 3; break;
+                    case R.id.radioButton4: radioGroup.clearCheck();checked = 4; break;
+                    case R.id.radioButton5: radioGroup.clearCheck();checked = 5; break;
+                    case R.id.radioButton6: radioGroup.clearCheck();checked = 6; break;
+                    default: break; }
+
+            }
+        });
+        button5.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch (buttonView.getId()) {
+                    case R.id.radioButton1: anoRadioGroup.clearCheck();checked = 1; break;
+                    case R.id.radioButton2: anoRadioGroup.clearCheck();checked = 2; break;
+                    case R.id.radioButton3: anoRadioGroup.clearCheck();checked = 3; break;
+                    case R.id.radioButton4: radioGroup.clearCheck();checked = 4; break;
+                    case R.id.radioButton5: radioGroup.clearCheck();checked = 5; break;
+                    case R.id.radioButton6: radioGroup.clearCheck();checked = 6; break;
+                    default: break; }
+
+            }
+        });
+        button6.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                switch (buttonView.getId()) {
+                    case R.id.radioButton1: anoRadioGroup.clearCheck();checked = 1; break;
+                    case R.id.radioButton2: anoRadioGroup.clearCheck();checked = 2; break;
+                    case R.id.radioButton3: anoRadioGroup.clearCheck();checked = 3; break;
+                    case R.id.radioButton4: radioGroup.clearCheck();checked = 4; break;
+                    case R.id.radioButton5: radioGroup.clearCheck();checked = 5; break;
+                    case R.id.radioButton6: radioGroup.clearCheck();checked = 6; break;
+                    default: break; }
+
+            }
+        });
+
+
         final EditText patientNameEditText = view.findViewById(R.id.PatientNameEditText);
         final EditText patientIdCardEditText = (EditText)view.findViewById(R.id.PatientIdCardEditText);
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() {
@@ -100,21 +172,7 @@ public class PatientManagerActivity extends AppCompatActivity {
                     return;
                 } else {
                     SharedPreferences reader = getSharedPreferences("start_file",MODE_PRIVATE);
-                    int theRelation;
-                    if(radioGroup.getCheckedRadioButtonId() != -1) {
-                        RadioButton radioButton = (RadioButton) view.findViewById(radioGroup.getCheckedRadioButtonId());
-                        switch (radioButton.getText().toString()){
-                            case "本人":theRelation = 0;break;
-                            case "父母":theRelation = 1;break;
-                            case "夫妻":theRelation = 2;break;
-                            case "子女":theRelation = 3;break;
-                            case "亲戚":theRelation = 4;break;
-                            case "其他":theRelation = 5;break;
-                            default: theRelation = 6;
-                        }
-                    }else{
-                        theRelation = -1;
-                    }
+                    int theRelation = checked;
                     Log.e("theRelation", "onClick: " + theRelation );
                     if (theRelation == -1) {
                         patientAddTask = new PatientTask(0, "{\"patientName\": \"" + patientNameEditText.getText().toString() + "\","

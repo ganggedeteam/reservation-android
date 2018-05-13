@@ -64,7 +64,8 @@
                             android:orientation="horizontal"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
-                            android:background="@android:color/transparent">
+                            android:background="@android:color/transparent"
+                            android:gravity="center">
 
                         <TextView
                                 android:text="医院名称"
@@ -83,7 +84,8 @@
                                 android:layout_width="wrap_content"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
-                                android:background="@android:color/transparent">
+                                android:background="@android:color/transparent"
+                                android:visibility="gone">
 
                             <TextView
                                     android:text="       院长："
@@ -91,7 +93,7 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/textView62"
                                     android:textAlignment="viewStart"
-                                    android:visibility="invisible"/>
+                                    android:visibility="gone"/>
 
                             <TextView
                                     android:text="                院长名字"
@@ -99,7 +101,8 @@
                                     android:layout_height="wrap_content"
                                     android:id="@+id/HospitalDetailManagerName"
                                     android:textStyle="bold|italic"
-                                    android:textColor="@android:color/background_dark"/>
+                                    android:textColor="@android:color/background_dark"
+                                    android:visibility="gone"/>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -441,7 +444,6 @@
                             android:text="本院科室信息暂无数据"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:id="@+id/textView67"
                             android:textStyle="bold"
                             android:textAlignment="center"
                             android:textSize="30sp"

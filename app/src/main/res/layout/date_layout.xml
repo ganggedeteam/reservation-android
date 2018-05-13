@@ -17,7 +17,7 @@
             android:id="@+id/DateNumber"
             android:layout_weight="1"
             android:textSize="24sp"
-            android:background="@android:color/background_light"
+            android:background="@android:color/holo_blue_light"
             android:textStyle="bold"/>
 
     <TextView

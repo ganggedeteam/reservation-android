@@ -413,7 +413,7 @@ public class HospitalDetailMessageActivity extends AppCompatActivity {
             while(i < 1 || i < size/10 + 1) {
                 HospitalDepartmentTypeConnection.JsonHead result;
                 String response = InternetConnection.ForInternetHeaderConnection(ip + last,key,token, jsonData + (i + 1) + "\"}");
-                Log.e("66666666666666666: ", "doInBackground: " + response );
+//                Log.e("66666666666666666: ", "doInBackground: " + response );
                 result = HospitalDepartmentTypeConnection.parseJsonData(response);
                 if(i==0)connectResult = new ArrayList<>();
                 if (result == null) {

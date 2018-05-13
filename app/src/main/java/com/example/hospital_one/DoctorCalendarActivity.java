@@ -169,6 +169,7 @@ public class DoctorCalendarActivity extends AppCompatActivity {
     String departmentId;
 
     private void setDate(final List<String> date){
+
         RecyclerView dateView = (RecyclerView)findViewById(R.id.DateView);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
@@ -177,8 +178,13 @@ public class DoctorCalendarActivity extends AppCompatActivity {
         adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(View view, int position) {
+                int year,month,day;
+                String[] dateDetail = date.get(position).split("-");
+                year = stringToInt(dateDetail[0]);
+                month = stringToInt(dateDetail[1]);
+                day = stringToInt(dateDetail[2]);
                 task = new CalendarMessageTask("{\"hospitalId\": \"" + hospitalId + "\"," +
-                        "\"admissionDate\": \""+ date.get(position) +"\"," +
+                        "\"admissionDate\": \""+ year + "-" + (month < 10?"0" + month:"" + month) + "-" + (day < 10?"0" + day: "" + day) +"\"," +
                         "\"departmentId\": \"" + departmentId + "\"");
                 task.execute((Void)null);
             }
@@ -264,6 +270,7 @@ public class DoctorCalendarActivity extends AppCompatActivity {
     public class ReservationTask extends AsyncTask<Void, Void, Boolean>{
         private int message;
         private final String jsonData;
+        String backMes;
         public ReservationTask(String jsonData){
             this.jsonData = jsonData;
         }
@@ -277,6 +284,7 @@ public class DoctorCalendarActivity extends AppCompatActivity {
             String key = readerHeader.getString("key","");
             String token = readerHeader.getString("token","");
             String response = InternetConnection.ForInternetHeaderConnection(url,key,token,jsonData);
+            backMes = response;
             Log.e("fjfhwiuafhsaufhasjdfhsakjdfhsakjfdhsa:", "doInBackground: "+response );
             if(response == null || response.equals("")){
                 this.message = 1;
@@ -297,13 +305,10 @@ public class DoctorCalendarActivity extends AppCompatActivity {
                 }else if(this.message == 2){
                     Toast.makeText(DoctorCalendarActivity.this,
                             "Json数据解析错误！",Toast.LENGTH_LONG).show();
-                }else if(this.message == 3){
+                }else{
+//                    ShowMessage();
                     Toast.makeText(DoctorCalendarActivity.this,
-                            "您已挂过号",Toast.LENGTH_LONG).show();
-                }
-                else{
-                    Toast.makeText(DoctorCalendarActivity.this,
-                            "未知错误，请与开发者联系!",Toast.LENGTH_LONG).show();
+                            ReservationConnection.paeseAddMesage(backMes),Toast.LENGTH_LONG).show();
                 }
             }
         }
@@ -414,6 +419,7 @@ public class DoctorCalendarActivity extends AppCompatActivity {
                     Toast.makeText(DoctorCalendarActivity.this,
                             "网络连接错误",Toast.LENGTH_LONG).show();
                 }else if(this.message == 2){
+                    setAdapter(new ArrayList<DoctorCalendarAdapter.DoctorCalendarView>());
                     ShowMessage("查找不到相关的信息！");
                 }else if(this.message == 3){
                     Toast.makeText(DoctorCalendarActivity.this,

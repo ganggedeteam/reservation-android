@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ReservationConnection {
 
-    public static String[] reservationStatus = {"未就诊","已就诊","未按时"};
+    public static String[] reservationStatus = {"待就诊","已就诊","未就诊"};
 
     public class ReservationMessage{
         public String isAdmission;
@@ -88,6 +88,17 @@ public class ReservationConnection {
         } catch (JSONException e) {
 //            e.printStackTrace();
             return 2;
+        }
+    }
+
+    public static String paeseAddMesage(String jsonData){
+        try {
+            JSONObject jsonObject = new JSONObject(jsonData);
+            return jsonObject.getString("message");
+
+        } catch (JSONException e) {
+//            e.printStackTrace();
+            return "错误";
         }
     }
 

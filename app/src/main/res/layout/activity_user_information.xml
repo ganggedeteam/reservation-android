@@ -143,17 +143,17 @@
                             android:layout_weight="4.5"
                             android:textAlignment="viewEnd"
                             android:textSize="20sp"
-                            android:visibility="visible"/>
+                            android:visibility="gone"/>
 
                     <EditText
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
+                            android:layout_height="wrap_content"
                             android:inputType="textPersonName"
                             android:text="Name"
                             android:ems="10"
                             android:id="@+id/InformationUserNameEditText"
                             android:layout_weight="4.5"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             android:textAlignment="viewEnd"
                             android:textSize="20sp"/>
 

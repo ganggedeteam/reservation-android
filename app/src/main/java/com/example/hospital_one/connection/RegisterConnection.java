@@ -57,4 +57,8 @@ public class RegisterConnection {
         return list;
     }
 
+//    public static String parseReservationMessageCanecl(String jsonData){
+//
+//    }
+
 }
